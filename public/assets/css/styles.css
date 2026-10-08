@@ -129,7 +129,7 @@ a:hover { color: var(--k-navy-900); text-decoration: underline; }
 .road__shoulder { position: absolute; left: 0; right: 0; top: 0; height: 10px; background: linear-gradient(180deg, #4A505C, #3A3F4A); }
 .road__edge { position: absolute; left: 0; right: 0; height: 4px; }
 .road__edge--top { top: 14px; background: var(--k-accent); opacity: 0.9; }
-.road__edge--bottom { bottom: 8px; background: rgba(255,255,255,0.8); }
+.road__edge--bottom { bottom: 8px; background: var(--k-accent); opacity: 0.9; }
 .road__dashes {
   position: absolute; left: 0; right: 0; bottom: 24px; height: 5px;
   background: repeating-linear-gradient(90deg, rgba(255,255,255,0.88) 0 70px, transparent 70px 140px);
