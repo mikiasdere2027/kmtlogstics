@@ -7,11 +7,15 @@ No build step: everything that gets deployed lives in `public/`.
 public/                 ← deploy this folder
   index.html            ← home page (with the contact form)
   freight.html  dispatch.html  eld.html  lease-to-own.html  mc-startup.html  ← service pages
+                        (freight.html has the freight quote form at #quote)
+  404.html              ← branded not-found page (absolute /assets paths; served by Vercel)
+  sitemap.xml           ← for Google; robots.txt points to it
   robots.txt
   assets/css/styles.css
   assets/js/main.js     ← contact form (interest pills, validation, submit)
   assets/img/favicon.svg
-api/contact.js          ← Vercel function: emails contact-form inquiries via Resend
+api/contact.js          ← Vercel function: emails contact + freight-quote requests via Resend,
+                          sends the visitor a confirmation; GET shows setup status
 api/_email.js           ← branded HTML email layout (preview: design-source/email-preview.png)
 design-source/          ← original Claude Design export (not deployed)
 netlify.toml            ← Netlify: publish = public
@@ -34,6 +38,11 @@ npx serve public
 - **Vercel:** import the repo; `vercel.json` already points at `public/`.
 - **Netlify:** import the repo, or drag the `public/` folder onto app.netlify.com/drop.
 - **GitHub Pages / any static host:** upload the contents of `public/`.
+
+## Analytics
+
+Every page loads Vercel Web Analytics (`/_vercel/insights/script.js`, cookie-free). Turn it on once in
+Vercel → project → **Analytics** → Enable. Until then the script just does nothing.
 
 ## Before going live
 

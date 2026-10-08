@@ -6,11 +6,12 @@
   <title>Nationwide Freight — KMT Logistics</title>
   <meta name="description" content="Asset-based freight capacity across the lower 48: dry van, reefer, flatbed, expedited and dedicated lanes with one point of contact and 24/7 dispatch.">
   <meta name="theme-color" content="#0A1630">
+  <link rel="canonical" href="https://www.kmtlogisticsllc.com/freight">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Nationwide Freight — KMT Logistics">
   <meta property="og:description" content="Asset-based freight capacity across the lower 48: dry van, reefer, flatbed, expedited and dedicated lanes with one point of contact and 24/7 dispatch.">
-  <meta property="og:image" content="https://kmtlogisticsllc.com/assets/img/freight-truck.jpg">
+  <meta property="og:image" content="https://www.kmtlogisticsllc.com/assets/img/freight-truck.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap">
@@ -53,7 +54,7 @@
       <h1 class="cover__title">Capacity you can count on, coast to coast</h1>
       <p class="cover__lede">KMT is an asset-based carrier — our trucks, our drivers, our authority. You get one point of contact from tender to POD and a dispatch team that answers around the clock, on lanes across the lower 48.</p>
       <div class="cover__row">
-        <a class="btn btn--blue btn--lift" href="index.html?interest=Ship%20freight#contact"><span>Get a quote</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></a>
+        <a class="btn btn--blue btn--lift" href="#quote"><span>Get a quote</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
         <ul class="cover__facts"><li>Lower 48 coverage</li><li>24/7 dispatch</li><li>One point of contact</li></ul>
       </div>
     </div>
@@ -129,11 +130,114 @@
     </ol>
   </section>
 
+  <section id="quote" class="quote">
+    <div class="wrap quote__inner">
+      <div class="quote__intro">
+        <span class="eyebrow">Freight quote</span>
+        <h2 class="section-title section-title--md">Get a rate for your lane.</h2>
+        <p>Tell us where it's going and what it is. A dispatcher replies with a rate within one business hour.</p>
+        <ul class="quote__points">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Dry van, reefer, flatbed, expedited and dedicated</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Lower 48, one point of contact to POD</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>No obligation — just a straight rate</li>
+        </ul>
+      </div>
+
+      <form class="form quote__form" id="quote-form" data-endpoint="api/contact" data-kind="quote" data-email="info@kmtlogisticsllc.com" data-success="quote-success" novalidate>
+        <div class="form__full form__group">Shipment</div>
+        <label>
+          <span>Pickup ZIP</span>
+          <input name="originZip" inputmode="numeric" autocomplete="off" maxlength="5" pattern="[0-9]{5}" placeholder="e.g. 60601" required>
+        </label>
+        <label>
+          <span>Delivery ZIP</span>
+          <input name="destZip" inputmode="numeric" autocomplete="off" maxlength="5" pattern="[0-9]{5}" placeholder="e.g. 75201" required>
+        </label>
+        <label>
+          <span>Equipment</span>
+          <select name="equipment" required>
+            <option value="Dry van">Dry van</option>
+            <option value="Reefer">Reefer</option>
+            <option value="Flatbed">Flatbed</option>
+            <option value="Expedited">Expedited</option>
+            <option value="Dedicated lanes">Dedicated lanes</option>
+          </select>
+        </label>
+        <label>
+          <span>Weight (lbs)</span>
+          <input name="weight" type="number" inputmode="numeric" min="1" max="80000" step="1" placeholder="e.g. 42000">
+        </label>
+        <label>
+          <span>Pickup date</span>
+          <input name="pickupDate" type="date">
+        </label>
+        <label>
+          <span>Commodity</span>
+          <input name="commodity" maxlength="120" placeholder="e.g. Packaged food, palletized">
+        </label>
+
+        <div class="form__full form__group">Your details</div>
+        <label>
+          <span>Name</span>
+          <input name="name" autocomplete="name" placeholder="Full name" required>
+        </label>
+        <label>
+          <span>Company or MC #</span>
+          <input name="company" autocomplete="organization" placeholder="Optional">
+        </label>
+        <label>
+          <span>Phone</span>
+          <input name="phone" type="tel" autocomplete="tel" placeholder="(555) 000-0000">
+        </label>
+        <label>
+          <span>Email</span>
+          <input name="email" type="email" autocomplete="email" placeholder="you@company.com">
+        </label>
+        <label class="form__full">
+          <span>Notes</span>
+          <textarea name="notes" rows="3" placeholder="Appointment times, hazmat, team service, recurring volume…"></textarea>
+        </label>
+        <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="form__full form__submit">
+          <button type="submit" class="btn btn--blue">Request a quote</button>
+          <span class="form__status" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+
+      <div class="form-success quote__form" id="quote-success" role="status" tabindex="-1" hidden>
+        <svg class="form-success__art" width="168" height="124" viewBox="0 0 168 124" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g stroke-linecap="round" stroke-width="3.5">
+            <path d="M30 34 L20 28" stroke="#1747E6"/><path d="M26 54 H14" stroke="#3EC6E0"/><path d="M40 16 L34 6" stroke="#22C55E"/>
+            <path d="M138 30 L148 22" stroke="#3EC6E0"/><path d="M146 52 H158" stroke="#1747E6"/><path d="M128 12 L132 2" stroke="#22C55E"/>
+          </g>
+          <ellipse cx="84" cy="116" rx="48" ry="5" fill="#0A1630" opacity="0.08"/>
+          <path d="M34 56 L84 22 L134 56 V104 Q134 110 128 110 H40 Q34 110 34 104 Z" fill="#DCE5F7"/>
+          <rect x="50" y="24" width="68" height="62" rx="8" fill="#1747E6"/>
+          <circle cx="84" cy="53" r="15" fill="none" stroke="#fff" stroke-width="4"/>
+          <text x="84" y="61" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="22" font-weight="800" fill="#fff">@</text>
+          <path d="M34 56 L84 88 L134 56 V104 Q134 110 128 110 H40 Q34 110 34 104 Z" fill="#F4F7FD"/>
+          <path d="M34 108 L74 80 M134 108 L94 80" stroke="#D3DCEB" stroke-width="2"/>
+          <circle cx="126" cy="40" r="17" fill="#22C55E" stroke="#fff" stroke-width="4"/>
+          <path d="M118 40 L124 46 L134 35" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Your quote request has been sent!</h3>
+        <p>Thanks — a dispatcher is reviewing your lane and will reply with a rate as soon as possible.</p>
+        <div class="form-success__note">
+          <span class="form-success__check" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <span>Got it — we'll reach out within one business hour.</span>
+        </div>
+        <button type="button" class="form-success__again" data-again="quote-form">Request another quote</button>
+      </div>
+    </div>
+  </section>
+
   <section class="cta-band">
     <div class="cta-band__inner">
       <h2>Got a lane to cover?</h2>
       <div class="cta-band__actions">
-        <a class="btn btn--accent btn--lift" href="index.html?interest=Ship%20freight#contact"><span>Get a quote</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></a>
+        <a class="btn btn--accent btn--lift" href="#quote"><span>Get a quote</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
         <a class="cta-band__phone" href="tel:5550142200"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call dispatch 24/7 · (555) 014-2200</a>
       </div>
     </div>
@@ -149,7 +253,7 @@
         <span class="logo__name">KMT Logistics LLC</span>
       </div>
       <p>Nationwide freight carrier with dispatch, ELD, lease-to-own and MC startup services for owner-operators.</p>
-      <span class="site-footer__ids">USDOT 9352031 · MC 62320826</span>
+      <span class="site-footer__ids">USDOT 9352031 · MC 62320826 · <a href="https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=9352031" target="_blank" rel="noopener">Verify on FMCSA ↗</a></span>
     </div>
     <div class="site-footer__col">
       <span class="site-footer__heading">Services</span>
@@ -176,5 +280,13 @@
     © <span data-year>2026</span> KMT Logistics LLC. All rights reserved.
   </div>
 </footer>
+<nav class="mobile-cta" aria-label="Quick contact">
+  <a class="btn btn--accent" href="tel:5550142200">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    <span>Call dispatch</span>
+  </a>
+  <a class="btn btn--blue" href="freight.html#quote"><span>Get a quote</span></a>
+</nav>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

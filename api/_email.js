@@ -108,6 +108,18 @@ ${body}
 </html>`;
 }
 
+// "2026-10-14" -> "Wed, Oct 14, 2026" (no timezone shifts)
+function prettyDate(iso) {
+  if (!iso) return "";
+  const [y, m, day] = iso.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, day));
+  return dt.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+}
+
+function lane(d) {
+  return `${esc(d.originZip)} <span style="color:${BLUE};font-weight:800;">&rarr;</span> ${esc(d.destZip)}`;
+}
+
 /* ---------- Email to KMT: the full inquiry ---------- */
 
 /** @param {object} d  { interest, name, company, phone, email, notes } */
@@ -123,25 +135,44 @@ function inquiryEmail(d, siteUrl) {
     ["Details", d.notes ? multiline(d.notes) : dash]
   ];
   const tableRows = rows.map((r, i) => row(r[0], r[1], i === rows.length - 1)).join("");
+  const isQuote = d.kind === "quote";
+  let laneCard = "";
+  if (isQuote) {
+    const q = [
+      ["Lane", lane(d)],
+      ["Equipment", esc(d.equipment)],
+      ["Weight", d.weight ? esc(d.weight.toLocaleString("en-US")) + " lbs" : dash],
+      ["Pickup date", d.pickupDate ? esc(prettyDate(d.pickupDate)) : dash],
+      ["Commodity", d.commodity ? esc(d.commodity) : dash]
+    ];
+    const truck = `<span style="font-size:15px;line-height:1;">&#9654;</span>`;
+    laneCard = `
+        <tr>
+          <td style="padding:24px 32px 0;">${detailsCard(truck, "Shipment", q.map((r, i) => row(r[0], r[1], i === q.length - 1)).join(""))}
+          </td>
+        </tr>`;
+  }
 
   return frame({
-    title: "New website inquiry",
-    preheader: `New ${d.interest || "website"} inquiry from ${d.name || "a visitor"}`,
-    headline: "New website inquiry",
-    highlight: d.interest || "General",
+    title: isQuote ? "New freight quote request" : "New website inquiry",
+    preheader: isQuote
+      ? `Quote request: ${d.equipment}, ${d.originZip} to ${d.destZip}, from ${d.name || "a visitor"}`
+      : `New ${d.interest || "website"} inquiry from ${d.name || "a visitor"}`,
+    headline: isQuote ? "New freight quote request" : "New website inquiry",
+    highlight: isQuote ? `${d.equipment} · ${d.originZip} → ${d.destZip}` : (d.interest || "General"),
     siteUrl,
     body: `
         <!-- Intro -->
         <tr>
           <td style="padding:36px 32px 8px;">
-            <h1 style="margin:0 0 12px;font-family:${FONT};font-size:28px;line-height:1.15;font-weight:800;letter-spacing:-0.5px;color:${NAVY};">New Website Inquiry</h1>
-            <p style="margin:0;font-family:${FONT};font-size:15px;line-height:1.6;color:${INK};">You have received a new inquiry from your website. Here are the details provided by the visitor:</p>
+            <h1 style="margin:0 0 12px;font-family:${FONT};font-size:28px;line-height:1.15;font-weight:800;letter-spacing:-0.5px;color:${NAVY};">${isQuote ? "New Quote Request" : "New Website Inquiry"}</h1>
+            <p style="margin:0;font-family:${FONT};font-size:15px;line-height:1.6;color:${INK};">${isQuote ? "A shipper requested a rate from the freight page. Here's the lane and their contact details:" : "You have received a new inquiry from your website. Here are the details provided by the visitor:"}</p>
           </td>
         </tr>
-
+${laneCard}
         <!-- Details table -->
         <tr>
-          <td style="padding:24px 32px 36px;">${detailsCard(esc((d.name || "?").trim().charAt(0).toUpperCase()), "Inquiry Details", tableRows)}
+          <td style="padding:24px 32px 36px;">${detailsCard(esc((d.name || "?").trim().charAt(0).toUpperCase()), isQuote ? "Contact" : "Inquiry Details", tableRows)}
           </td>
         </tr>
 `
@@ -149,9 +180,18 @@ function inquiryEmail(d, siteUrl) {
 }
 
 function inquiryText(d) {
+  const quote = d.kind === "quote" ? [
+    "Lane: " + d.originZip + " -> " + d.destZip,
+    "Equipment: " + d.equipment,
+    "Weight: " + (d.weight ? d.weight + " lbs" : "—"),
+    "Pickup date: " + (d.pickupDate ? prettyDate(d.pickupDate) : "—"),
+    "Commodity: " + (d.commodity || "—"),
+    ""
+  ] : [];
   return [
-    "New website inquiry — " + (d.interest || "General"),
+    d.kind === "quote" ? "New freight quote request" : "New website inquiry — " + (d.interest || "General"),
     "",
+    ...quote,
     "Interest: " + (d.interest || "—"),
     "Name: " + (d.name || "—"),
     "Company / MC #: " + (d.company || "—"),
@@ -203,25 +243,37 @@ function visitorEmail(d, siteUrl) {
   const name = firstName(d.name);
   const interest = d.interest || "General";
   const phoneDigits = DISPATCH_PHONE.replace(/[^0-9+]/g, "");
-  const summary = [
+  const isQuote = d.kind === "quote";
+  // Quote summary uses only server-validated fields (ZIPs, equipment list, date), never free text
+  const summaryRows = isQuote ? [
+    ["Request", "Freight quote"],
+    ["Lane", lane(d)],
+    ["Equipment", esc(d.equipment)],
+    ["Pickup date", d.pickupDate ? esc(prettyDate(d.pickupDate)) : "Flexible"],
+    ["Response time", "Within one business hour"]
+  ] : [
     ["Request", esc(interest)],
     ["Response time", "Within one business hour"],
     ["Dispatch", "Open 24/7"]
-  ].map((r, i, all) => row(r[0], r[1], i === all.length - 1)).join("");
+  ];
+  const summary = summaryRows.map((r, i, all) => row(r[0], r[1], i === all.length - 1)).join("");
   const check = `<span style="font-size:16px;line-height:1;">&#10003;</span>`;
+  const about = isQuote
+    ? `a <strong style="color:${NAVY};">${esc(d.equipment)}</strong> rate from <strong style="color:${NAVY};">${esc(d.originZip)}</strong> to <strong style="color:${NAVY};">${esc(d.destZip)}</strong>`
+    : `<strong style="color:${NAVY};">${esc(interest)}</strong>`;
 
   return frame({
-    title: "We received your inquiry",
+    title: isQuote ? "We received your quote request" : "We received your inquiry",
     preheader: "Thanks for contacting KMT Logistics — we'll reach out within one business hour.",
     headline: "Thanks for reaching out",
-    highlight: "We received your inquiry",
+    highlight: isQuote ? "We received your quote request" : "We received your inquiry",
     siteUrl,
     body: `
         <!-- Greeting -->
         <tr>
           <td style="padding:36px 32px 8px;">
             <h1 style="margin:0 0 12px;font-family:${FONT};font-size:28px;line-height:1.15;font-weight:800;letter-spacing:-0.5px;color:${NAVY};">${name ? "Hi " + esc(name) + "," : "Hi there,"}</h1>
-            <p style="margin:0;font-family:${FONT};font-size:15px;line-height:1.6;color:${INK};">Thanks for contacting KMT Logistics. We've received your inquiry about <strong style="color:${NAVY};">${esc(interest)}</strong>, and a member of our team will get back to you within one business hour.</p>
+            <p style="margin:0;font-family:${FONT};font-size:15px;line-height:1.6;color:${INK};">Thanks for contacting KMT Logistics. We've received your ${isQuote ? "request for" : "inquiry about"} ${about}, and ${isQuote ? "a dispatcher will get back to you with a rate" : "a member of our team will get back to you"} within one business hour.</p>
           </td>
         </tr>
 
@@ -250,8 +302,12 @@ function visitorEmail(d, siteUrl) {
           <td style="padding:30px 32px 0;">
             <div style="font-family:${FONT};font-size:18px;font-weight:800;color:${NAVY};margin-bottom:22px;">What happens next</div>${milestones([
               ["01", "We review your request", "Your inquiry goes straight to the KMT team."],
-              ["02", "We reach out", "A real person calls or emails you back within one business hour."],
-              ["03", "Get rolling", "We line up your quote, dispatcher or next steps — whatever you need."]
+              isQuote
+                ? ["02", "You get a rate", "A dispatcher prices your lane and replies within one business hour."]
+                : ["02", "We reach out", "A real person calls or emails you back within one business hour."],
+              isQuote
+                ? ["03", "Book the load", "Happy with the rate? We confirm pickup and send the rate con."]
+                : ["03", "Get rolling", "We line up your quote, dispatcher or next steps — whatever you need."]
             ])}
           </td>
         </tr>
@@ -293,7 +349,8 @@ function visitorText(d) {
   return [
     (name ? "Hi " + name : "Hi there") + ",",
     "",
-    "Thanks for contacting KMT Logistics. We've received your inquiry about " + (d.interest || "General") +
+    "Thanks for contacting KMT Logistics. We've received your " +
+      (d.kind === "quote" ? "quote request for " + d.equipment + " from " + d.originZip + " to " + d.destZip : "inquiry about " + (d.interest || "General")) +
       " and a member of our team will get back to you within one business hour.",
     "",
     "What happens next:",

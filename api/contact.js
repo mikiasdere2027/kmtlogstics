@@ -13,7 +13,33 @@
 const { inquiryEmail, inquiryText, visitorEmail, visitorText } = require("./_email");
 
 const INTERESTS = ["Ship freight", "Dispatch", "ELD", "Lease-to-own", "MC startup"];
-const LIMITS = { name: 120, company: 160, phone: 40, email: 200, notes: 4000 };
+const LIMITS = { name: 120, company: 160, phone: 40, email: 200, notes: 4000, commodity: 120 };
+const EQUIPMENT = ["Dry van", "Reefer", "Flatbed", "Expedited", "Dedicated lanes"];
+
+// Freight quote fields. Returns an error message, or null when valid; fills `d` in place.
+function readQuote(body, d) {
+  d.originZip = clean(body.originZip, 5);
+  d.destZip = clean(body.destZip, 5);
+  if (!/^\d{5}$/.test(d.originZip)) return "Enter a 5-digit pickup ZIP.";
+  if (!/^\d{5}$/.test(d.destZip)) return "Enter a 5-digit delivery ZIP.";
+  d.equipment = EQUIPMENT.includes(body.equipment) ? body.equipment : "Dry van";
+  const w = clean(body.weight, 10);
+  if (w) {
+    const n = Number(w);
+    if (!Number.isInteger(n) || n < 1 || n > 80000) return "Weight should be between 1 and 80,000 lbs.";
+    d.weight = n;
+  }
+  const pd = clean(body.pickupDate, 10);
+  if (pd) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(pd) || isNaN(Date.parse(pd))) return "Pick a valid pickup date.";
+    // One day of slack for visitors west of UTC; nothing more than a year out
+    const day = 86400000, t = Date.parse(pd), now = Date.now();
+    if (t < now - 2 * day || t > now + 366 * day) return "Pick a pickup date from today on.";
+    d.pickupDate = pd;
+  }
+  d.commodity = clean(body.commodity, LIMITS.commodity);
+  return null;
+}
 
 function clean(value, max) {
   return String(value == null ? "" : value).replace(/\u0000/g, "").trim().slice(0, max);
@@ -85,6 +111,14 @@ module.exports = async function handler(req, res) {
     notes: clean(body.notes, LIMITS.notes)
   };
 
+  const isQuote = body.kind === "quote";
+  if (isQuote) {
+    d.kind = "quote";
+    d.interest = "Ship freight";
+    const qErr = readQuote(body, d);
+    if (qErr) return res.status(400).json({ ok: false, error: qErr });
+  }
+
   if (!d.name) return res.status(400).json({ ok: false, error: "Please add your name." });
   if (!d.phone && !d.email) {
     return res.status(400).json({ ok: false, error: "Add a phone number or email so we can reach you." });
@@ -108,7 +142,9 @@ module.exports = async function handler(req, res) {
   const message = {
     from: process.env.CONTACT_FROM || DEFAULT_FROM,
     to: [process.env.CONTACT_TO || DEFAULT_TO],
-    subject: "KMT website inquiry — " + d.interest,
+    subject: isQuote
+      ? "Freight quote — " + d.equipment + ", " + d.originZip + " → " + d.destZip
+      : "KMT website inquiry — " + d.interest,
     html: inquiryEmail(d, siteUrl),
     text: inquiryText(d)
   };
@@ -143,7 +179,7 @@ module.exports = async function handler(req, res) {
             from: message.from,
             to: [d.email],
             reply_to: message.to[0],
-            subject: "We received your inquiry — KMT Logistics",
+            subject: isQuote ? "We received your quote request — KMT Logistics" : "We received your inquiry — KMT Logistics",
             html: visitorEmail(d, siteUrl),
             text: visitorText(d)
           })

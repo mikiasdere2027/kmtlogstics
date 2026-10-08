@@ -402,3 +402,45 @@ a:hover { color: var(--k-navy-900); text-decoration: underline; }
 .cta-band__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px 36px; }
 .cta-band__phone { color: #fff; font-size: 15px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
 .cta-band__phone:hover { color: var(--k-accent); text-decoration: none; }
+
+/* FMCSA verify link next to USDOT / MC */
+.site-footer__ids a { color: #A9B6D3; text-decoration: underline; text-underline-offset: 2px; }
+.site-footer__ids a:hover { color: #fff; }
+
+/* Mobile call / quote bar — phones only */
+.mobile-cta { display: none; }
+@media (max-width: 767px) {
+  body { padding-bottom: calc(74px + env(safe-area-inset-bottom)); }
+  .mobile-cta {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(10,22,48,0.96); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 -6px 20px rgba(6,14,31,0.25);
+  }
+  .mobile-cta .btn { justify-content: center; padding: 13px 12px; font-size: 14px; }
+}
+
+/* 404 page */
+.lost-links { margin: 40px 0 0; padding: 22px 0 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px 26px; border-top: 1px solid var(--k-steel-200); max-width: 720px; }
+.lost-links a { font-size: 14px; font-weight: 700; color: var(--k-blue-600); }
+.lost-links a:hover { color: var(--k-navy-900); }
+
+/* Freight quote section */
+.quote { background: var(--k-blue-50); }
+.quote__inner { padding: 84px 21px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start; }
+.quote__intro { flex: 1 1 300px; display: flex; flex-direction: column; gap: 15px; }
+.quote__intro > p { font-size: 16px; line-height: 1.55; color: var(--k-ink-600); max-width: 40ch; }
+.quote__points { margin: 8px 0 0; padding: 20px 0 0; list-style: none; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--k-steel-200); }
+.quote__points li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; font-weight: 700; color: var(--k-navy-900); }
+.quote__points svg { flex: 0 0 auto; color: var(--k-blue-600); margin-top: 1px; }
+.quote__form { flex: 1 1 460px; }
+.form__group { font-size: 12px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--k-blue-600); padding-top: 4px; }
+.form__group + label, .form__group ~ .form__group { margin-top: 0; }
+.form select {
+  font-family: inherit; font-size: 13px; padding: 11px 36px 11px 12px; border: 1.5px solid var(--k-steel-200); border-radius: 9px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230A1630' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
+  color: var(--k-navy-900); outline: none; width: 100%; appearance: none; -webkit-appearance: none;
+}
+.form select:focus { border-color: var(--k-blue-600); }
+.form input[aria-invalid="true"], .form select[aria-invalid="true"] { border-color: #B42318; }
