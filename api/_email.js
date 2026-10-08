@@ -167,17 +167,36 @@ function inquiryText(d) {
    Deliberately does not echo the visitor's free-text fields (message, company, phone):
    anyone can type any address into the form, so this email must not carry text they chose. */
 
-function step(num, title, text, last) {
+// Horizontal milestone track: numbered circles joined by a line, text under each.
+// Built from table cells (no flexbox/positioning) so it holds up in Gmail and Outlook.
+function milestones(steps) {
+  const TRACK = "#C7D5F7";
+  const col = (100 / steps.length).toFixed(2) + "%";
+  const line = (show) => `<div style="height:3px;line-height:3px;font-size:0;background:${show ? TRACK : "transparent"};">&nbsp;</div>`;
+  const markers = steps.map((st, i) => `
+                <td width="${col}" valign="middle" style="padding:0;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td width="50%" valign="middle">${line(i > 0)}</td>
+                      <td width="40" valign="middle" style="width:40px;">
+                        <div style="width:40px;height:40px;line-height:40px;border-radius:20px;background:${BLUE};color:#FFFFFF;text-align:center;font-family:${FONT};font-size:14px;font-weight:800;box-shadow:0 0 0 5px #E1EAFF;">${st[0]}</div>
+                      </td>
+                      <td width="50%" valign="middle">${line(i < steps.length - 1)}</td>
+                    </tr>
+                  </table>
+                </td>`).join("");
+  const labels = steps.map((st) => `
+                <td width="${col}" valign="top" align="center" style="padding:16px 8px 0;font-family:${FONT};text-align:center;">
+                  <div style="font-size:15px;font-weight:800;line-height:1.3;color:${NAVY};">${esc(st[1])}</div>
+                  <div style="margin-top:5px;font-size:13px;line-height:1.5;color:${INK};">${esc(st[2])}</div>
+                </td>`).join("");
   return `
-              <tr>
-                <td width="44" valign="top" style="padding:0 0 ${last ? 0 : 18}px;">
-                  <div style="width:32px;height:32px;line-height:32px;border-radius:9px;background:${BLUE};color:#FFFFFF;text-align:center;font-family:${FONT};font-size:13px;font-weight:800;">${num}</div>
-                </td>
-                <td valign="top" style="padding:3px 0 ${last ? 0 : 18}px 12px;font-family:${FONT};">
-                  <div style="font-size:15px;font-weight:800;color:${NAVY};">${esc(title)}</div>
-                  <div style="margin-top:3px;font-size:14px;line-height:1.55;color:${INK};">${esc(text)}</div>
-                </td>
-              </tr>`;
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed;">
+              <tr>${markers}
+              </tr>
+              <tr>${labels}
+              </tr>
+            </table>`;
 }
 
 function visitorEmail(d, siteUrl) {
@@ -229,9 +248,11 @@ function visitorEmail(d, siteUrl) {
         <!-- What happens next -->
         <tr>
           <td style="padding:30px 32px 0;">
-            <div style="font-family:${FONT};font-size:18px;font-weight:800;color:${NAVY};margin-bottom:16px;">What happens next</div>
-            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${step("01", "We review your request", "Your inquiry goes straight to the KMT team.")}${step("02", "We reach out", "A real person calls or emails you back within one business hour.")}${step("03", "Get rolling", "We line up your quote, dispatcher or next steps — whatever you need.", true)}
-            </table>
+            <div style="font-family:${FONT};font-size:18px;font-weight:800;color:${NAVY};margin-bottom:22px;">What happens next</div>${milestones([
+              ["01", "We review your request", "Your inquiry goes straight to the KMT team."],
+              ["02", "We reach out", "A real person calls or emails you back within one business hour."],
+              ["03", "Get rolling", "We line up your quote, dispatcher or next steps — whatever you need."]
+            ])}
           </td>
         </tr>
 

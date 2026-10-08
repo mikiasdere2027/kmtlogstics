@@ -38,7 +38,7 @@ npx serve public
 ## Before going live
 
 1. **Contact details:** replace the placeholder phone `(555) 014-2200` / `tel:5550142200`,
-   `info@kmtlogisticsllc.com`, and `MC 000000 · USDOT 0000000` in `public/index.html`.
+   `info@kmtlogisticsllc.com` in `public/index.html`.
 2. **Contact form:** the form posts to `/api/contact`, which sends a branded email through
    Resend (free: 3,000 emails/month). Hosting must be Vercel (the function doesn't run on Netlify
    or GitHub Pages). In Vercel → Project → Settings → Environment Variables, add:
