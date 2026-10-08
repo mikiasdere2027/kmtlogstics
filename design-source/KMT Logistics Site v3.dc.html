@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/rem-assist-design-system-019ddaa4-3f46-7816-811c-f7bf3d65769c/colors_and_type.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<script src="./image-slot.js"></script>
+<style>
+  :root {
+    --k-blue-800:#0B2690; --k-blue-700:#0F33B8; --k-blue-600:#1747E6; --k-blue-500:#3463FF; --k-blue-100:#E1EAFF; --k-blue-50:#F2F6FF;
+    --k-navy-950:#060E1F; --k-navy-900:#0A1630; --k-navy-800:#13224A;
+    --k-ink-600:#4B5873; --k-ink-500:#67738C; --k-line:#E2E8F3; --k-steel-200:#D3DCEB;
+    --k-accent:#FFD60A; --k-accent-hover:#FFE14D; --k-on-accent:#0A1630;
+  }
+  body { margin:0; background:#fff; -webkit-font-smoothing:antialiased; }
+  h1, h2, h3, h4, h5, h6 { font-family:inherit; }
+  a { color: var(--k-blue-600); text-decoration:none; }
+  a:hover { color: var(--k-navy-900); text-decoration:underline; }
+  @keyframes kmtDrive {
+    0% { left:-510px; animation-timing-function:cubic-bezier(0.2,0.7,0.25,1); }
+    34% { left:max(18px, calc(100% - 540px)); animation-timing-function:linear; }
+    64% { left:max(18px, calc(100% - 540px)); animation-timing-function:cubic-bezier(0.6,0,0.85,0.45); }
+    100% { left:calc(100% + 60px); }
+  }
+  @keyframes kmtWheel {
+    0% { transform:rotate(0deg); animation-timing-function:cubic-bezier(0.2,0.7,0.25,1); }
+    34% { transform:rotate(3240deg); animation-timing-function:linear; }
+    64% { transform:rotate(3240deg); animation-timing-function:cubic-bezier(0.6,0,0.85,0.45); }
+    100% { transform:rotate(5400deg); }
+  }
+</style>
+</helmet>
+
+<div style="font-family:'Plus Jakarta Sans', var(--font-sans); color:var(--k-navy-900); background:#fff; overflow-x:hidden">
+
+  <header style="position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.92); backdrop-filter:blur(6px)">
+    <div style="max-width:1080px; margin:0 auto; padding:11px 21px; display:flex; align-items:center; gap:24px">
+      <a href="#top" style="display:flex; align-items:center; gap:9px; text-decoration:none" style-hover="text-decoration:none">
+        <div style="width:33px; height:33px; border-radius:8px; background:var(--k-blue-600); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px">
+          <span style="color:#fff; font-weight:800; font-size:11px; letter-spacing:0.02em; line-height:1">KMT</span>
+          <span style="width:17px; height:2px; border-radius:2px; background:var(--k-accent)"></span>
+        </div>
+        <span style="font-size:17px; font-weight:800; letter-spacing:-0.03em; color:var(--k-navy-900); white-space:nowrap">KMT LOGISTICS</span>
+      </a>
+      <div style="margin-left:auto; display:flex; align-items:center; gap:24px">
+        <sc-if value="{{ showNav }}" hint-placeholder-val="{{ true }}">
+          <nav style="display:flex; align-items:center; gap:23px">
+            <a href="#services" style="font-size:12px; font-weight:500; color:var(--k-navy-900)" style-hover="color:var(--k-blue-600); text-decoration:none">Freight</a>
+            <a href="#services" style="font-size:12px; font-weight:500; color:var(--k-navy-900)" style-hover="color:var(--k-blue-600); text-decoration:none">Dispatch</a>
+            <a href="#services" style="font-size:12px; font-weight:500; color:var(--k-navy-900)" style-hover="color:var(--k-blue-600); text-decoration:none">ELD</a>
+            <a href="#lease" style="font-size:12px; font-weight:500; color:var(--k-navy-900)" style-hover="color:var(--k-blue-600); text-decoration:none">Lease-to-own</a>
+            <a href="#path" style="font-size:12px; font-weight:500; color:var(--k-navy-900)" style-hover="color:var(--k-blue-600); text-decoration:none">MC startup</a>
+          </nav>
+        </sc-if>
+        <div style="display:flex; align-items:center; gap:8px">
+          <sc-if value="{{ showHeaderPhone }}" hint-placeholder-val="{{ true }}">
+            <a href="{{ phoneHref }}" style="border:1px solid var(--k-steel-200); color:var(--k-navy-900); font-size:12px; font-weight:700; padding:10px 15px; border-radius:9px; white-space:nowrap; transition:border-color 150ms" style-hover="border-color:var(--k-navy-900); text-decoration:none">{{ phone }}</a>
+          </sc-if>
+          <a href="#contact" style="background:var(--k-navy-900); color:#fff; font-size:12px; font-weight:700; padding:11px 17px; border-radius:9px; white-space:nowrap; transition:background 150ms" style-hover="background:var(--k-navy-800); color:#fff; text-decoration:none">Get started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="top" style="padding:6px 15px 0">
+    <div style="max-width:1080px; margin:0 auto; position:relative; border-radius:21px; overflow:hidden; background:linear-gradient(180deg, #1747E6 0%, #1240D6 60%, #0F33B8 100%); min-height:600px">
+      <sc-if value="{{ heroWide }}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute; top:0; right:0; bottom:83px; width:62%">
+          <image-slot id="kmt3-hero-bg" shape="rect" src="https://images.unsplash.com/photo-1494783367193-149034c05e8f?auto=format&fit=crop&w=1800&q=80" credit="Photo by Diego Jimenez on Unsplash" credit-href="https://unsplash.com/@diegojimenez" placeholder="Drop a highway or mountain landscape photo" style="position:absolute; inset:0; width:100%; height:100%"></image-slot>
+        </div>
+        <div style="position:absolute; inset:0; background:linear-gradient(90deg, #1747E6 36%, rgba(23,71,230,0.78) 50%, rgba(23,71,230,0.18) 74%, rgba(23,71,230,0.08) 100%), linear-gradient(180deg, rgba(15,51,184,0) 50%, rgba(15,51,184,0.75) 86%); pointer-events:none"></div>
+      </sc-if>
+
+      <div style="position:relative; z-index:2; padding:66px 48px 225px; pointer-events:none">
+        <div style="max-width:495px; pointer-events:auto">
+          <div style="font-size:11px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:var(--k-accent); margin-bottom:17px">For shippers &amp; owner-operators</div>
+          <h1 style="font-size:60px; line-height:0.98; letter-spacing:-0.05em; font-weight:800; color:#fff; margin:0 0 17px; text-wrap:balance">Moving freight. Building carriers.</h1>
+          <div style="font-size:23px; line-height:1.2; letter-spacing:-0.03em; font-weight:800; color:var(--k-accent); margin-bottom:17px">Nationwide loads · 24/7 dispatch</div>
+          <p style="font-size:15px; line-height:1.5; color:#E6EDFF; margin:0 0 27px; max-width:54ch; text-wrap:pretty">We haul across the lower 48 — and give drivers what they need to run their own: MC authority, a lease-to-own truck, dispatch and ELD.</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap">
+            <a href="#contact" style="display:flex; align-items:center; gap:6px; background:var(--k-accent); color:var(--k-on-accent); font-size:14px; font-weight:800; padding:14px 24px; border-radius:11px; white-space:nowrap; transition:background 150ms, transform 150ms" style-hover="background:var(--k-accent-hover); color:var(--k-on-accent); text-decoration:none; transform:translateY(-1px)">
+              <span>Get started</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+            </a>
+            <a href="#services" style="border:2px solid rgba(255,255,255,0.85); color:#fff; font-size:14px; font-weight:800; padding:13px 24px; border-radius:11px; white-space:nowrap; transition:background 150ms" style-hover="background:rgba(255,255,255,0.12); color:#fff; text-decoration:none">Ship with KMT</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="position:absolute; left:0; right:0; bottom:0; height:83px; background:#151C2E; pointer-events:none">
+        <div style="position:absolute; left:0; right:0; top:0; height:6px; background:#2B3654"></div>
+        <div style="position:absolute; left:0; right:0; top:14px; height:2px; background:rgba(255,255,255,0.55)"></div>
+        <div style="position:absolute; left:0; right:0; top:47px; height:4px; background:repeating-linear-gradient(90deg, var(--k-accent) 0 42px, transparent 42px 78px)"></div>
+        <div style="position:absolute; left:0; right:0; bottom:9px; height:2px; background:rgba(255,255,255,0.35)"></div>
+      </div>
+      <div style="position:absolute; left:0; right:0; bottom:0; height:225px; z-index:1; pointer-events:none">{{ truck }}</div>
+    </div>
+  </section>
+
+  <section style="max-width:1080px; margin:0 auto; padding:33px 21px 6px; display:grid; grid-template-columns:repeat(auto-fit, minmax(165px, 1fr)); row-gap:18px">
+    <div style="display:flex; align-items:center; gap:12px; padding:5px 18px">
+      <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path><path d="M15 18H9"></path><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path><circle cx="17" cy="18" r="2"></circle><circle cx="7" cy="18" r="2"></circle></svg>
+      <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:14px; font-weight:800; letter-spacing:-0.01em">Nationwide freight</span><span style="font-size:12px; color:var(--k-ink-600)">Loads in all 48 states</span></div>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px; padding:5px 18px; border-left:1px solid var(--k-line)">
+      <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"></path><path d="M21 16v2a4 4 0 0 1-4 4h-5"></path></svg>
+      <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:14px; font-weight:800; letter-spacing:-0.01em">Dispatch</span><span style="font-size:12px; color:var(--k-ink-600)">Keep wheels turning</span></div>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px; padding:5px 18px; border-left:1px solid var(--k-line)">
+      <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+      <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:14px; font-weight:800; letter-spacing:-0.01em">ELD + HOS</span><span style="font-size:12px; color:var(--k-ink-600)">Stay DOT compliant</span></div>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px; padding:5px 18px; border-left:1px solid var(--k-line)">
+      <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"></path><path d="m21 2-9.6 9.6"></path><circle cx="7.5" cy="15.5" r="5.5"></circle></svg>
+      <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:14px; font-weight:800; letter-spacing:-0.01em">Lease-to-own</span><span style="font-size:12px; color:var(--k-ink-600)">Drive it, then own it</span></div>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px; padding:5px 18px; border-left:1px solid var(--k-line)">
+      <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.520 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+      <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:14px; font-weight:800; letter-spacing:-0.01em">MC startup</span><span style="font-size:12px; color:var(--k-ink-600)">Your own authority</span></div>
+    </div>
+  </section>
+
+  <section id="services" style="max-width:1080px; margin:0 auto; padding:78px 21px 30px">
+    <div style="font-size:11px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:var(--k-blue-600); margin-bottom:21px">What we do</div>
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:18px 48px; flex-wrap:wrap; margin-bottom:39px">
+      <h2 style="font-size:57px; line-height:0.98; letter-spacing:-0.05em; font-weight:800; margin:0; max-width:12ch; text-wrap:balance">One partner. Every mile.</h2>
+      <p style="font-size:20px; line-height:1.45; color:var(--k-ink-600); margin:0; max-width:28ch; text-wrap:pretty">Ship with us, drive with us, or build your own operation on our back office.</p>
+    </div>
+
+    <div style="display:flex; flex-wrap:wrap; gap:14px">
+      <div style="flex:1 1 390px; min-height:495px; border-radius:21px; background:var(--k-blue-100); overflow:hidden; display:flex; flex-direction:column">
+        <div style="padding:33px 33px 0; display:flex; flex-direction:column; gap:11px">
+          <span style="font-size:11px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:var(--k-blue-700)">Asset-based carrier</span>
+          <h3 style="font-size:39px; line-height:1.0; letter-spacing:-0.045em; font-weight:800; margin:0">Nationwide Freight</h3>
+          <p style="font-size:17px; line-height:1.45; color:var(--k-ink-600); margin:0; max-width:34ch">Our trucks, our drivers, our authority — one point of contact from tender to POD.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:5px">
+            <sc-for list="{{ freightModes }}" as="mode" hint-placeholder-count="5">
+              <span style="font-size:11px; font-weight:700; color:var(--k-navy-900); background:#fff; padding:6px 11px; border-radius:9999px">{{ mode }}</span>
+            </sc-for>
+          </div>
+        </div>
+        <div style="flex:1 1 auto; min-height:225px; margin:27px 33px 0; border-radius:14px 14px 0 0; overflow:hidden; position:relative; box-shadow:0 -7px 23px -10px rgba(11,38,144,0.35)">
+          <image-slot id="kmt3-freight" shape="rect" src="https://images.unsplash.com/photo-1779583074717-e60fa13131ce?auto=format&fit=crop&w=1800&q=80" credit="Photo by Fabio Sasso on Unsplash" credit-href="https://unsplash.com/@abduzeedo" placeholder="Drop a photo of a KMT tractor-trailer" style="position:absolute; inset:0; width:100%; height:100%"></image-slot>
+        </div>
+      </div>
+
+      <div style="flex:1 1 390px; display:flex; flex-direction:column; gap:14px">
+        <div style="border-radius:21px; background:var(--k-navy-900); color:#fff; overflow:hidden; display:flex; flex-wrap:wrap; min-height:240px">
+          <div style="flex:1 1 173px; padding:30px; display:flex; flex-direction:column; gap:11px">
+            <span style="font-size:11px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:var(--k-accent)">For owner-operators</span>
+            <h3 style="font-size:32px; line-height:1.0; letter-spacing:-0.045em; font-weight:800; margin:0; color:#fff">Dispatch Service</h3>
+            <p style="font-size:14px; line-height:1.45; color:#C9D4EE; margin:0">We find loads, negotiate rates and handle broker paperwork. You drive.</p>
+            <a href="#contact" style="margin-top:auto; font-size:12px; font-weight:800; color:var(--k-accent)" style-hover="color:#fff">Get a dispatcher →</a>
+          </div>
+          <div style="flex:1 1 188px; position:relative; min-height:188px; margin:24px 0; border-radius:12px 0 0 12px; overflow:hidden">
+            <image-slot id="kmt3-dispatch" shape="rect" src="https://images.unsplash.com/photo-1647712452980-64c0d5bf5dbc?auto=format&fit=crop&w=1800&q=80" credit="Photo by Nubelson Fernandes on Unsplash" credit-href="https://unsplash.com/@nublson" placeholder="Drop a dispatch board screenshot" style="position:absolute; inset:0; width:100%; height:100%"></image-slot>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:14px; flex:1 1 auto">
+          <div style="flex:1 1 180px; min-height:240px; border-radius:21px; background:#fff; border:1px solid var(--k-line); padding:27px; display:flex; flex-direction:column; gap:9px">
+            <div style="width:39px; height:39px; border-radius:11px; background:var(--k-blue-100); display:grid; place-items:center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+            </div>
+            <h3 style="font-size:24px; line-height:1.05; letter-spacing:-0.04em; font-weight:800; margin:6px 0 0">ELD &amp; Compliance</h3>
+            <p style="font-size:13px; line-height:1.5; color:var(--k-ink-600); margin:0">FMCSA-registered ELD, HOS logs, IFTA reporting and DOT audit prep.</p>
+            <a href="#contact" style="margin-top:auto; font-size:12px; font-weight:800; color:var(--k-blue-600)">Set up ELD →</a>
+          </div>
+          <div style="flex:1 1 180px; min-height:240px; border-radius:21px; background:var(--k-blue-600); color:#fff; padding:27px; display:flex; flex-direction:column; gap:9px">
+            <div style="width:39px; height:39px; border-radius:11px; background:rgba(255,255,255,0.14); display:grid; place-items:center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--k-accent)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"></path><path d="m21 2-9.6 9.6"></path><circle cx="7.5" cy="15.5" r="5.5"></circle></svg>
+            </div>
+            <h3 style="font-size:24px; line-height:1.05; letter-spacing:-0.04em; font-weight:800; margin:6px 0 0; color:#fff">Lease-to-Own Trucks</h3>
+            <p style="font-size:13px; line-height:1.5; color:#E6EDFF; margin:0">Fully managed. Drive a late-model tractor today, own it at the end.</p>
+            <a href="#lease" style="margin-top:auto; font-size:12px; font-weight:800; color:var(--k-accent)" style-hover="color:#fff">See the program →</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex:1 1 100%; border-radius:21px; background:var(--k-accent); color:var(--k-on-accent); padding:33px; display:flex; flex-wrap:wrap; align-items:center; gap:24px 48px">
+        <div style="flex:1 1 270px; display:flex; flex-direction:column; gap:9px">
+          <span style="font-size:11px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase">New authority</span>
+          <h3 style="font-size:39px; line-height:1.0; letter-spacing:-0.045em; font-weight:800; margin:0">MC Startup</h3>
+          <p style="font-size:15px; line-height:1.45; margin:0; max-width:38ch">We file it, you drive it. Authority, insurance and compliance set up right the first time.</p>
+          <a href="#path" style="align-self:flex-start; margin-top:8px; background:var(--k-navy-900); color:#fff; font-size:13px; font-weight:800; padding:12px 20px; border-radius:11px; white-space:nowrap; transition:background 150ms" style-hover="background:var(--k-navy-800); color:#fff; text-decoration:none">Start my authority</a>
+        </div>
+        <div style="flex:1 1 330px; display:grid; grid-template-columns:repeat(auto-fit, minmax(158px, 1fr)); gap:11px">
+          <sc-for list="{{ mcChecklist }}" as="item" hint-placeholder-count="4">
+            <div style="display:flex; align-items:center; gap:9px; background:rgba(255,255,255,0.5); border-radius:12px; padding:14px 15px">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M20 6 9 17l-5-5"></path></svg>
+              <span style="font-size:13px; font-weight:800">{{ item }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lease" style="background:var(--k-blue-50); margin-top:60px">
+    <div style="max-width:1080px; margin:0 auto; padding:84px 21px; display:flex; flex-wrap:wrap; gap:48px; align-items:center">
+      <div style="flex:1 1 360px; min-height:450px; position:relative; border-radius:21px; overflow:hidden">
+        <image-slot id="kmt3-lease" shape="rect" src="https://images.unsplash.com/photo-1783428673235-77dafc15eb59?auto=format&fit=crop&w=1800&q=80" credit="Photo by snap wander on Unsplash" credit-href="https://unsplash.com/@passimage" placeholder="Drop a photo of a lease-to-own tractor" style="position:absolute; inset:0; width:100%; height:100%"></image-slot>
+      </div>
+      <div style="flex:1 1 360px; display:flex; flex-direction:column; gap:17px">
+        <span style="font-size:11px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:var(--k-blue-600)">Fully managed lease-to-own</span>
+        <h2 style="font-size:51px; line-height:0.98; letter-spacing:-0.05em; font-weight:800; margin:0; text-wrap:balance">Drive it today. Own it at the end.</h2>
+        <p style="font-size:16px; line-height:1.5; color:var(--k-ink-600); margin:0; max-width:46ch; text-wrap:pretty">Late-model tractors with the hard parts handled. We manage maintenance, insurance, plates and loads — every mile goes toward a truck with your name on the title.</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(173px, 1fr)); gap:9px; margin-top:5px">
+          <sc-for list="{{ leaseIncluded }}" as="inc" hint-placeholder-count="6">
+            <div style="display:flex; align-items:center; gap:9px; background:#fff; border-radius:11px; padding:12px 14px; box-shadow:0 1px 2px rgba(10,22,48,0.06)">
+              <span style="width:21px; height:21px; border-radius:9999px; background:var(--k-blue-600); display:grid; place-items:center; flex:0 0 auto">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+              </span>
+              <span style="font-size:13px; font-weight:700">{{ inc }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex; gap:9px; flex-wrap:wrap; margin-top:9px">
+          <a href="#contact" style="background:var(--k-blue-600); color:#fff; font-size:14px; font-weight:800; padding:14px 23px; border-radius:11px; white-space:nowrap; transition:background 150ms" style-hover="background:var(--k-blue-700); color:#fff; text-decoration:none">Apply for a truck</a>
+          <a href="{{ phoneHref }}" style="border:2px solid var(--k-navy-900); color:var(--k-navy-900); font-size:14px; font-weight:800; padding:12px 23px; border-radius:11px; white-space:nowrap" style-hover="background:var(--k-navy-900); color:#fff; text-decoration:none">Ask about terms</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:84px 15px 0">
+    <div style="max-width:1080px; margin:0 auto; background:var(--k-navy-900); border-radius:21px; padding:27px; display:flex; flex-wrap:wrap; gap:39px; align-items:center">
+      <div style="flex:1 1 390px; min-height:330px; position:relative; border-radius:15px; overflow:hidden">
+        <image-slot id="kmt3-support" shape="rect" src="https://images.unsplash.com/photo-1714079761488-e0c9b9ac4138?auto=format&fit=crop&w=1800&q=80" credit="Photo by Vagaro on Unsplash" credit-href="https://unsplash.com/@vagaro" placeholder="Drop a photo of your dispatch team" style="position:absolute; inset:0; width:100%; height:100%"></image-slot>
+      </div>
+      <div style="flex:1 1 300px; padding:9px 21px 9px 3px; display:flex; flex-direction:column; gap:15px">
+        <span style="font-size:11px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:var(--k-accent)">24/7 dispatch &amp; driver support</span>
+        <h2 style="font-size:45px; line-height:1.0; letter-spacing:-0.05em; font-weight:800; margin:0; color:#fff; text-wrap:balance">Somebody answers. Day or night.</h2>
+        <p style="font-size:16px; line-height:1.5; color:#C9D4EE; margin:0; max-width:40ch">Breakdown at 2 a.m., detention at the dock, a rate con that doesn't match — talk to a dispatcher who knows your truck.</p>
+        <a href="{{ phoneHref }}" style="align-self:flex-start; display:flex; align-items:center; gap:6px; background:var(--k-accent); color:var(--k-on-accent); font-size:14px; font-weight:800; padding:14px 23px; border-radius:11px; white-space:nowrap; margin-top:6px; transition:background 150ms" style-hover="background:var(--k-accent-hover); color:var(--k-on-accent); text-decoration:none">
+          <span>Talk to dispatch</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+        </a>
+        <div style="display:flex; align-items:center; gap:9px; color:#fff; font-size:13px">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>
+          <span>Driver &amp; dispatcher line · {{ phone }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="path" style="max-width:1080px; margin:0 auto; padding:90px 21px 78px">
+    <div style="font-size:11px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:var(--k-blue-600); margin-bottom:21px">How it works</div>
+    <h2 style="font-size:57px; line-height:0.98; letter-spacing:-0.05em; font-weight:800; margin:0 0 39px; max-width:15ch; text-wrap:balance">From new authority to first load.</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(188px, 1fr)); gap:15px">
+      <sc-for list="{{ steps }}" as="step" hint-placeholder-count="4">
+        <div style="background:var(--k-blue-50); border:1px solid var(--k-line); border-radius:17px; padding:24px; min-height:180px; display:flex; flex-direction:column; gap:9px; transition:box-shadow 150ms, transform 150ms" style-hover="box-shadow:0 11px 21px -10px rgba(11,38,144,0.3); transform:translateY(-2px)">
+          <span style="width:42px; height:42px; border-radius:11px; background:var(--k-blue-600); color:#fff; display:grid; place-items:center; font-size:15px; font-weight:800">{{ step.num }}</span>
+          <h3 style="font-size:19px; line-height:1.2; letter-spacing:-0.025em; font-weight:800; margin:12px 0 0">{{ step.title }}</h3>
+          <p style="font-size:13px; line-height:1.5; color:var(--k-ink-600); margin:0">{{ step.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="contact" style="background:var(--k-blue-50)">
+    <div style="max-width:1080px; margin:0 auto; padding:84px 21px; display:flex; flex-wrap:wrap; gap:48px; align-items:flex-start">
+      <div style="flex:1 1 300px; display:flex; flex-direction:column; gap:15px">
+        <span style="font-size:11px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:var(--k-blue-600)">Get started</span>
+        <h2 style="font-size:51px; line-height:0.98; letter-spacing:-0.05em; font-weight:800; margin:0; text-wrap:balance">Tell us where you're headed.</h2>
+        <p style="font-size:16px; line-height:1.5; color:var(--k-ink-600); margin:0; max-width:38ch">Shipper with a lane to cover, or a driver ready to run your own — a real person replies within one business hour.</p>
+        <div style="display:flex; flex-direction:column; gap:14px; padding-top:20px; margin-top:6px; border-top:1px solid var(--k-steel-200)">
+          <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:11px; color:var(--k-ink-500)">Dispatch, 24/7</span><a href="{{ phoneHref }}" style="font-size:18px; font-weight:800; color:var(--k-navy-900)">{{ phone }}</a></div>
+          <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:11px; color:var(--k-ink-500)">Email</span><a href="{{ emailHref }}" style="font-size:18px; font-weight:800; color:var(--k-navy-900)">{{ email }}</a></div>
+        </div>
+      </div>
+      <form onSubmit="{{ onSubmit }}" style="flex:1 1 405px; background:#fff; border-radius:21px; padding:30px; box-shadow:0 15px 30px -18px rgba(11,38,144,0.25); display:grid; grid-template-columns:repeat(auto-fit, minmax(173px, 1fr)); gap:14px">
+        <div style="grid-column:1 / -1; display:flex; flex-direction:column; gap:8px">
+          <span style="font-size:11px; font-weight:700">I'm interested in</span>
+          <div style="display:flex; gap:6px; flex-wrap:wrap">
+            <sc-for list="{{ interests }}" as="opt" hint-placeholder-count="5">
+              <sc-if value="{{ opt.on }}">
+                <button type="button" onClick="{{ opt.pick }}" style="font-family:'Plus Jakarta Sans', var(--font-sans); font-size:11px; font-weight:800; padding:8px 14px; border-radius:9999px; cursor:pointer; white-space:nowrap; background:var(--k-blue-600); color:#fff; border:2px solid var(--k-blue-600)">{{ opt.label }}</button>
+              </sc-if>
+              <sc-if value="{{ opt.off }}">
+                <button type="button" onClick="{{ opt.pick }}" style="font-family:'Plus Jakarta Sans', var(--font-sans); font-size:11px; font-weight:700; padding:8px 14px; border-radius:9999px; cursor:pointer; white-space:nowrap; background:#fff; color:var(--k-navy-900); border:2px solid var(--k-steel-200); transition:border-color 150ms" style-hover="border-color:var(--k-blue-600)">{{ opt.label }}</button>
+              </sc-if>
+            </sc-for>
+          </div>
+        </div>
+        <label style="display:flex; flex-direction:column; gap:6px">
+          <span style="font-size:11px; font-weight:700">Name</span>
+          <input name="name" placeholder="Full name" style="font-family:'Plus Jakarta Sans', var(--font-sans); font-size:13px; padding:11px 12px; border:1.5px solid var(--k-steel-200); border-radius:9px; background:#fff; color:var(--k-navy-900); outline:none" style-focus="border-color:var(--k-blue-600)">
+        </label>
+        <label style="display:flex; flex-direction:column; gap:6px">
+          <span style="font-size:11px; font-weight:700">Company or MC #</span>
+          <input name="company" placeholder="Optional" style="font-family:'Plus Jakarta Sans', var(--font-sans); font-size:13px; padding:11px 12px; border:1.5px solid var(--k-steel-200); border-radius:9px; background:#fff; color:var(--k-navy-900); outline:none" style-focus="border-color:var(--k-blue-600)">
+        </label>
+        <label style="display:flex; flex-direction:column; gap:6px">
+          <span style="font-size:11px; font-weight:700">Phone</span>
+          <input name="phone" type="tel" placeholder="(555) 000-0000" style="font-family:'Plus Jakarta Sans', var(--font-sans); font-size:13px; padding:11px 12px; border:1.5px solid var(--k-steel-200); border-radius:9px; background:#fff; color:var(--k-navy-900); outline:none" style-focus="border-color:var(--k-blue-600)">
+        </label>
+        <label style="display:flex; flex-direction:column; gap:6px">
+          <span style="font-size:11px; font-weight:700">Email</span>
+          <input name="email" type="email" placeholder="you@company.com" style="font-family:'Plus Jakarta Sans', var(--font-sans); font-size:13px; padding:11px 12px; border:1.5px solid var(--k-steel-200); border-radius:9px; background:#fff; color:var(--k-navy-900); outline:none" style-focus="border-color:var(--k-blue-600)">
+        </label>
+        <label style="grid-column:1 / -1; display:flex; flex-direction:column; gap:6px">
+          <span style="font-size:11px; font-weight:700">Details</span>
+          <textarea name="notes" rows="4" placeholder="Lane and equipment, or where you are with your authority and truck." style="font-family:'Plus Jakarta Sans', var(--font-sans); font-size:13px; padding:11px 12px; border:1.5px solid var(--k-steel-200); border-radius:9px; background:#fff; color:var(--k-navy-900); outline:none; resize:vertical" style-focus="border-color:var(--k-blue-600)"></textarea>
+        </label>
+        <div style="grid-column:1 / -1; display:flex; align-items:center; gap:15px; flex-wrap:wrap">
+          <button type="submit" style="background:var(--k-blue-600); color:#fff; border:none; font-family:'Plus Jakarta Sans', var(--font-sans); font-size:14px; font-weight:800; padding:14px 24px; border-radius:11px; cursor:pointer; white-space:nowrap; transition:background 150ms" style-hover="background:var(--k-blue-700)" style-active="transform:scale(0.98)">Send to KMT</button>
+          <span style="font-size:12px; font-weight:700; color:#15803D">{{ confirmation }}</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer style="background:var(--k-navy-950); color:#A9B6D3">
+    <div style="max-width:1080px; margin:0 auto; padding:60px 21px 33px; display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:33px">
+      <div style="display:flex; flex-direction:column; gap:12px">
+        <div style="display:flex; align-items:center; gap:9px">
+          <div style="width:32px; height:32px; border-radius:8px; background:var(--k-blue-600); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px">
+            <span style="color:#fff; font-weight:800; font-size:10px; line-height:1">KMT</span>
+            <span style="width:15px; height:2px; border-radius:2px; background:var(--k-accent)"></span>
+          </div>
+          <span style="font-size:14px; font-weight:800; color:#fff; letter-spacing:-0.02em">KMT Logistics LLC</span>
+        </div>
+        <p style="font-size:11px; line-height:1.6; margin:0; max-width:32ch">Nationwide freight carrier with dispatch, ELD, lease-to-own and MC startup services for owner-operators.</p>
+        <span style="font-family:var(--font-mono); font-size:10px; color:#7D8BAA">MC 000000 · USDOT 0000000</span>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:9px">
+        <span style="font-size:10px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#fff">Services</span>
+        <a href="#services" style="font-size:12px; color:#A9B6D3" style-hover="color:#fff">Nationwide freight</a>
+        <a href="#services" style="font-size:12px; color:#A9B6D3" style-hover="color:#fff">Dispatch service</a>
+        <a href="#services" style="font-size:12px; color:#A9B6D3" style-hover="color:#fff">ELD &amp; compliance</a>
+        <a href="#lease" style="font-size:12px; color:#A9B6D3" style-hover="color:#fff">Lease-to-own trucks</a>
+        <a href="#path" style="font-size:12px; color:#A9B6D3" style-hover="color:#fff">MC startup</a>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:9px">
+        <span style="font-size:10px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#fff">Work with us</span>
+        <a href="#contact" style="font-size:12px; color:#A9B6D3" style-hover="color:#fff">Ship with KMT</a>
+        <a href="#contact" style="font-size:12px; color:#A9B6D3" style-hover="color:#fff">Drive for KMT</a>
+        <a href="{{ emailHref }}" style="font-size:12px; color:#A9B6D3" style-hover="color:#fff">Carrier packet</a>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:9px">
+        <span style="font-size:10px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#fff">Contact</span>
+        <a href="{{ phoneHref }}" style="font-size:12px; color:#A9B6D3" style-hover="color:#fff">{{ phone }}</a>
+        <a href="{{ emailHref }}" style="font-size:12px; color:#A9B6D3" style-hover="color:#fff">{{ email }}</a>
+        <span style="font-size:12px">Dispatch open 24/7</span>
+      </div>
+    </div>
+    <div style="max-width:1080px; margin:0 auto; padding:17px 21px 33px; border-top:1px solid rgba(255,255,255,0.1); font-size:11px; color:#7D8BAA">© 2026 KMT Logistics LLC. All rights reserved.</div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentPalette&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Highway yellow&quot;,&quot;Safety orange&quot;,&quot;Signal cyan&quot;],&quot;default&quot;:&quot;Highway yellow&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Brand&quot;},&quot;animateTruck&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;(555) 014-2200&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;dispatch@kmtlogistics.com&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;}}">
+class Component extends DCLogic {
+  state = { interest: "Ship freight", confirmation: "", vw: typeof window !== "undefined" ? window.innerWidth : 1440 };
+  onResize = () => this.setState({ vw: window.innerWidth });
+
+  palettes() {
+    return {
+      "Highway yellow": { "--k-accent": "#FFD60A", "--k-accent-hover": "#FFE14D", "--k-on-accent": "#0A1630" },
+      "Safety orange": { "--k-accent": "#FF8A1F", "--k-accent-hover": "#FF9E45", "--k-on-accent": "#0A1630" },
+      "Signal cyan": { "--k-accent": "#3EE6E0", "--k-accent-hover": "#70EEEA", "--k-on-accent": "#0A1630" }
+    };
+  }
+  applyAccent() {
+    const all = this.palettes();
+    const p = all[this.props.accentPalette] || all["Highway yellow"];
+    const s = document.documentElement.style;
+    for (const k in p) s.setProperty(k, p[k]);
+  }
+  componentDidMount() { this.applyAccent(); window.addEventListener("resize", this.onResize); this.onResize(); }
+  componentDidUpdate() { this.applyAccent(); }
+  componentWillUnmount() { window.removeEventListener("resize", this.onResize); }
+
+  truckSvg(anim) {
+    const a = anim ? "animation:kmtWheel 11s infinite;" : "";
+    const wheel = (x) =>
+      `<circle cx="${x}" cy="170" r="22" fill="#121826"/><circle cx="${x}" cy="170" r="12" fill="#C3CCDA"/>` +
+      `<g style="transform-box:fill-box;transform-origin:center;${a}"><circle cx="${x}" cy="170" r="12" fill="none"/>` +
+      `<path d="M${x - 11} 170H${x + 11}M${x} 159V181" stroke="#5B6780" stroke-width="2.5" stroke-linecap="round"/></g>` +
+      `<circle cx="${x}" cy="170" r="4" fill="#4B5873"/>`;
+    return `<svg viewBox="0 0 640 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="320" cy="193" rx="316" ry="7" fill="rgba(2,6,20,0.45)"/>
+<rect x="4" y="8" width="412" height="138" rx="6" fill="#F7F9FC" stroke="#C9D3E3" stroke-width="2"/>
+<rect x="5" y="110" width="410" height="12" style="fill:var(--k-accent)"/>
+<rect x="5" y="122" width="410" height="5" fill="#1747E6"/>
+<text x="34" y="86" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="66" letter-spacing="-3" fill="#0A1630">KMT</text>
+<text x="200" y="64" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="#1747E6">LOGISTICS</text>
+<text x="201" y="88" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="12.5" letter-spacing="2" fill="#67738C">NATIONWIDE FREIGHT</text>
+<rect x="20" y="146" width="150" height="10" fill="#2A3346"/>
+<rect x="170" y="146" width="240" height="5" fill="#2A3346"/>
+<rect x="332" y="146" width="7" height="28" fill="#55607A"/><rect x="326" y="172" width="19" height="5" rx="2" fill="#55607A"/>
+<rect x="6" y="150" width="6" height="22" fill="#55607A"/>
+<rect x="136" y="152" width="4" height="28" fill="#2A3346"/>
+<rect x="398" y="146" width="234" height="10" fill="#2A3346"/>
+<path d="M430 150V48Q430 36 442 36H536Q548 36 554 46L576 88L614 96Q628 99 628 114V150Z" fill="#FFFFFF" stroke="#C9D3E3" stroke-width="2"/>
+<path d="M431 127H627V149H431Z" fill="#E4EAF4"/>
+<path d="M431 116H627V123H431Z" style="fill:var(--k-accent)"/>
+<path d="M431 123H627V126H431Z" fill="#1747E6"/>
+<path d="M544 48L564 86H532V52Q532 48 536 48Z" fill="#14213D"/>
+<path d="M546 53L554 69H546Z" fill="rgba(255,255,255,0.28)"/>
+<path d="M522 50V146" stroke="#C9D3E3" stroke-width="2" fill="none"/>
+<rect x="526" y="96" width="13" height="4" rx="2" fill="#9AA6B8"/>
+<rect x="444" y="54" width="44" height="18" rx="4" fill="#14213D"/>
+<rect x="566" y="54" width="4" height="28" rx="2" fill="#2A3346"/>
+<rect x="618" y="100" width="10" height="36" rx="2" fill="#9AA6B8"/>
+<rect x="608" y="102" width="10" height="7" rx="2" fill="#FFE27A"/>
+<rect x="600" y="140" width="34" height="14" rx="3" fill="#B7C1D1"/>
+<rect x="512" y="2" width="8" height="48" rx="3" fill="#C3CCDA"/>
+<rect x="464" y="131" width="54" height="21" rx="10" fill="#D5DCE7" stroke="#B7C1D1"/>
+<rect x="524" y="152" width="4" height="28" fill="#2A3346"/>
+<circle cx="592" cy="170" r="27" fill="#2A3346"/>
+${[58, 108, 450, 500, 592].map(wheel).join("")}
+</svg>`;
+  }
+
+  renderVals() {
+    const phone = this.props.phone ?? "(555) 014-2200";
+    const email = this.props.email ?? "dispatch@kmtlogistics.com";
+    const anim = this.props.animateTruck ?? true;
+    const vw = this.state.vw;
+    return {
+      phone,
+      email,
+      phoneHref: "tel:" + phone.replace(/[^0-9+]/g, ""),
+      emailHref: "mailto:" + email,
+      heroWide: vw >= 780,
+      showNav: vw >= 840,
+      showHeaderPhone: vw >= 1000,
+      truck: React.createElement("div", {
+        style: {
+          position: "absolute", bottom: 47, width: 450, height: 141,
+          left: anim ? -510 : "max(18px, calc(100% - 540px))",
+          animation: anim ? "kmtDrive 11s infinite" : "none"
+        },
+        dangerouslySetInnerHTML: { __html: this.truckSvg(anim) }
+      }),
+      confirmation: this.state.confirmation,
+      freightModes: ["Dry van", "Reefer", "Flatbed", "Expedited", "Dedicated lanes"],
+      mcChecklist: ["LLC formation & EIN", "USDOT & MC number", "BOC-3, UCR & insurance", "IFTA, IRP & drug consortium"],
+      leaseIncluded: ["Late-model tractor", "Maintenance managed", "Insurance & plates", "Loads dispatched for you", "ELD installed", "Weekly settlements"],
+      steps: [
+        { num: "01", title: "Launch your authority", body: "We form the LLC, file your USDOT and MC, and handle BOC-3 and UCR." },
+        { num: "02", title: "Get your truck", body: "Bring your own, or drive a fully managed lease-to-own tractor." },
+        { num: "03", title: "Go live on ELD", body: "ELD installed, IFTA set up, HOS walkthrough for every driver." },
+        { num: "04", title: "Start hauling", body: "Your dispatcher books the first load. Settlements land weekly." }
+      ],
+      interests: ["Ship freight", "Dispatch", "ELD", "Lease-to-own", "MC startup"].map((label) => {
+        const on = this.state.interest === label;
+        return { label, on, off: !on, pick: () => this.setState({ interest: label }) };
+      }),
+      onSubmit: (e) => {
+        e.preventDefault();
+        this.setState({ confirmation: "Got it — we'll reach out within one business hour." });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
