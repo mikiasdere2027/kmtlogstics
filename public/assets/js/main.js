@@ -33,6 +33,24 @@
     pickInterest(fromUrl);
   }
 
+  var done = "Got it — we'll reach out within one business hour.";
+  var success = document.getElementById("form-success");
+  var again = document.getElementById("form-again");
+
+  function showSuccess() {
+    if (!success) { setStatus(done); return; }
+    form.hidden = true;
+    success.hidden = false;
+    success.focus();
+  }
+  if (again) {
+    again.addEventListener("click", function () {
+      success.hidden = true;
+      form.hidden = false;
+      form.elements.name.focus();
+    });
+  }
+
   function setStatus(msg, isError) {
     status.textContent = msg;
     status.classList.toggle("is-error", !!isError);
@@ -55,7 +73,6 @@
     }
 
     var endpoint = form.getAttribute("data-endpoint");
-    var done = "Got it — we'll reach out within one business hour.";
 
     // No server when the page is opened straight from disk, so fall back to the email app
     if (!endpoint || location.protocol === "file:") {
@@ -94,13 +111,16 @@
           var msg = r.json.error && /^(Please|Add|That)/.test(r.json.error) ? r.json.error : null;
           var err = new Error(msg || "send failed");
           err.userMessage = msg;
+          err.reason = r.json.reason;
           throw err;
         }
         form.reset();
         pickInterest("Ship freight");
-        setStatus(done);
+        setStatus("");
+        showSuccess();
       })
       .catch(function (err) {
+        if (err && err.reason) console.warn("Contact form not delivered:", err.reason, "— open /api/contact for setup status");
         setStatus((err && err.userMessage) || "Couldn't send — please call or email us instead.", true);
       })
       .finally(function () { submitBtn.disabled = false; });
