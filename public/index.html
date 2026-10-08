@@ -11,7 +11,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="KMT Logistics — Moving freight. Building carriers.">
   <meta property="og:description" content="Nationwide loads, 24/7 dispatch, ELD, lease-to-own trucks and MC startup for owner-operators.">
-  <meta property="og:image" content="assets/img/hero-highway.jpg">
+  <meta property="og:image" content="https://kmtlogisticsllc.com/assets/img/hero-highway.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,70 +71,88 @@
       </div>
 
       <div class="road" aria-hidden="true">
+        <div class="road__shoulder"></div>
         <div class="road__edge road__edge--top"></div>
         <div class="road__dashes"></div>
         <div class="road__edge road__edge--bottom"></div>
-      </div>
-      <div class="truck-lane" aria-hidden="true">
         <div class="truck">
-          <svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="320" cy="193" rx="316" ry="7" fill="rgba(2,6,20,0.45)"/>
-            <rect x="4" y="8" width="412" height="138" rx="6" fill="#F7F9FC" stroke="#C9D3E3" stroke-width="2"/>
-            <rect x="5" y="110" width="410" height="12" style="fill:var(--k-accent)"/>
-            <rect x="5" y="122" width="410" height="5" fill="#1747E6"/>
-            <text x="34" y="86" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="66" letter-spacing="-3" fill="#0A1630">KMT</text>
-            <text x="200" y="64" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="#1747E6">LOGISTICS</text>
-            <text x="201" y="88" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="12.5" letter-spacing="2" fill="#67738C">NATIONWIDE FREIGHT</text>
-            <rect x="20" y="146" width="150" height="10" fill="#2A3346"/>
-            <rect x="170" y="146" width="240" height="5" fill="#2A3346"/>
-            <rect x="332" y="146" width="7" height="28" fill="#55607A"/><rect x="326" y="172" width="19" height="5" rx="2" fill="#55607A"/>
-            <rect x="6" y="150" width="6" height="22" fill="#55607A"/>
-            <rect x="136" y="152" width="4" height="28" fill="#2A3346"/>
-            <rect x="398" y="146" width="234" height="10" fill="#2A3346"/>
-            <path d="M430 150V48Q430 36 442 36H536Q548 36 554 46L576 88L614 96Q628 99 628 114V150Z" fill="#FFFFFF" stroke="#C9D3E3" stroke-width="2"/>
-            <path d="M431 127H627V149H431Z" fill="#E4EAF4"/>
-            <path d="M431 116H627V123H431Z" style="fill:var(--k-accent)"/>
-            <path d="M431 123H627V126H431Z" fill="#1747E6"/>
-            <path d="M544 48L564 86H532V52Q532 48 536 48Z" fill="#14213D"/>
-            <path d="M546 53L554 69H546Z" fill="rgba(255,255,255,0.28)"/>
-            <path d="M522 50V146" stroke="#C9D3E3" stroke-width="2" fill="none"/>
-            <rect x="526" y="96" width="13" height="4" rx="2" fill="#9AA6B8"/>
-            <rect x="444" y="54" width="44" height="18" rx="4" fill="#14213D"/>
-            <rect x="566" y="54" width="4" height="28" rx="2" fill="#2A3346"/>
-            <rect x="618" y="100" width="10" height="36" rx="2" fill="#9AA6B8"/>
-            <rect x="608" y="102" width="10" height="7" rx="2" fill="#FFE27A"/>
-            <rect x="600" y="140" width="34" height="14" rx="3" fill="#B7C1D1"/>
-            <rect x="512" y="2" width="8" height="48" rx="3" fill="#C3CCDA"/>
-            <rect x="464" y="131" width="54" height="21" rx="10" fill="#D5DCE7" stroke="#B7C1D1"/>
-            <rect x="524" y="152" width="4" height="28" fill="#2A3346"/>
-            <circle cx="592" cy="170" r="27" fill="#2A3346"/>
-            <g>
-              <circle cx="58" cy="170" r="22" fill="#121826"/><circle cx="58" cy="170" r="12" fill="#C3CCDA"/>
-              <g class="truck__spin"><circle cx="58" cy="170" r="12" fill="none"/><path d="M47 170H69M58 159V181" stroke="#5B6780" stroke-width="2.5" stroke-linecap="round"/></g>
-              <circle cx="58" cy="170" r="4" fill="#4B5873"/>
+          <!-- Top-down tractor-trailer, driving left to right -->
+          <svg viewBox="0 0 600 124" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="trailerBody" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#2450E0"/>
+                <stop offset="0.18" stop-color="#1238B4"/>
+                <stop offset="0.82" stop-color="#0B2690"/>
+                <stop offset="1" stop-color="#071A66"/>
+              </linearGradient>
+              <linearGradient id="cabBody" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#E4E9F1"/>
+                <stop offset="0.2" stop-color="#FFFFFF"/>
+                <stop offset="0.8" stop-color="#F6F8FB"/>
+                <stop offset="1" stop-color="#D6DCE6"/>
+              </linearGradient>
+              <pattern id="ribs" width="7" height="124" patternUnits="userSpaceOnUse">
+                <rect width="1.4" height="124" fill="#000" opacity="0.16"/>
+                <rect x="1.4" width="1" height="124" fill="#fff" opacity="0.07"/>
+              </pattern>
+              <filter id="truckShadow" x="-5%" y="-30%" width="115%" height="170%">
+                <feGaussianBlur stdDeviation="5"/>
+              </filter>
+            </defs>
+
+            <!-- shadow cast down-right -->
+            <rect x="10" y="20" width="586" height="100" rx="10" fill="#000" opacity="0.45" filter="url(#truckShadow)"/>
+
+            <!-- tires peeking out from under the body -->
+            <g fill="#0E121A">
+              <rect x="34" y="6" width="26" height="9" rx="2"/><rect x="64" y="6" width="26" height="9" rx="2"/>
+              <rect x="34" y="109" width="26" height="9" rx="2"/><rect x="64" y="109" width="26" height="9" rx="2"/>
+              <rect x="458" y="10" width="22" height="9" rx="2"/><rect x="484" y="10" width="22" height="9" rx="2"/>
+              <rect x="458" y="105" width="22" height="9" rx="2"/><rect x="484" y="105" width="22" height="9" rx="2"/>
+              <rect x="556" y="12" width="20" height="8" rx="2"/><rect x="556" y="104" width="20" height="8" rx="2"/>
             </g>
-            <g>
-              <circle cx="108" cy="170" r="22" fill="#121826"/><circle cx="108" cy="170" r="12" fill="#C3CCDA"/>
-              <g class="truck__spin"><circle cx="108" cy="170" r="12" fill="none"/><path d="M97 170H119M108 159V181" stroke="#5B6780" stroke-width="2.5" stroke-linecap="round"/></g>
-              <circle cx="108" cy="170" r="4" fill="#4B5873"/>
+
+            <!-- trailer -->
+            <rect x="0" y="12" width="438" height="100" rx="3" fill="url(#trailerBody)"/>
+            <rect x="6" y="12" width="426" height="100" fill="url(#ribs)"/>
+            <rect x="0" y="12" width="7" height="100" rx="2" fill="#081650"/>
+            <rect x="2" y="30" width="3" height="64" fill="#3F5BC4" opacity="0.6"/>
+            <rect x="432" y="12" width="6" height="100" rx="2" fill="#C9D1DE"/>
+            <rect x="0" y="12" width="438" height="2" fill="#fff" opacity="0.18"/>
+
+            <!-- roof logo: same mark as the site header (blue KMT badge + wordmark) -->
+            <g transform="translate(67 31)">
+              <rect width="62" height="62" rx="12" fill="#1747E6"/>
+              <rect x="0.75" y="0.75" width="60.5" height="60.5" rx="11.5" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="1.5"/>
+              <text x="31" y="33" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="20" letter-spacing="0.4" fill="#FFFFFF">KMT</text>
+              <rect x="15" y="40" width="32" height="4" rx="2" style="fill:var(--k-accent)"/>
+              <text x="76" y="41" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="28" letter-spacing="-0.8" fill="#FFFFFF">KMT LOGISTICS</text>
             </g>
-            <g>
-              <circle cx="450" cy="170" r="22" fill="#121826"/><circle cx="450" cy="170" r="12" fill="#C3CCDA"/>
-              <g class="truck__spin"><circle cx="450" cy="170" r="12" fill="none"/><path d="M439 170H461M450 159V181" stroke="#5B6780" stroke-width="2.5" stroke-linecap="round"/></g>
-              <circle cx="450" cy="170" r="4" fill="#4B5873"/>
-            </g>
-            <g>
-              <circle cx="500" cy="170" r="22" fill="#121826"/><circle cx="500" cy="170" r="12" fill="#C3CCDA"/>
-              <g class="truck__spin"><circle cx="500" cy="170" r="12" fill="none"/><path d="M489 170H511M500 159V181" stroke="#5B6780" stroke-width="2.5" stroke-linecap="round"/></g>
-              <circle cx="500" cy="170" r="4" fill="#4B5873"/>
-            </g>
-            <g>
-              <circle cx="592" cy="170" r="22" fill="#121826"/><circle cx="592" cy="170" r="12" fill="#C3CCDA"/>
-              <g class="truck__spin"><circle cx="592" cy="170" r="12" fill="none"/><path d="M581 170H603M592 159V181" stroke="#5B6780" stroke-width="2.5" stroke-linecap="round"/></g>
-              <circle cx="592" cy="170" r="4" fill="#4B5873"/>
-            </g>
+
+            <!-- coupling -->
+            <rect x="438" y="50" width="16" height="24" fill="#2B3240"/>
+            <path d="M440 56 C446 50 450 50 454 56" fill="none" stroke="#FFD60A" stroke-width="1.5"/>
+            <path d="M440 68 C446 74 450 74 454 68" fill="none" stroke="#E5484D" stroke-width="1.5"/>
+
+            <!-- tractor -->
+            <rect x="450" y="18" width="144" height="88" rx="16" fill="url(#cabBody)" stroke="#C5CDD9" stroke-width="1"/>
+            <rect x="458" y="25" width="70" height="74" rx="9" fill="#F3F5F9" stroke="#D3DAE5"/>
+            <rect x="472" y="40" width="34" height="44" rx="5" fill="#E3E8EF" stroke="#CBD3DF"/>
+            <rect x="478" y="47" width="22" height="30" rx="3" fill="#D4DBE5"/>
+            <rect x="532" y="24" width="14" height="76" rx="5" fill="#E9EDF3" stroke="#D3DAE5"/>
+            <rect x="548" y="23" width="13" height="78" rx="5" fill="#172033"/>
+            <rect x="550" y="27" width="4" height="70" rx="2" fill="#fff" opacity="0.14"/>
+            <path d="M566 30 H586 M566 94 H586" stroke="#D3DAE5" stroke-width="1.5"/>
+            <rect x="588" y="26" width="6" height="10" rx="2" fill="#FFE27A"/>
+            <rect x="588" y="88" width="6" height="10" rx="2" fill="#FFE27A"/>
+            <circle cx="552" cy="21" r="1.8" fill="#FFB020"/><circle cx="552" cy="103" r="1.8" fill="#FFB020"/>
+
+            <!-- mirrors -->
+            <rect x="549" y="6" width="3" height="12" fill="#9AA6B8"/><rect x="545" y="2" width="12" height="7" rx="2" fill="#2B3240"/>
+            <rect x="549" y="106" width="3" height="12" fill="#9AA6B8"/><rect x="545" y="115" width="12" height="7" rx="2" fill="#2B3240"/>
           </svg>
         </div>
+      </div>
       </div>
     </div>
   </section>
@@ -315,15 +333,15 @@
         <p>Shipper with a lane to cover, or a driver ready to run your own — a real person replies within one business hour.</p>
         <div class="contact__details">
           <div><span>Dispatch, 24/7</span><a href="tel:5550142200">(555) 014-2200</a></div>
-          <div><span>Email</span><a href="mailto:dispatch@kmtlogistics.com">dispatch@kmtlogistics.com</a></div>
+          <div><span>Email</span><a href="mailto:dispatch@kmtlogisticsllc.com">dispatch@kmtlogisticsllc.com</a></div>
         </div>
       </div>
 
       <!--
-        Form delivery: submissions go through FormSubmit (formsubmit.co) and arrive at admin@kmtlogistics.com.
-        The first submission sends an activation email to that inbox; click the link once to turn delivery on.
+        Form delivery: posts to api/contact (Vercel function, see /api/contact.js), which emails the inbox via Resend.
+        Opened from disk (file://) there is no server, so submitting opens the visitor's email app instead.
       -->
-      <form class="form" id="contact-form" data-endpoint="https://formsubmit.co/ajax/admin@kmtlogistics.com" data-email="admin@kmtlogistics.com" novalidate>
+      <form class="form" id="contact-form" data-endpoint="api/contact" data-email="info@kmtlogisticsllc.com" novalidate>
         <fieldset class="form__full">
           <legend>I'm interested in</legend>
           <div class="pills" role="group">
@@ -388,12 +406,12 @@
       <span class="site-footer__heading">Work with us</span>
       <a href="index.html?interest=Ship%20freight#contact">Ship with KMT</a>
       <a href="index.html?interest=Lease-to-own#contact">Drive for KMT</a>
-      <a href="mailto:dispatch@kmtlogistics.com?subject=Carrier%20packet%20request">Carrier packet</a>
+      <a href="mailto:dispatch@kmtlogisticsllc.com?subject=Carrier%20packet%20request">Carrier packet</a>
     </div>
     <div class="site-footer__col">
       <span class="site-footer__heading">Contact</span>
       <a href="tel:5550142200">(555) 014-2200</a>
-      <a href="mailto:dispatch@kmtlogistics.com">dispatch@kmtlogistics.com</a>
+      <a href="mailto:dispatch@kmtlogisticsllc.com">dispatch@kmtlogisticsllc.com</a>
       <span>Dispatch open 24/7</span>
     </div>
   </div>

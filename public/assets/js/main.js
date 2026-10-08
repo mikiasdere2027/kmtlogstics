@@ -57,7 +57,8 @@
     var endpoint = form.getAttribute("data-endpoint");
     var done = "Got it — we'll reach out within one business hour.";
 
-    if (!endpoint) {
+    // No server when the page is opened straight from disk, so fall back to the email app
+    if (!endpoint || location.protocol === "file:") {
       var body = ["Interest: " + data.get("interest"), "Name: " + data.get("name"),
         "Company / MC #: " + data.get("company"), "Phone: " + data.get("phone"),
         "Email: " + data.get("email"), "", data.get("notes")].join("\n");
@@ -71,30 +72,36 @@
     submitBtn.disabled = true;
     setStatus("Sending…");
     var payload = {
-      _subject: "KMT website inquiry — " + data.get("interest"),
-      _template: "table",
-      _captcha: "false",
-      Interest: data.get("interest"),
-      Name: data.get("name"),
-      "Company / MC #": data.get("company"),
-      Phone: data.get("phone"),
-      email: data.get("email"), // FormSubmit uses this as the reply-to address
-      Details: data.get("notes")
+      interest: data.get("interest"),
+      name: data.get("name"),
+      company: data.get("company"),
+      phone: data.get("phone"),
+      email: data.get("email"),
+      notes: data.get("notes"),
+      _honey: data.get("_honey")
     };
     fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify(payload)
     })
-      .then(function (res) { return res.json().then(function (json) { return { ok: res.ok, json: json }; }); })
+      .then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (json) { return { ok: res.ok, json: json }; });
+      })
       .then(function (r) {
-        if (!r.ok || String(r.json.success) !== "true") throw new Error(r.json.message || "send failed");
+        if (!r.ok || !r.json.ok) {
+          // Validation messages from the server are safe to show; anything else gets the generic one
+          var msg = r.json.error && /^(Please|Add|That)/.test(r.json.error) ? r.json.error : null;
+          var err = new Error(msg || "send failed");
+          err.userMessage = msg;
+          throw err;
+        }
         form.reset();
         pickInterest("Ship freight");
         setStatus(done);
       })
-      .catch(function () {
-        setStatus("Couldn't send — please call or email us instead.", true);
+      .catch(function (err) {
+        setStatus((err && err.userMessage) || "Couldn't send — please call or email us instead.", true);
       })
       .finally(function () { submitBtn.disabled = false; });
   });
