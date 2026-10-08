@@ -97,8 +97,8 @@ a:hover { color: var(--k-navy-900); text-decoration: underline; }
 /* Hero */
 .hero { padding: 0; }
 .hero__card {
-  --road-h: 176px;
-  position: relative; overflow: hidden; min-height: 680px;
+  --road-h: 220px;
+  position: relative; overflow: hidden; min-height: 720px;
   background: linear-gradient(180deg, #1747E6 0%, #1240D6 60%, #0F33B8 100%);
 }
 .hero__photo { display: none; position: absolute; top: 0; right: 0; bottom: var(--road-h); width: 62%; }
@@ -131,26 +131,27 @@ a:hover { color: var(--k-navy-900); text-decoration: underline; }
 .road__edge--top { top: 14px; background: var(--k-accent); opacity: 0.9; }
 .road__edge--bottom { bottom: 8px; background: var(--k-accent); opacity: 0.9; }
 .road__dashes {
-  position: absolute; left: 0; right: 0; bottom: 24px; height: 5px;
+  position: absolute; left: 0; right: 0; top: calc((var(--road-h) + 6px) / 2 - 2px); height: 5px;
   background: repeating-linear-gradient(90deg, rgba(255,255,255,0.88) 0 70px, transparent 70px 140px);
   animation: kmtRoad 11s infinite;
 }
 
 .truck {
-  position: absolute; top: 22px; width: 560px; aspect-ratio: 600 / 124; left: -620px;
+  position: absolute; top: calc((var(--road-h) + 6px) / 2); transform: translateY(-50%);
+  width: 520px; aspect-ratio: 600 / 124; left: -580px;
   animation: kmtDrive 11s infinite;
 }
 .truck svg { display: block; width: 100%; height: 100%; }
 @media (max-width: 600px) {
-  .hero__card { --road-h: 128px; min-height: 600px; }
-  .truck { width: min(380px, calc(100vw - 36px)); top: 20px; }
-  .road__dashes { bottom: 20px; height: 4px; }
+  .hero__card { --road-h: 160px; min-height: 620px; }
+  .truck { width: min(320px, calc(100vw - 36px)); }
+  .road__dashes { height: 4px; }
 }
 
 @keyframes kmtDrive {
-  0% { left: -620px; animation-timing-function: cubic-bezier(0.2,0.7,0.25,1); }
-  34% { left: max(18px, calc(100% - 640px)); animation-timing-function: linear; }
-  64% { left: max(18px, calc(100% - 640px)); animation-timing-function: cubic-bezier(0.6,0,0.85,0.45); }
+  0% { left: -580px; animation-timing-function: cubic-bezier(0.2,0.7,0.25,1); }
+  34% { left: max(18px, calc(100% - 600px)); animation-timing-function: linear; }
+  64% { left: max(18px, calc(100% - 600px)); animation-timing-function: cubic-bezier(0.6,0,0.85,0.45); }
   100% { left: calc(100% + 60px); }
 }
 /* While the truck holds position, the lane keeps sliding past so it still reads as driving */
@@ -162,7 +163,7 @@ a:hover { color: var(--k-navy-900); text-decoration: underline; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .truck { animation: none; left: max(18px, calc(100% - 640px)); }
+  .truck { animation: none; left: max(18px, calc(100% - 600px)); }
   .road__dashes { animation: none; }
 }
 
