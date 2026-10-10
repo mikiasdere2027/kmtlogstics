@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="./assets/css/styles.css?v=20261010">
   <script src="assets/js/main.js" defer></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"KMT Logistics LLC","url":"https://www.kmtlogisticsllc.com/","logo":"https://www.kmtlogisticsllc.com/assets/img/favicon.svg","email":"dispatch@kmtlogisticsllc.com","telephone":"+1-555-014-2200","areaServed":"US","description":"Asset-based nationwide freight carrier with dispatch, ELD, lease-to-own and MC startup services for owner-operators.","identifier":[{"@type":"PropertyValue","propertyID":"USDOT","value":"9352031"},{"@type":"PropertyValue","propertyID":"MC","value":"62320826"}]}</script>
 </head>
@@ -33,11 +33,69 @@
     </a>
     <div class="site-header__right">
       <nav class="site-nav" aria-label="Main">
-        <a href="freight.html">Freight</a>
-        <a href="dispatch.html">Dispatch</a>
-        <a href="eld.html">ELD</a>
+        <a href="#services">Driver services</a>
         <a href="lease-to-own.html">Lease-to-own</a>
-        <a href="mc-startup.html">MC startup</a>
+        <a href="#path">How it works</a>
+        <div class="site-nav__menu">
+          <button class="site-nav__menu-toggle" type="button" aria-expanded="false" aria-controls="shipper-menu">
+            <span>For shippers</span>
+            <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="shipper-menu" id="shipper-menu" hidden>
+            <div class="shipper-menu__cols shipper-menu__cols--home">
+              <section class="shipper-menu__col">
+                <div class="shipper-menu__col-header">
+                  <span class="shipper-menu__col-eyebrow">FREIGHT SOLUTIONS</span>
+                  <h3 class="shipper-menu__col-title">Freight Services</h3>
+                  <p class="shipper-menu__col-sub">Reliable transportation for your business.</p>
+                </div>
+                <div class="shipper-menu__entries">
+                  <a class="shipper-menu__entry" href="freight.html">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17h4V5H2v12h3"/><path d="M14 9h4l4 4v4h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span>
+                    <span class="shipper-menu__entry-copy"><strong>Freight Transportation</strong><span>Nationwide coverage and equipment options.</span></span><i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                  <a class="shipper-menu__entry" href="freight.html#equipment">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></svg></span>
+                    <span class="shipper-menu__entry-copy"><strong>Equipment &amp; Capacity</strong><span>Dry van, reefer, flatbed and specialized freight.</span></span><i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                  <a class="shipper-menu__entry" href="freight.html">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+                    <span class="shipper-menu__entry-copy"><strong>Service Areas</strong><span>Coverage across the United States.</span></span><i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                </div>
+              </section>
+              <section class="shipper-menu__col">
+                <div class="shipper-menu__col-header">
+                  <span class="shipper-menu__col-eyebrow">RESOURCES</span>
+                  <h3 class="shipper-menu__col-title">Helpful Information</h3>
+                  <p class="shipper-menu__col-sub">Everything you need to ship with KMT.</p>
+                </div>
+                <div class="shipper-menu__entries">
+                  <a class="shipper-menu__entry" href="freight.html#quote">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg></span>
+                    <span class="shipper-menu__entry-copy"><strong>Request a Freight Quote</strong><span>Get a competitive rate for your shipment.</span></span><i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                  <a class="shipper-menu__entry" href="freight.html#process">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg></span>
+                    <span class="shipper-menu__entry-copy"><strong>Ship With KMT</strong><span>Process, requirements and documentation.</span></span><i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                  <a class="shipper-menu__entry" href="#contact">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H7l-3 3V4Z"/><path d="M8 8h8M8 12h5"/></svg></span>
+                    <span class="shipper-menu__entry-copy"><strong>Contact Our Team</strong><span>Talk to a logistics specialist.</span></span><i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                </div>
+              </section>
+            </div>
+            <aside class="shipper-menu__promo">
+              <div class="shipper-menu__promo-media"><img src="assets/img/promo-freight.png" alt="Semi truck hauling freight across an open highway" loading="lazy"><div class="shipper-menu__promo-overlay"></div></div>
+              <div class="shipper-menu__promo-body">
+                <div class="shipper-menu__promo-top"><div class="shipper-menu__promo-badge"><span>KMT</span><span></span></div><h3 class="shipper-menu__promo-title">Need a Rate?</h3><p class="shipper-menu__promo-desc">Get a competitive quote for your freight shipment.</p></div>
+                <a class="shipper-menu__promo-btn" href="freight.html#quote"><span>Request a freight quote</span><span class="shipper-menu__promo-btn-arrow" aria-hidden="true">→</span></a>
+                <ul class="shipper-menu__promo-checks"><li><span aria-hidden="true">✓</span><span>Competitive rates</span></li><li><span aria-hidden="true">✓</span><span>Nationwide coverage</span></li><li><span aria-hidden="true">✓</span><span>Dedicated support team</span></li></ul>
+              </div>
+            </aside>
+          </div>
+        </div>
       </nav>
       <div class="site-header__actions">
         <a class="header-phone" href="tel:5550142200"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(555) 014-2200</a>

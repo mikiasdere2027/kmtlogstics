@@ -3,6 +3,68 @@
   var year = document.querySelector("[data-year]");
   if (year) year.textContent = new Date().getFullYear();
 
+  // Navigation mega menu: hover & click operated with debounce, Escape, outside-click dismissal, and arrow alignment.
+  document.querySelectorAll(".site-nav__menu").forEach(function (menu) {
+    var toggle = menu.querySelector(".site-nav__menu-toggle");
+    var panel = menu.querySelector(".shipper-menu");
+    if (!toggle || !panel) return;
+    var leaveTimer = null;
+
+    function alignArrow() {
+      if (window.innerWidth < 840) return;
+      var toggleRect = toggle.getBoundingClientRect();
+      var panelRect = panel.getBoundingClientRect();
+      if (panelRect.width > 0) {
+        var toggleCenter = toggleRect.left + (toggleRect.width / 2);
+        var arrowLeft = toggleCenter - panelRect.left;
+        panel.style.setProperty("--arrow-left", arrowLeft + "px");
+      }
+    }
+
+    function open() {
+      clearTimeout(leaveTimer);
+      toggle.setAttribute("aria-expanded", "true");
+      panel.hidden = false;
+      alignArrow();
+    }
+
+    function close() {
+      clearTimeout(leaveTimer);
+      toggle.setAttribute("aria-expanded", "false");
+      panel.hidden = true;
+    }
+
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var isOpen = toggle.getAttribute("aria-expanded") === "true";
+      if (isOpen) { close(); } else { open(); }
+    });
+
+    // Desktop hover interaction
+    menu.addEventListener("mouseenter", function () {
+      if (window.innerWidth >= 840) open();
+    });
+    menu.addEventListener("mouseleave", function () {
+      if (window.innerWidth >= 840) {
+        leaveTimer = setTimeout(close, 200);
+      }
+    });
+
+    window.addEventListener("resize", function () {
+      if (toggle.getAttribute("aria-expanded") === "true") {
+        alignArrow();
+      }
+    });
+
+    // Keyboard accessibility & outside click
+    document.addEventListener("click", function (event) {
+      if (!menu.contains(event.target)) close();
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") { close(); toggle.focus(); }
+    });
+  });
+
   var DONE = "Got it — we'll reach out within one business hour.";
   var QUOTE_FIELDS = ["originZip", "destZip", "equipment", "weight", "pickupDate", "commodity"];
 
@@ -15,15 +77,17 @@
 
   function initForm(form) {
     var kind = form.getAttribute("data-kind") || "contact";
-    var status = form.querySelector(".form__status");
+    var statuses = form.querySelectorAll(".form__status");
     var submitBtn = form.querySelector('button[type="submit"]');
     var success = document.getElementById(form.getAttribute("data-success"));
     var pills = form.querySelectorAll(".pill");
     var interestInput = form.querySelector('input[name="interest"]');
 
     function setStatus(msg, isError) {
-      status.textContent = msg;
-      status.classList.toggle("is-error", !!isError);
+      statuses.forEach(function (status) {
+        status.textContent = msg;
+        status.classList.toggle("is-error", !!isError);
+      });
     }
 
     function invalid(field, msg) {
@@ -57,6 +121,26 @@
         pickInterest(fromUrl);
       }
     }
+
+    var stepOne = form.querySelector('[data-form-step="1"]');
+    var stepTwo = form.querySelector('[data-form-step="2"]');
+    var nextStep = form.querySelector("[data-next-step]");
+    var prevStep = form.querySelector("[data-prev-step]");
+    function showStep(number) {
+      if (!stepOne || !stepTwo) return;
+      stepOne.hidden = number !== 1;
+      stepTwo.hidden = number !== 2;
+      if (number === 2) stepTwo.querySelector("input, textarea").focus();
+    }
+    if (nextStep) nextStep.addEventListener("click", function () {
+      var e = form.elements;
+      if (!interestInput || !interestInput.value) return invalid(null, "Choose the service you’re interested in.");
+      if (interestInput.value !== "Ship freight" && !e.setup.value) return invalid(e.setup, "Tell us about your current setup.");
+      if (interestInput.value !== "Ship freight" && !e.authority.value) return invalid(e.authority, "Choose your authority status.");
+      setStatus("", false);
+      showStep(2);
+    });
+    if (prevStep) prevStep.addEventListener("click", function () { showStep(1); });
 
     var dateInput = form.elements.pickupDate;
     if (dateInput) dateInput.min = today();
@@ -116,6 +200,9 @@
         interest: kind === "quote" ? "Ship freight" : data.get("interest"),
         name: data.get("name"),
         company: data.get("company"),
+        setup: data.get("setup"),
+        authority: data.get("authority"),
+        equipmentType: data.get("equipmentType"),
         phone: data.get("phone"),
         email: data.get("email"),
         notes: data.get("notes"),
@@ -143,7 +230,7 @@
             throw err;
           }
           form.reset();
-          pickInterest("Ship freight");
+          pickInterest("");
           setStatus("");
           showSuccess();
         })

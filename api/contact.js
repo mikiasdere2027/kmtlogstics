@@ -13,7 +13,10 @@
 const { inquiryEmail, inquiryText, visitorEmail, visitorText } = require("./_email");
 
 const INTERESTS = ["Ship freight", "Dispatch", "ELD", "Lease-to-own", "MC startup"];
-const LIMITS = { name: 120, company: 160, phone: 40, email: 200, notes: 4000, commodity: 120 };
+const LIMITS = { name: 120, company: 160, phone: 40, email: 200, notes: 4000, commodity: 120, setup: 80, authority: 80, equipmentType: 80 };
+const SETUPS = ["I own my truck", "I operate a small fleet", "I’m preparing to start"];
+const AUTHORITIES = ["Active authority", "Leased to another carrier", "Not yet active", "Not sure"];
+const DRIVER_EQUIPMENT = ["Dry van", "Reefer", "Flatbed", "Other"];
 const EQUIPMENT = ["Dry van", "Reefer", "Flatbed", "Expedited", "Dedicated lanes"];
 
 // Freight quote fields. Returns an error message, or null when valid; fills `d` in place.
@@ -106,6 +109,9 @@ module.exports = async function handler(req, res) {
     interest: INTERESTS.includes(body.interest) ? body.interest : "General",
     name: clean(body.name, LIMITS.name),
     company: clean(body.company, LIMITS.company),
+    setup: SETUPS.includes(body.setup) ? body.setup : "",
+    authority: AUTHORITIES.includes(body.authority) ? body.authority : "",
+    equipmentType: DRIVER_EQUIPMENT.includes(body.equipmentType) ? body.equipmentType : "",
     phone: clean(body.phone, LIMITS.phone),
     email: clean(body.email, LIMITS.email),
     notes: clean(body.notes, LIMITS.notes)
@@ -120,6 +126,7 @@ module.exports = async function handler(req, res) {
   }
 
   if (!d.name) return res.status(400).json({ ok: false, error: "Please add your name." });
+  if (!isQuote && d.interest !== "Ship freight" && (!d.setup || !d.authority)) return res.status(400).json({ ok: false, error: "Please complete your operation details." });
   if (!d.phone && !d.email) {
     return res.status(400).json({ ok: false, error: "Add a phone number or email so we can reach you." });
   }

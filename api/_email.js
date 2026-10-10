@@ -128,6 +128,9 @@ function inquiryEmail(d, siteUrl) {
   const phoneDigits = String(d.phone || "").replace(/[^0-9+]/g, "");
   const rows = [
     ["Interest", d.interest ? esc(d.interest) : dash],
+    ["Current setup", d.setup ? esc(d.setup) : dash],
+    ["Authority status", d.authority ? esc(d.authority) : dash],
+    ["Truck / trailer", d.equipmentType ? esc(d.equipmentType) : dash],
     ["Name", d.name ? esc(d.name) : dash],
     ["Company / MC #", d.company ? esc(d.company) : dash],
     ["Phone", d.phone ? `<a href="tel:${esc(phoneDigits)}" style="color:${NAVY};text-decoration:none;">${esc(d.phone)}</a>` : dash],
@@ -193,6 +196,9 @@ function inquiryText(d) {
     "",
     ...quote,
     "Interest: " + (d.interest || "—"),
+    "Current setup: " + (d.setup || "—"),
+    "Authority status: " + (d.authority || "—"),
+    "Truck / trailer: " + (d.equipmentType || "—"),
     "Name: " + (d.name || "—"),
     "Company / MC #: " + (d.company || "—"),
     "Phone: " + (d.phone || "—"),
