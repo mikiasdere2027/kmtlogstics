@@ -4,6 +4,7 @@
   if (year) year.textContent = new Date().getFullYear();
 
   // Navigation mega menu: hover & click operated with debounce, Escape, outside-click dismissal, and arrow alignment.
+  var navMenus = []; // close() of every mega menu, so opening one closes the others
   document.querySelectorAll(".site-nav__menu").forEach(function (menu) {
     var toggle = menu.querySelector(".site-nav__menu-toggle");
     var panel = menu.querySelector(".shipper-menu");
@@ -22,6 +23,7 @@
     }
 
     function open() {
+      navMenus.forEach(function (closeOther) { if (closeOther !== close) closeOther(); });
       clearTimeout(leaveTimer);
       toggle.setAttribute("aria-expanded", "true");
       panel.hidden = false;
@@ -33,6 +35,8 @@
       toggle.setAttribute("aria-expanded", "false");
       panel.hidden = true;
     }
+
+    navMenus.push(close);
 
     toggle.addEventListener("click", function (e) {
       e.stopPropagation();
@@ -61,9 +65,54 @@
       if (!menu.contains(event.target)) close();
     });
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") { close(); toggle.focus(); }
+      // Only the menu that was open takes focus back
+      if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") { close(); toggle.focus(); }
     });
   });
+
+  // Home page: transparent header over the hero, solid navy once the hero has scrolled under it
+  var overlayHeader = document.querySelector(".site-header--overlay");
+  var heroEl = document.querySelector(".hero");
+  if (overlayHeader && heroEl) {
+    var ticking = false;
+    var updateHeader = function () {
+      ticking = false;
+      var solid = heroEl.getBoundingClientRect().bottom <= overlayHeader.offsetHeight;
+      overlayHeader.classList.toggle("is-solid", solid);
+      // frosted glass as soon as the page moves, so hero text never shows through the menu
+      overlayHeader.classList.toggle("is-scrolled", window.scrollY > 8);
+    };
+    var onScroll = function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(updateHeader); }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    updateHeader();
+  }
+
+  // Mobile menu (hamburger), shown below 840px
+  var burger = document.querySelector(".nav-burger");
+  var mobileNav = document.getElementById("mobile-nav");
+  if (burger && mobileNav) {
+    var setMobile = function (open) {
+      burger.setAttribute("aria-expanded", String(open));
+      burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      mobileNav.hidden = !open;
+      document.body.classList.toggle("nav-open", open);
+    };
+    burger.addEventListener("click", function () {
+      setMobile(burger.getAttribute("aria-expanded") !== "true");
+    });
+    mobileNav.addEventListener("click", function (e) {
+      if (e.target.closest("a")) setMobile(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !mobileNav.hidden) { setMobile(false); burger.focus(); }
+    });
+    window.addEventListener("resize", function () {
+      if (window.innerWidth >= 840 && !mobileNav.hidden) setMobile(false);
+    });
+  }
 
   var DONE = "Got it — we'll reach out within one business hour.";
   var QUOTE_FIELDS = ["originZip", "destZip", "equipment", "weight", "pickupDate", "commodity"];

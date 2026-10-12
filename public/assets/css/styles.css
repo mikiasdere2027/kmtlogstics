@@ -472,11 +472,10 @@ a:hover { color: var(--k-navy-900); text-decoration: underline; }
 /* Hero */
 .hero { padding: 0; }
 .hero__card {
-  --road-h: 187px;
-  position: relative; overflow: hidden; min-height: 720px;
+  position: relative; overflow: hidden; min-height: 640px; display: flex; flex-direction: column;
   background: linear-gradient(180deg, #1747E6 0%, #1240D6 60%, #0F33B8 100%);
 }
-.hero__photo { display: none; position: absolute; top: 0; right: 0; bottom: var(--road-h); width: 68%; background: transparent; }
+.hero__photo { display: none; position: absolute; top: 0; right: 0; bottom: 0; width: 68%; background: transparent; }
 .hero__photo img {
   object-fit: cover;
   object-position: right center;
@@ -490,14 +489,14 @@ a:hover { color: var(--k-navy-900); text-decoration: underline; }
     linear-gradient(180deg, rgba(15,51,184,0) 50%, rgba(15,51,184,0.75) 86%);
 }
 @media (min-width: 780px) { .hero__photo, .hero__shade { display: block; } }
-.hero__content { position: relative; z-index: 2; max-width: var(--wrap-wide); margin: 0 auto; padding: 84px var(--gutter) calc(var(--road-h) + 48px); pointer-events: none; }
+.hero__content { position: relative; z-index: 2; max-width: var(--wrap-wide); margin: 0 auto; padding: 84px var(--gutter) 64px; pointer-events: none; flex: 1 0 auto; width: 100%; box-sizing: border-box; }
 .hero__copy { max-width: 540px; pointer-events: auto; }
 .hero__copy .eyebrow { letter-spacing: 0.12em; margin-bottom: 17px; }
 .hero h1 { font-size: clamp(40px, 9vw, 60px); line-height: 1.04; letter-spacing: -0.025em; color: #fff; margin-bottom: 17px; }
 .hero__tag { font-size: clamp(19px, 4vw, 23px); line-height: 1.2; letter-spacing: -0.03em; font-weight: 800; color: var(--k-accent); margin-bottom: 17px; }
 .hero__lede { font-size: 15px; line-height: 1.5; color: #E6EDFF; margin-bottom: 27px; max-width: 54ch; }
 .hero__ctas { display: flex; gap: 12px; flex-wrap: wrap; }
-@media (max-width: 600px) { .hero__content { padding: 44px 20px calc(var(--road-h) + 36px); } }
+@media (max-width: 600px) { .hero__content { padding: 44px 20px 40px; } }
 
 /* Top-down highway lane with the truck driving through it */
 .road {
@@ -519,13 +518,14 @@ a:hover { color: var(--k-navy-900); text-decoration: underline; }
 
 .truck {
   position: absolute; top: calc((var(--road-h) + 6px) / 2); transform: translateY(-50%);
-  width: 442px; aspect-ratio: 600 / 124; left: -500px;
+  width: 430px; aspect-ratio: 600 / 124; left: -500px;
   animation: kmtDrive 11s infinite;
 }
 .truck svg { display: block; width: 100%; height: 100%; }
 @media (max-width: 600px) {
-  .hero__card { --road-h: 136px; min-height: 620px; }
-  .truck { width: min(272px, calc(85vw - 31px)); }
+  .road-band { --road-h: 136px; }
+  .hero__card { min-height: 0; }
+  .truck { width: min(278px, calc(85vw - 31px)); }
   .road__dashes { height: 4px; }
 }
 
@@ -851,3 +851,247 @@ a:hover { color: var(--k-navy-900); text-decoration: underline; }
 }
 .form select:focus { border-color: var(--k-blue-600); }
 .form input[aria-invalid="true"], .form select[aria-invalid="true"] { border-color: #B42318; }
+
+/* For carriers mega menu — same component as For shippers, both columns always shown */
+.carrier-menu .shipper-menu__col:nth-child(2) { display: flex; }
+.site-nav__menu-toggle.is-current { color: var(--k-accent); }
+
+/* Hamburger + mobile menu (below 840px, where the desktop nav is hidden) */
+.nav-burger {
+  display: none; width: 42px; height: 42px; margin-left: 4px; padding: 0; border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 9px; background: transparent; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+}
+.nav-burger span { display: block; width: 18px; height: 2px; border-radius: 2px; background: #fff; transition: transform 200ms ease, opacity 200ms ease; }
+.nav-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.mobile-nav { display: none; }
+@media (max-width: 839px) {
+  .nav-burger { display: inline-flex; }
+  .mobile-nav:not([hidden]) {
+    display: block; position: fixed; left: 0; right: 0; top: 64px; bottom: 0; z-index: 65; overflow-y: auto;
+    background: var(--k-navy-900); border-top: 1px solid rgba(255,255,255,0.08);
+    animation: kmtPop 200ms ease;
+  }
+  .mobile-nav__inner { padding: 18px var(--gutter) calc(110px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 22px; }
+  .mobile-nav__group { display: flex; flex-direction: column; }
+  .mobile-nav__label { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--k-accent); margin-bottom: 4px; }
+  .mobile-nav__group a { padding: 12px 0; font-size: 17px; font-weight: 700; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .mobile-nav__group a:hover, .mobile-nav__group a[aria-current="page"] { color: var(--k-accent); text-decoration: none; }
+  .mobile-nav__call { justify-content: center; }
+  body.nav-open { overflow: hidden; }
+}
+@media (max-width: 420px) { .header-cta { padding: 10px 12px; font-size: 11px; } }
+/* Carrier promo photo has the truck centred: slide it right and strengthen the fade so the copy stays readable */
+.carrier-menu .shipper-menu__promo-media img {
+  width: 125%; margin-left: 26%; object-position: center 62%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.25) 14%, rgba(0,0,0,0.7) 30%, #000 46%);
+          mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.25) 14%, rgba(0,0,0,0.7) 30%, #000 46%);
+}
+.carrier-menu .shipper-menu__promo-overlay {
+  /* eased fade: many stops so the blue wash dissolves into the photo instead of ending on a line */
+  background: linear-gradient(90deg,
+    rgba(225,234,255,1) 0%, rgba(225,234,255,.97) 30%, rgba(225,234,255,.9) 38%,
+    rgba(225,234,255,.75) 45%, rgba(225,234,255,.55) 52%, rgba(225,234,255,.34) 59%,
+    rgba(225,234,255,.17) 66%, rgba(225,234,255,.06) 73%, rgba(225,234,255,0) 80%);
+}
+
+/* Keep header labels on one line; tighten spacing on small laptops / tablets */
+/* top-level labels only — text inside the mega menus must still wrap */
+.site-nav > a, .site-nav__menu-toggle { white-space: nowrap; }
+@media (min-width: 840px) and (max-width: 1100px) {
+  .site-header__inner { gap: 22px; }
+  .site-nav { gap: 18px; }
+  .site-nav a, .site-nav__menu-toggle { font-size: 12px; letter-spacing: 0.02em; }
+  .header-cta { padding: 10px 14px; }
+}
+
+/* Highlights bar at the bottom of the hero (white on blue) */
+.hero__bar {
+  position: relative; z-index: 2;
+  background: linear-gradient(180deg, rgba(11,38,144,0.78), rgba(10,30,120,0.92));
+  border-top: 1px solid rgba(255,255,255,0.16);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.features--hero { max-width: var(--wrap-wide); margin: 0 auto; padding: 22px var(--gutter); box-sizing: border-box; row-gap: 14px; }
+.features--hero .feature { padding: 4px 18px; }
+.features--hero .feature:first-child { padding-left: 0; }
+.features--hero .feature + .feature { border-left-color: rgba(255,255,255,0.2); }
+.features--hero .feature svg { stroke: var(--k-accent); }
+.features--hero .feature__title { color: #fff; }
+.features--hero .feature__sub { color: #C9D6FF; }
+@media (max-width: 700px) {
+  .features--hero { grid-template-columns: 1fr 1fr; padding: 18px 20px; }
+  .features--hero .feature, .features--hero .feature:first-child { padding: 6px 4px; border-left: none; }
+}
+
+/* Road + truck animation, now its own strip under the hero */
+.road-band { --road-h: 187px; position: relative; height: var(--road-h); }
+@media (max-width: 600px) { .road-band { --road-h: 136px; } }
+
+/* ---- Hero v2: highlights as linked columns on the blue, road + truck as the hero's bottom edge ---- */
+.hero__card { --road-h: 146px; min-height: 0; background: linear-gradient(180deg, #0E2FA8 0%, #1240D6 52%, #0F33B8 100%); }
+.hero__card .road-band { --road-h: inherit; flex: 0 0 auto; }
+.hero__photo { bottom: var(--road-h); }
+.hero__content { padding-bottom: 40px; }
+.hero__copy .eyebrow::before {
+  content: ""; display: inline-block; width: 34px; height: 3px; border-radius: 2px; background: var(--k-accent);
+  vertical-align: middle; margin: -2px 14px 0 0;
+}
+.hero__bar { background: none; border-top: 0; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.features--hero { grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 0 var(--gutter) 40px; }
+.features--hero .feature {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: 12px;
+  padding: 6px 26px; text-decoration: none; color: inherit; border-radius: 4px;
+}
+.features--hero .feature:first-child { padding-left: 0; }
+.features--hero .feature > svg:first-child { grid-column: 1 / -1; width: 32px; height: 32px; margin-bottom: 16px; }
+.features--hero .feature__title { font-size: 17px; }
+.features--hero .feature__sub { font-size: 14px; }
+.features--hero .feature__arrow { width: 18px; height: 18px; color: var(--k-accent); stroke: currentColor; margin-bottom: 2px; transition: transform 160ms ease; }
+.features--hero .feature:hover { text-decoration: none; }
+.features--hero .feature:hover .feature__title { color: var(--k-accent); }
+.features--hero .feature:hover .feature__arrow { transform: translateX(4px); }
+@media (max-width: 1100px) {
+  .features--hero { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 22px; }
+  .features--hero .feature:nth-child(4) { border-left: none; padding-left: 0; }
+}
+@media (max-width: 700px) {
+  .hero__card { --road-h: 117px; }
+  .features--hero { grid-template-columns: 1fr 1fr; padding: 0 20px 30px; row-gap: 18px; }
+  .features--hero .feature, .features--hero .feature:first-child, .features--hero .feature:nth-child(4) { padding: 4px 6px 4px 0; border-left: none; }
+  .features--hero .feature > svg:first-child { margin-bottom: 10px; width: 28px; height: 28px; }
+}
+.features--hero .feature { row-gap: 0; }
+.features--hero .feature > svg:first-child { margin-bottom: 12px; }
+@media (max-width: 700px) { .features--hero .feature > svg:first-child { margin-bottom: 8px; } }
+
+/* Hero fills the first screen: headline centred in the free space, highlights + road pinned to the bottom edge */
+.hero__card { min-height: calc(100vh - 64px); min-height: calc(100svh - 64px); }
+.hero__content { display: flex; flex-direction: column; justify-content: center; padding-top: 56px; }
+@media (max-width: 767px) {
+  /* leave room for the fixed Call / Get a quote bar so the road isn't hidden behind it */
+  .hero__card { min-height: calc(100vh - 64px - 74px); min-height: calc(100svh - 64px - 74px); }
+}
+@media (max-height: 640px) and (min-width: 768px) {
+  .hero__card { min-height: 0; } /* very short windows: let the content set the height */
+}
+
+/* Home page: header floats transparent over the hero, turns navy once the hero has scrolled away */
+.site-header--overlay {
+  position: fixed; left: 0; right: 0; top: 0;
+  background: transparent; box-shadow: none;
+  transition: background-color 250ms ease, box-shadow 250ms ease;
+}
+.site-header--overlay.is-solid,
+body.nav-open .site-header--overlay {
+  background: var(--k-navy-900); box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 8px 24px rgba(6,14,31,0.25);
+}
+/* the hero now starts at the very top, under the header */
+.site-header--overlay + main .hero__card { min-height: 100vh; min-height: 100svh; }
+.site-header--overlay + main .hero__content { padding-top: calc(64px + 56px); }
+@media (max-width: 767px) {
+  .site-header--overlay + main .hero__card { min-height: calc(100vh - 74px); min-height: calc(100svh - 74px); }
+  .site-header--overlay + main .hero__content { padding-top: calc(64px + 36px); }
+}
+@media (max-height: 640px) and (min-width: 768px) {
+  .site-header--overlay + main .hero__card { min-height: 0; }
+}
+/* keep the blue KMT badge visible while it sits on the blue hero */
+.site-header--overlay .logo__mark { transition: box-shadow 250ms ease; }
+.site-header--overlay:not(.is-solid) .logo__mark { box-shadow: 0 0 0 1.5px rgba(255,255,255,0.6), 0 4px 14px rgba(6,14,31,0.25); }
+
+/* Overlay header: roomier at the very top, frosted glass once scrolling over the hero, navy after it */
+.site-header--overlay { transition: background-color 250ms ease, box-shadow 250ms ease, height 250ms ease, backdrop-filter 250ms ease; }
+@media (min-width: 840px) {
+  .site-header--overlay:not(.is-scrolled) { height: 84px; }
+  .site-header--overlay + main .hero__content { padding-top: calc(84px + 48px); }
+}
+.site-header--overlay.is-scrolled:not(.is-solid) {
+  background: rgba(10, 22, 48, 0.58);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+          backdrop-filter: blur(20px) saturate(150%);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.10), 0 8px 24px rgba(6,14,31,0.18);
+}
+.site-header--overlay.is-scrolled .logo__mark { box-shadow: none; }
+
+/* ---- Truck effects (all on the same 11s cycle as kmtDrive, so they stay in sync) ----
+   0–34% drive in & slow down · 34–64% cruise while the lane slides · 64–100% speed up and leave */
+.truck__body { width: 100%; height: 100%; animation: kmtRumble 0.18s steps(2) infinite; }
+.truck__body svg { display: block; width: 100%; height: 100%; }
+.truck__fx { position: absolute; inset: 0; pointer-events: none; }
+
+/* headlight beams ahead of the cab */
+.truck__beam {
+  position: absolute; left: 98.6%; width: 30%; height: 30%;
+  background: radial-gradient(ellipse at left center, rgba(255,244,190,0.75) 0%, rgba(255,244,190,0.28) 40%, rgba(255,244,190,0) 72%);
+  clip-path: polygon(0 38%, 100% 0, 100% 100%, 0 62%);
+  filter: blur(1.5px); animation: kmtBeam 11s infinite;
+}
+.truck__beam--top { top: 10%; }
+.truck__beam--bottom { top: 60%; }
+
+/* brake lights on the trailer's rear corners */
+.truck__brake {
+  position: absolute; left: -0.6%; width: 1.4%; height: 10%; border-radius: 2px;
+  background: #7A1414; animation: kmtBrake 11s infinite;
+}
+.truck__brake--top { top: 12%; }
+.truck__brake--bottom { top: 78%; }
+
+/* speed streaks behind the trailer */
+.truck__streak {
+  position: absolute; right: 101%; top: var(--y); height: 2px; width: 0; border-radius: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.6));
+  animation: kmtStreak 11s infinite;
+}
+
+/* exhaust puffs from the stacks when pulling away */
+.truck__puff {
+  position: absolute; left: 73%; width: 16px; height: 16px; border-radius: 50%; opacity: 0;
+  background: radial-gradient(circle, rgba(214,222,236,0.75) 0%, rgba(214,222,236,0) 70%);
+  animation: kmtPuff 11s infinite;
+}
+.truck__puff--top { top: -8%; }
+.truck__puff--bottom { top: 86%; animation-delay: 0.12s; }
+
+@keyframes kmtRumble { from { transform: translateY(0); } to { transform: translateY(0.7px); } }
+@keyframes kmtBeam { 0%, 100% { opacity: 0.9; } 50% { opacity: 0.7; } }
+@keyframes kmtBrake {
+  0%, 18% { background: #7A1414; box-shadow: none; }
+  24%, 36% { background: #FF3B30; box-shadow: 0 0 8px 3px rgba(255,59,48,0.75), -12px 0 18px 6px rgba(255,59,48,0.35); }
+  44%, 100% { background: #7A1414; box-shadow: none; }
+}
+@keyframes kmtStreak {
+  0% { width: var(--w); opacity: 0.85; }
+  20% { width: calc(var(--w) * 0.5); opacity: 0.4; }
+  28%, 66% { width: 0; opacity: 0; }
+  76% { width: var(--w); opacity: 0.9; }
+  100% { width: calc(var(--w) * 1.5); opacity: 0.75; }
+}
+@keyframes kmtPuff {
+  0%, 63% { opacity: 0; transform: translateX(0) scale(0.3); }
+  66% { opacity: 0.9; transform: translateX(-6px) scale(0.7); }
+  76% { opacity: 0; transform: translateX(-70px) scale(2.6); }
+  100% { opacity: 0; transform: translateX(-70px) scale(2.6); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .truck__body, .truck__beam, .truck__brake { animation: none; }
+  .truck__streak, .truck__puff { display: none; }
+}
+
+/* Mega-menu promo cards: brand-blue gradient that dissolves into the photo (no hard edge) */
+.shipper-menu__promo { background: linear-gradient(155deg, #1B4FEA 0%, #1240D6 55%, #0F33B8 100%); }
+.shipper-menu__promo-overlay,
+.carrier-menu .shipper-menu__promo-overlay {
+  background: linear-gradient(90deg,
+    rgba(18,64,214,1) 0%, rgba(18,64,214,.98) 28%, rgba(18,64,214,.93) 38%,
+    rgba(18,64,214,.82) 46%, rgba(18,64,214,.64) 54%, rgba(18,64,214,.42) 62%,
+    rgba(18,64,214,.22) 70%, rgba(18,64,214,.08) 78%, rgba(18,64,214,0) 86%);
+}
+.shipper-menu__promo-title { color: #fff; }
+.shipper-menu__promo-desc { color: #D6E2FF; }
+.carrier-menu .shipper-menu__promo-desc { max-width: 19ch; }
+.shipper-menu__promo-checks { border-top-color: rgba(255,255,255,0.24); }
+.shipper-menu__promo-checks li { color: #fff; }
+.shipper-menu__promo-badge { box-shadow: 0 0 0 1.5px rgba(255,255,255,0.55); }

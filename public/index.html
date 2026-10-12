@@ -25,7 +25,7 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-header">
+<header class="site-header site-header--overlay">
   <div class="site-header__inner">
     <a href="index.html" class="logo" aria-label="KMT Logistics home">
       <span class="logo__mark" aria-hidden="true"><span>KMT</span><span></span></span>
@@ -33,9 +33,6 @@
     </a>
     <div class="site-header__right">
       <nav class="site-nav" aria-label="Main">
-        <a href="#services">Driver services</a>
-        <a href="lease-to-own.html">Lease-to-own</a>
-        <a href="#path">How it works</a>
         <div class="site-nav__menu">
           <button class="site-nav__menu-toggle" type="button" aria-expanded="false" aria-controls="shipper-menu">
             <span>For shippers</span>
@@ -45,7 +42,6 @@
             <div class="shipper-menu__cols shipper-menu__cols--home">
               <section class="shipper-menu__col">
                 <div class="shipper-menu__col-header">
-                  <span class="shipper-menu__col-eyebrow">FREIGHT SOLUTIONS</span>
                   <h3 class="shipper-menu__col-title">Freight Services</h3>
                   <p class="shipper-menu__col-sub">Reliable transportation for your business.</p>
                 </div>
@@ -66,7 +62,6 @@
               </section>
               <section class="shipper-menu__col">
                 <div class="shipper-menu__col-header">
-                  <span class="shipper-menu__col-eyebrow">RESOURCES</span>
                   <h3 class="shipper-menu__col-title">Helpful Information</h3>
                   <p class="shipper-menu__col-sub">Everything you need to ship with KMT.</p>
                 </div>
@@ -96,12 +91,136 @@
             </aside>
           </div>
         </div>
+        <div class="site-nav__menu">
+          <button class="site-nav__menu-toggle" type="button" aria-expanded="false" aria-controls="carrier-menu">
+            <span>For carriers</span>
+            <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="shipper-menu carrier-menu" id="carrier-menu" hidden>
+            <div class="shipper-menu__cols">
+              <section class="shipper-menu__col">
+                <div class="shipper-menu__col-header">
+                  <h3 class="shipper-menu__col-title">Owner-Operator Services</h3>
+                  <p class="shipper-menu__col-sub">Keep loads moving and your logs clean.</p>
+                </div>
+                <div class="shipper-menu__entries">
+                  <a class="shipper-menu__entry" href="dispatch.html">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>Dispatch Service</strong>
+                      <span>We find loads, negotiate rates and handle paperwork.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                  <a class="shipper-menu__entry" href="eld.html">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>ELD &amp; Compliance</strong>
+                      <span>FMCSA-registered ELD, HOS, IFTA and audit prep.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                </div>
+              </section>
+              <section class="shipper-menu__col">
+                <div class="shipper-menu__col-header">
+                  <h3 class="shipper-menu__col-title">Own Your Business</h3>
+                  <p class="shipper-menu__col-sub">From new authority to your own truck.</p>
+                </div>
+                <div class="shipper-menu__entries">
+                  <a class="shipper-menu__entry" href="lease-to-own.html">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"/><path d="m21 2-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>Lease-to-Own Trucks</strong>
+                      <span>Drive a late-model tractor today, own it at the end.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                  <a class="shipper-menu__entry" href="mc-startup.html">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>MC Startup</strong>
+                      <span>LLC, USDOT, MC, BOC-3 and insurance — filed right.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                </div>
+              </section>
+            </div>
+
+            <aside class="shipper-menu__promo">
+              <div class="shipper-menu__promo-media">
+                <img src="assets/img/lease-tractor.jpg" alt="Late-model semi tractor ready for a lease-to-own driver" loading="lazy">
+                <div class="shipper-menu__promo-overlay"></div>
+              </div>
+              <div class="shipper-menu__promo-body">
+                <div class="shipper-menu__promo-top">
+                  <div class="shipper-menu__promo-badge" aria-hidden="true"><span>KMT</span><span></span></div>
+                  <h3 class="shipper-menu__promo-title">Drive with KMT</h3>
+                  <p class="shipper-menu__promo-desc">Dispatch, ELD and your own truck.</p>
+                </div>
+                <a class="shipper-menu__promo-btn" href="index.html?interest=Lease-to-own#contact">
+                  <span>Talk to our team</span>
+                  <span class="shipper-menu__promo-btn-arrow" aria-hidden="true">→</span>
+                </a>
+                <ul class="shipper-menu__promo-checks">
+                  <li>
+                    <svg class="shipper-menu__check-icon" width="18" height="18" viewBox="0 0 24 24" fill="#F5B014"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4" fill="none" stroke="#0A1630" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>24/7 dispatch support</span>
+                  </li>
+                  <li>
+                    <svg class="shipper-menu__check-icon" width="18" height="18" viewBox="0 0 24 24" fill="#F5B014"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4" fill="none" stroke="#0A1630" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>ELD installed for you</span>
+                  </li>
+                  <li>
+                    <svg class="shipper-menu__check-icon" width="18" height="18" viewBox="0 0 24 24" fill="#F5B014"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4" fill="none" stroke="#0A1630" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>Weekly settlements</span>
+                  </li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+        <a href="#path">How it works</a>
+        <a href="#contact">Contact</a>
       </nav>
       <div class="site-header__actions">
         <a class="header-phone" href="tel:5550142200"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(555) 014-2200</a>
-        <a class="header-cta" href="index.html#contact">Get started</a>
+        <a class="header-cta" href="#contact">Get started</a>
+        <button class="nav-burger" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav" hidden>
+    <nav class="mobile-nav__inner" aria-label="Mobile">
+      <div class="mobile-nav__group">
+        <span class="mobile-nav__label">For shippers</span>
+        <a href="freight.html">Freight transportation</a>
+        <a href="freight.html#quote">Request a freight quote</a>
+      </div>
+      <div class="mobile-nav__group">
+        <span class="mobile-nav__label">For carriers</span>
+        <a href="dispatch.html">Dispatch service</a>
+        <a href="eld.html">ELD &amp; compliance</a>
+        <a href="lease-to-own.html">Lease-to-own trucks</a>
+        <a href="mc-startup.html">MC startup</a>
+      </div>
+      <div class="mobile-nav__group mobile-nav__group--plain">
+        <a href="#path">How it works</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="btn btn--accent mobile-nav__call" href="tel:5550142200">Call dispatch 24/7 · (555) 014-2200</a>
+    </nav>
   </div>
 </header>
 
@@ -130,115 +249,131 @@
         </div>
       </div>
 
-      <div class="road" aria-hidden="true">
-        <div class="road__shoulder"></div>
-        <div class="road__edge road__edge--top"></div>
-        <div class="road__dashes"></div>
-        <div class="road__edge road__edge--bottom"></div>
-        <div class="truck">
-          <!-- Top-down tractor-trailer, driving left to right -->
-          <svg viewBox="0 0 600 124" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="trailerBody" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#2450E0"/>
-                <stop offset="0.18" stop-color="#1238B4"/>
-                <stop offset="0.82" stop-color="#0B2690"/>
-                <stop offset="1" stop-color="#071A66"/>
-              </linearGradient>
-              <linearGradient id="cabBody" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#E4E9F1"/>
-                <stop offset="0.2" stop-color="#FFFFFF"/>
-                <stop offset="0.8" stop-color="#F6F8FB"/>
-                <stop offset="1" stop-color="#D6DCE6"/>
-              </linearGradient>
-              <pattern id="ribs" width="7" height="124" patternUnits="userSpaceOnUse">
-                <rect width="1.4" height="124" fill="#000" opacity="0.16"/>
-                <rect x="1.4" width="1" height="124" fill="#fff" opacity="0.07"/>
-              </pattern>
-              <filter id="truckShadow" x="-5%" y="-30%" width="115%" height="170%">
-                <feGaussianBlur stdDeviation="5"/>
-              </filter>
-            </defs>
-
-            <!-- shadow cast down-right -->
-            <rect x="10" y="20" width="586" height="100" rx="10" fill="#000" opacity="0.45" filter="url(#truckShadow)"/>
-
-            <!-- tires peeking out from under the body -->
-            <g fill="#0E121A">
-              <rect x="34" y="6" width="26" height="9" rx="2"/><rect x="64" y="6" width="26" height="9" rx="2"/>
-              <rect x="34" y="109" width="26" height="9" rx="2"/><rect x="64" y="109" width="26" height="9" rx="2"/>
-              <rect x="458" y="10" width="22" height="9" rx="2"/><rect x="484" y="10" width="22" height="9" rx="2"/>
-              <rect x="458" y="105" width="22" height="9" rx="2"/><rect x="484" y="105" width="22" height="9" rx="2"/>
-              <rect x="556" y="12" width="20" height="8" rx="2"/><rect x="556" y="104" width="20" height="8" rx="2"/>
-            </g>
-
-            <!-- trailer -->
-            <rect x="0" y="12" width="438" height="100" rx="3" fill="url(#trailerBody)"/>
-            <rect x="6" y="12" width="426" height="100" fill="url(#ribs)"/>
-            <rect x="0" y="12" width="7" height="100" rx="2" fill="#081650"/>
-            <rect x="2" y="30" width="3" height="64" fill="#3F5BC4" opacity="0.6"/>
-            <rect x="432" y="12" width="6" height="100" rx="2" fill="#C9D1DE"/>
-            <rect x="0" y="12" width="438" height="2" fill="#fff" opacity="0.18"/>
-
-            <!-- roof logo: same mark as the site header (blue KMT badge + wordmark) -->
-            <g transform="translate(67 31)">
-              <rect width="62" height="62" rx="12" fill="#1747E6"/>
-              <rect x="0.75" y="0.75" width="60.5" height="60.5" rx="11.5" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="1.5"/>
-              <text x="31" y="33" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="20" letter-spacing="0.4" fill="#FFFFFF">KMT</text>
-              <rect x="15" y="40" width="32" height="4" rx="2" style="fill:var(--k-accent)"/>
-              <text x="76" y="41" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="28" letter-spacing="-0.8" fill="#FFFFFF">KMT LOGISTICS</text>
-            </g>
-
-            <!-- coupling -->
-            <rect x="438" y="50" width="16" height="24" fill="#2B3240"/>
-            <path d="M440 56 C446 50 450 50 454 56" fill="none" stroke="#FFD60A" stroke-width="1.5"/>
-            <path d="M440 68 C446 74 450 74 454 68" fill="none" stroke="#E5484D" stroke-width="1.5"/>
-
-            <!-- tractor -->
-            <rect x="450" y="18" width="144" height="88" rx="16" fill="url(#cabBody)" stroke="#C5CDD9" stroke-width="1"/>
-            <rect x="458" y="25" width="70" height="74" rx="9" fill="#F3F5F9" stroke="#D3DAE5"/>
-            <rect x="472" y="40" width="34" height="44" rx="5" fill="#E3E8EF" stroke="#CBD3DF"/>
-            <rect x="478" y="47" width="22" height="30" rx="3" fill="#D4DBE5"/>
-            <rect x="532" y="24" width="14" height="76" rx="5" fill="#E9EDF3" stroke="#D3DAE5"/>
-            <rect x="548" y="23" width="13" height="78" rx="5" fill="#172033"/>
-            <rect x="550" y="27" width="4" height="70" rx="2" fill="#fff" opacity="0.14"/>
-            <path d="M566 30 H586 M566 94 H586" stroke="#D3DAE5" stroke-width="1.5"/>
-            <rect x="588" y="26" width="6" height="10" rx="2" fill="#FFE27A"/>
-            <rect x="588" y="88" width="6" height="10" rx="2" fill="#FFE27A"/>
-            <circle cx="552" cy="21" r="1.8" fill="#FFB020"/><circle cx="552" cy="103" r="1.8" fill="#FFB020"/>
-
-            <!-- mirrors -->
-            <rect x="549" y="6" width="3" height="12" fill="#9AA6B8"/><rect x="545" y="2" width="12" height="7" rx="2" fill="#2B3240"/>
-            <rect x="549" y="106" width="3" height="12" fill="#9AA6B8"/><rect x="545" y="115" width="12" height="7" rx="2" fill="#2B3240"/>
-          </svg>
+      <div class="hero__bar">
+        <div class="features features--hero" role="list" aria-label="Highlights">
+        <a class="feature" role="listitem" href="freight.html">
+          <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+          <div class="feature__text"><span class="feature__title">Nationwide freight</span><span class="feature__sub">Loads in all 48 states</span></div>
+            <svg class="feature__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
+        <a class="feature" role="listitem" href="dispatch.html">
+          <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></svg>
+          <div class="feature__text"><span class="feature__title">Dispatch</span><span class="feature__sub">Keep wheels turning</span></div>
+            <svg class="feature__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
+        <a class="feature" role="listitem" href="eld.html">
+          <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+          <div class="feature__text"><span class="feature__title">ELD + HOS</span><span class="feature__sub">Stay DOT compliant</span></div>
+            <svg class="feature__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
+        <a class="feature" role="listitem" href="lease-to-own.html">
+          <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"/><path d="m21 2-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/></svg>
+          <div class="feature__text"><span class="feature__title">Lease-to-own</span><span class="feature__sub">Drive it, then own it</span></div>
+            <svg class="feature__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
+        <a class="feature" role="listitem" href="mc-startup.html">
+          <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          <div class="feature__text"><span class="feature__title">MC startup</span><span class="feature__sub">Your own authority</span></div>
+            <svg class="feature__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
         </div>
       </div>
+      <div class="road-band" aria-hidden="true">
+        <div class="road">
+          <div class="road__shoulder"></div>
+          <div class="road__edge road__edge--top"></div>
+          <div class="road__dashes"></div>
+          <div class="road__edge road__edge--bottom"></div>
+          <div class="truck">
+            <div class="truck__fx" aria-hidden="true">
+              <span class="truck__beam truck__beam--top"></span><span class="truck__beam truck__beam--bottom"></span>
+              <span class="truck__streak" style="--y: 26%; --w: 90px"></span><span class="truck__streak" style="--y: 50%; --w: 150px"></span><span class="truck__streak" style="--y: 74%; --w: 70px"></span>
+              <span class="truck__puff truck__puff--top"></span><span class="truck__puff truck__puff--bottom"></span>
+            </div>
+            <div class="truck__body">
+            <!-- Top-down tractor-trailer, driving left to right -->
+            <svg viewBox="0 0 600 124" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="trailerBody" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#2450E0"/>
+                  <stop offset="0.18" stop-color="#1238B4"/>
+                  <stop offset="0.82" stop-color="#0B2690"/>
+                  <stop offset="1" stop-color="#071A66"/>
+                </linearGradient>
+                <linearGradient id="cabBody" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#E4E9F1"/>
+                  <stop offset="0.2" stop-color="#FFFFFF"/>
+                  <stop offset="0.8" stop-color="#F6F8FB"/>
+                  <stop offset="1" stop-color="#D6DCE6"/>
+                </linearGradient>
+                <pattern id="ribs" width="7" height="124" patternUnits="userSpaceOnUse">
+                  <rect width="1.4" height="124" fill="#000" opacity="0.16"/>
+                  <rect x="1.4" width="1" height="124" fill="#fff" opacity="0.07"/>
+                </pattern>
+                <filter id="truckShadow" x="-5%" y="-30%" width="115%" height="170%">
+                  <feGaussianBlur stdDeviation="5"/>
+                </filter>
+              </defs>
+
+              <!-- shadow cast down-right -->
+              <rect x="10" y="20" width="586" height="100" rx="10" fill="#000" opacity="0.45" filter="url(#truckShadow)"/>
+
+              <!-- tires peeking out from under the body -->
+              <g fill="#0E121A">
+                <rect x="34" y="6" width="26" height="9" rx="2"/><rect x="64" y="6" width="26" height="9" rx="2"/>
+                <rect x="34" y="109" width="26" height="9" rx="2"/><rect x="64" y="109" width="26" height="9" rx="2"/>
+                <rect x="458" y="10" width="22" height="9" rx="2"/><rect x="484" y="10" width="22" height="9" rx="2"/>
+                <rect x="458" y="105" width="22" height="9" rx="2"/><rect x="484" y="105" width="22" height="9" rx="2"/>
+                <rect x="556" y="12" width="20" height="8" rx="2"/><rect x="556" y="104" width="20" height="8" rx="2"/>
+              </g>
+
+              <!-- trailer -->
+              <rect x="0" y="12" width="438" height="100" rx="3" fill="url(#trailerBody)"/>
+              <rect x="6" y="12" width="426" height="100" fill="url(#ribs)"/>
+              <rect x="0" y="12" width="7" height="100" rx="2" fill="#081650"/>
+              <rect x="2" y="30" width="3" height="64" fill="#3F5BC4" opacity="0.6"/>
+              <rect x="432" y="12" width="6" height="100" rx="2" fill="#C9D1DE"/>
+              <rect x="0" y="12" width="438" height="2" fill="#fff" opacity="0.18"/>
+
+              <!-- roof logo: same mark as the site header (blue KMT badge + wordmark) -->
+              <g transform="translate(67 31)">
+                <rect width="62" height="62" rx="12" fill="#1747E6"/>
+                <rect x="0.75" y="0.75" width="60.5" height="60.5" rx="11.5" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="1.5"/>
+                <text x="31" y="33" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="20" letter-spacing="0.4" fill="#FFFFFF">KMT</text>
+                <rect x="15" y="40" width="32" height="4" rx="2" style="fill:var(--k-accent)"/>
+                <text x="76" y="41" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="28" letter-spacing="-0.8" fill="#FFFFFF">KMT LOGISTICS</text>
+              </g>
+
+              <!-- coupling -->
+              <rect x="438" y="50" width="16" height="24" fill="#2B3240"/>
+              <path d="M440 56 C446 50 450 50 454 56" fill="none" stroke="#FFD60A" stroke-width="1.5"/>
+              <path d="M440 68 C446 74 450 74 454 68" fill="none" stroke="#E5484D" stroke-width="1.5"/>
+
+              <!-- tractor -->
+              <rect x="450" y="18" width="144" height="88" rx="16" fill="url(#cabBody)" stroke="#C5CDD9" stroke-width="1"/>
+              <rect x="458" y="25" width="70" height="74" rx="9" fill="#F3F5F9" stroke="#D3DAE5"/>
+              <rect x="472" y="40" width="34" height="44" rx="5" fill="#E3E8EF" stroke="#CBD3DF"/>
+              <rect x="478" y="47" width="22" height="30" rx="3" fill="#D4DBE5"/>
+              <rect x="532" y="24" width="14" height="76" rx="5" fill="#E9EDF3" stroke="#D3DAE5"/>
+              <rect x="548" y="23" width="13" height="78" rx="5" fill="#172033"/>
+              <rect x="550" y="27" width="4" height="70" rx="2" fill="#fff" opacity="0.14"/>
+              <path d="M566 30 H586 M566 94 H586" stroke="#D3DAE5" stroke-width="1.5"/>
+              <rect x="588" y="26" width="6" height="10" rx="2" fill="#FFE27A"/>
+              <rect x="588" y="88" width="6" height="10" rx="2" fill="#FFE27A"/>
+              <circle cx="552" cy="21" r="1.8" fill="#FFB020"/><circle cx="552" cy="103" r="1.8" fill="#FFB020"/>
+
+              <!-- mirrors -->
+              <rect x="549" y="6" width="3" height="12" fill="#9AA6B8"/><rect x="545" y="2" width="12" height="7" rx="2" fill="#2B3240"/>
+              <rect x="549" y="106" width="3" height="12" fill="#9AA6B8"/><rect x="545" y="115" width="12" height="7" rx="2" fill="#2B3240"/>
+            </svg>
+            </div>
+            <span class="truck__brake truck__brake--top" aria-hidden="true"></span><span class="truck__brake truck__brake--bottom" aria-hidden="true"></span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="wrap features" aria-label="Highlights">
-    <div class="feature">
-      <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
-      <div class="feature__text"><span class="feature__title">Nationwide freight</span><span class="feature__sub">Loads in all 48 states</span></div>
-    </div>
-    <div class="feature">
-      <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></svg>
-      <div class="feature__text"><span class="feature__title">Dispatch</span><span class="feature__sub">Keep wheels turning</span></div>
-    </div>
-    <div class="feature">
-      <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-      <div class="feature__text"><span class="feature__title">ELD + HOS</span><span class="feature__sub">Stay DOT compliant</span></div>
-    </div>
-    <div class="feature">
-      <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"/><path d="m21 2-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/></svg>
-      <div class="feature__text"><span class="feature__title">Lease-to-own</span><span class="feature__sub">Drive it, then own it</span></div>
-    </div>
-    <div class="feature">
-      <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="var(--k-blue-600)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
-      <div class="feature__text"><span class="feature__title">MC startup</span><span class="feature__sub">Your own authority</span></div>
-    </div>
-  </section>
 
   <section id="services" class="wrap services">
     <span class="eyebrow">What we do</span>
