@@ -56,7 +56,7 @@ function detailsCard(badge, title, tableRows) {
 }
 
 /**
- * Shared frame: navy cover with the KMT badge, a two-line headline and the half-truck art,
+ * Shared frame: navy cover with the KMT logo, a two-line headline and the half-truck art,
  * then the body rows.
  * @param {string} siteUrl  public address the truck image loads from, e.g. "https://kmtlogisticsllc.com"
  */
@@ -82,12 +82,7 @@ function frame({ title, preheader, headline, highlight, siteUrl, body }) {
             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
               <tr>
                 <td valign="middle" style="padding:28px 0 26px 30px;">
-                  <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                      <td width="46" height="46" align="center" valign="middle" style="background:${BLUE};border-radius:10px;font-family:${FONT};font-size:14px;font-weight:800;color:#FFFFFF;line-height:1;">KMT<div style="width:22px;height:3px;background:${YELLOW};border-radius:2px;margin:5px auto 0;line-height:3px;font-size:0;">&nbsp;</div></td>
-                      <td style="padding-left:12px;font-family:${FONT};font-size:19px;font-weight:800;letter-spacing:-0.5px;color:#FFFFFF;white-space:nowrap;">KMT LOGISTICS</td>
-                    </tr>
-                  </table>
+                  <img src="${esc(siteUrl)}/assets/img/email-logo.png" width="176" height="71" alt="KMT Logistics" style="display:block;width:176px;max-width:176px;height:auto;border:0;background:${NAVY};">
                   <div style="margin-top:20px;font-family:${FONT};font-size:20px;line-height:1.25;font-weight:700;color:#FFFFFF;">${esc(headline)}</div>
                   <div style="font-family:${FONT};font-size:22px;line-height:1.25;font-weight:800;color:${YELLOW};">${esc(highlight)}</div>
                 </td>

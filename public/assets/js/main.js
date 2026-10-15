@@ -292,4 +292,72 @@
   }
 
   document.querySelectorAll("form[data-endpoint]").forEach(initForm);
+
+  // Scroll reveal: cards and section content ease in as they enter the viewport.
+  // Content is only hidden by JS (never by CSS alone), so nothing is lost if scripts fail.
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    var REVEAL = [
+      // [selector, direction]
+      [".services__head", "up"], [".card--freight", "left"], [".card--dispatch", "down"], [".card--eld", "left"], [".card--lease", "right"], [".card--mc", "up"],
+      [".lease__inner > .photo", "left"], [".lease__copy", "right"],
+      [".support__card", "zoom"],
+      [".steps > .eyebrow, .steps > .section-title", "up"], [".step", "up"],
+      [".contact__intro", "left"], [".contact__inner > .form, .contact__inner > .form-success", "right"],
+      [".cover__mark", "zoom"],
+      [".split__inner > .photo", "left"], [".split__copy", "right"],
+      [".info > .eyebrow, .info > .section-title", "up"], [".info-card", "up"],
+      [".quote__intro", "left"], [".quote__inner > .form, .quote__inner > .form-success", "right"],
+      [".cta-band__inner", "up"],
+      [".site-footer__col", "up"]
+    ];
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var seen = new Map(); // parent -> how many siblings queued, for the stagger
+    var queue = [];
+    // Per-item directions for groups of small items: [direction for item 1, 2, 3, ...]
+    var CHIP_DIRS = ["left", "upright", "left", "left"]; // MC Startup checklist: → ↗ → →
+    REVEAL.forEach(function (pair) {
+      document.querySelectorAll(pair[0]).forEach(function (el) {
+        if (el.hidden || el.classList.contains("reveal") || el.closest(".hero, .site-header")) return;
+        // Anything already on screen at load stays put (no flash of hidden content)
+        if (el.getBoundingClientRect().top < vh * 0.92) return;
+        var n = seen.get(el.parentNode) || 0;
+        seen.set(el.parentNode, n + 1);
+        el.style.setProperty("--reveal-delay", Math.min(n, 5) * 90 + "ms");
+        el.dataset.revealDir = pair[1];
+        el.classList.add("reveal", "reveal--" + pair[1]);
+        queue.push(el);
+      });
+    });
+    document.querySelectorAll(".checklist li").forEach(function (el, i) {
+      if (el.closest(".hero, .site-header") || el.getBoundingClientRect().top < vh * 0.92) return;
+      var dir = CHIP_DIRS[i % CHIP_DIRS.length];
+      el.style.setProperty("--reveal-delay", 260 + i * 110 + "ms"); // after the yellow card has started to fade in
+      el.dataset.revealDir = dir;
+      el.classList.add("reveal", "reveal--" + dir);
+      queue.push(el);
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        io.unobserve(el);
+        el.classList.add("is-in");
+        // Hand the element back to its own hover/transition styles once it has settled
+        var cleanup = function () {
+          el.classList.remove("reveal", "reveal--" + el.dataset.revealDir, "is-in");
+          el.style.removeProperty("--reveal-delay");
+          delete el.dataset.revealDir;
+        };
+        el.addEventListener("transitionend", function onEnd(e) {
+          if (e.target !== el || e.propertyName !== "opacity") return;
+          el.removeEventListener("transitionend", onEnd);
+          cleanup();
+        });
+        setTimeout(cleanup, 1800); // safety net if transitionend never fires
+      });
+    }, { threshold: 0, rootMargin: "0px 0px -10% 0px" });
+    queue.forEach(function (el) { io.observe(el); });
+  }
 })();

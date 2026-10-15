@@ -66,18 +66,11 @@ a:hover { color: var(--k-navy-900); text-decoration: underline; }
 /* Logo */
 .logo { display: flex; align-items: center; gap: 9px; }
 .logo:hover { text-decoration: none; }
-.logo__mark {
-  width: 33px; height: 33px; border-radius: 8px; background: var(--k-blue-600);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
-}
-.logo__mark span:first-child { color: #fff; font-weight: 800; font-size: 11px; letter-spacing: 0.02em; line-height: 1; }
-.logo__mark span:last-child { width: 17px; height: 2px; border-radius: 2px; background: var(--k-accent); }
-.logo__name { font-size: 17px; font-weight: 800; letter-spacing: -0.01em; color: var(--k-navy-900); white-space: nowrap; }
+.logo__img { display: block; height: 38px; width: auto; }
 
 /* Header */
 .site-header { position: sticky; top: 0; z-index: 50; background: var(--k-navy-900); box-shadow: 0 1px 0 rgba(255,255,255,0.06); height: 64px; box-sizing: border-box; }
 .site-header__inner { max-width: var(--wrap-wide); margin: 0 auto; padding: 0 var(--gutter); height: 100%; box-sizing: border-box; display: flex; align-items: center; gap: 40px; position: relative; }
-.site-header .logo__name { color: #fff; }
 .site-header__right { flex: 1; display: flex; align-items: center; gap: 24px; }
 .site-nav { display: none; align-items: center; gap: 28px; }
 .site-nav a { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #fff; transition: color 150ms ease; }
@@ -346,20 +339,13 @@ a:hover { color: var(--k-navy-900); text-decoration: underline; }
   flex-direction: column;
 }
 .shipper-menu__promo-badge {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-  background: var(--k-blue-600);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
+  width: 64px;
+  height: auto;
+  display: block;
   margin-bottom: 14px;
   flex: 0 0 auto;
+  filter: drop-shadow(0 1px 4px rgba(6,14,31,0.28));
 }
-.shipper-menu__promo-badge span:first-child { color: #fff; font-size: 10px; font-weight: 800; letter-spacing: .02em; line-height: 1; }
-.shipper-menu__promo-badge span:last-child { width: 15px; height: 2px; border-radius: 2px; background: var(--k-accent); }
 .shipper-menu__promo-title {
   color: #0A1630;
   font-size: 23px;
@@ -467,7 +453,7 @@ a:hover { color: var(--k-navy-900); text-decoration: underline; }
 .header-cta:hover { background: var(--k-accent-hover); color: var(--k-on-accent); text-decoration: none; }
 @media (min-width: 840px) { .site-nav { display: flex; } }
 @media (min-width: 1000px) { .header-phone { display: inline-flex; } }
-@media (max-width: 420px) { .logo__name { font-size: 15px; } }
+@media (max-width: 420px) { .logo__img { height: 28px; } }
 
 /* Hero */
 .hero { padding: 0; }
@@ -744,10 +730,7 @@ a:hover { color: var(--k-navy-900); text-decoration: underline; }
 .site-footer__grid { padding: 60px 21px 33px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 33px; }
 .site-footer__col { display: flex; flex-direction: column; gap: 9px; }
 .site-footer__brand { gap: 12px; }
-.site-footer .logo__mark { width: 32px; height: 32px; }
-.site-footer .logo__mark span:first-child { font-size: 10px; letter-spacing: 0; }
-.site-footer .logo__mark span:last-child { width: 15px; }
-.site-footer .logo__name { font-size: 14px; color: #fff; letter-spacing: 0; }
+.site-footer .logo__img { height: 36px; }
 .site-footer__brand p { font-size: 11px; line-height: 1.6; max-width: 32ch; }
 .site-footer__ids { font-family: var(--font-mono); font-size: 10px; color: #7D8BAA; }
 .site-footer__heading { font-size: 10px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; }
@@ -997,9 +980,8 @@ body.nav-open .site-header--overlay {
 @media (max-height: 640px) and (min-width: 768px) {
   .site-header--overlay + main .hero__card { min-height: 0; }
 }
-/* keep the blue KMT badge visible while it sits on the blue hero */
-.site-header--overlay .logo__mark { transition: box-shadow 250ms ease; }
-.site-header--overlay:not(.is-solid) .logo__mark { box-shadow: 0 0 0 1.5px rgba(255,255,255,0.6), 0 4px 14px rgba(6,14,31,0.25); }
+/* keep the white logo legible while it sits on the blue hero */
+.site-header--overlay:not(.is-solid) .logo__img { filter: drop-shadow(0 2px 8px rgba(6,14,31,0.45)); }
 
 /* Overlay header: roomier at the very top, frosted glass once scrolling over the hero, navy after it */
 .site-header--overlay { transition: background-color 250ms ease, box-shadow 250ms ease, height 250ms ease, backdrop-filter 250ms ease; }
@@ -1013,7 +995,7 @@ body.nav-open .site-header--overlay {
           backdrop-filter: blur(20px) saturate(150%);
   box-shadow: 0 1px 0 rgba(255,255,255,0.10), 0 8px 24px rgba(6,14,31,0.18);
 }
-.site-header--overlay.is-scrolled .logo__mark { box-shadow: none; }
+.site-header--overlay.is-scrolled .logo__img { filter: none; }
 
 /* ---- Truck effects (all on the same 11s cycle as kmtDrive, so they stay in sync) ----
    0–34% drive in & slow down · 34–64% cruise while the lane slides · 64–100% speed up and leave */
@@ -1094,4 +1076,21 @@ body.nav-open .site-header--overlay {
 .carrier-menu .shipper-menu__promo-desc { max-width: 19ch; }
 .shipper-menu__promo-checks { border-top-color: rgba(255,255,255,0.24); }
 .shipper-menu__promo-checks li { color: #fff; }
-.shipper-menu__promo-badge { box-shadow: 0 0 0 1.5px rgba(255,255,255,0.55); }
+.shipper-menu__promo-badge { filter: drop-shadow(0 2px 6px rgba(6,14,31,0.35)); }
+
+/* Scroll reveal (classes are added by main.js, and removed again once the element has settled) */
+.reveal {
+  opacity: 0; transform: translate3d(0, 30px, 0);
+  transition: opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms),
+              transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal--left { transform: translate3d(-44px, 0, 0); }
+.reveal--right { transform: translate3d(44px, 0, 0); }
+.reveal--zoom { transform: translate3d(0, 22px, 0) scale(0.965); }
+.reveal--down { transform: translate3d(0, -40px, 0); }
+.reveal--upright { transform: translate3d(-36px, 30px, 0); }
+.reveal.is-in { opacity: 1; transform: none; }
+@media (max-width: 767px) {
+  .reveal--left, .reveal--right, .reveal--upright { transform: translate3d(0, 28px, 0); } /* sideways slides feel odd on narrow screens */
+}
