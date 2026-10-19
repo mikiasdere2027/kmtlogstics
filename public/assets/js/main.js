@@ -3,6 +3,11 @@
   var year = document.querySelector("[data-year]");
   if (year) year.textContent = new Date().getFullYear();
 
+  // Logo intro: assets/js/intro.js runs it (loaded from <head> only when it should play).
+  // When it isn't playing, drop the hidden markup.
+  var intro = document.getElementById("intro");
+  if (intro && !document.documentElement.classList.contains("intro-on")) intro.remove();
+
   // Navigation mega menu: hover & click operated with debounce, Escape, outside-click dismissal, and arrow alignment.
   var navMenus = []; // close() of every mega menu, so opening one closes the others
   document.querySelectorAll(".site-nav__menu").forEach(function (menu) {

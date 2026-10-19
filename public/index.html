@@ -21,9 +21,60 @@
   <link rel="stylesheet" href="./assets/css/styles.css?v=20261010">
   <script src="assets/js/main.js" defer></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"KMT Logistics LLC","url":"https://www.kmtlogisticsllc.com/","logo":"https://www.kmtlogisticsllc.com/assets/img/favicon.svg","email":"dispatch@kmtlogisticsllc.com","telephone":"+1-555-014-2200","areaServed":"US","description":"Asset-based nationwide freight carrier with dispatch, ELD, lease-to-own and MC startup services for owner-operators.","identifier":[{"@type":"PropertyValue","propertyID":"USDOT","value":"9352031"},{"@type":"PropertyValue","propertyID":"MC","value":"62320826"}]}</script>
+  <script>(function(){var d=document.documentElement;try{var force=/[?&]intro/.test(location.search);if(!force&&(sessionStorage.getItem("kmt-intro")||matchMedia("(prefers-reduced-motion: reduce)").matches)){d.classList.add("no-intro");return;}d.classList.add("intro-on","intro-logo-hidden");if(force)d.classList.add("intro-forced");["assets/vendor/gsap.min.js","assets/vendor/MorphSVGPlugin.min.js","assets/js/intro.js"].forEach(function(src){var s=document.createElement("script");s.src=src;s.async=false;document.head.appendChild(s);});}catch(e){d.classList.add("no-intro");}})();</script>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro__bg"></div>
+  <div class="intro__lines"></div>
+  <div class="intro__glow"></div>
+  <div class="intro__stage">
+    <div class="intro__cam">
+      <!-- One SVG in the logo's own coordinates (assets/img/KMT Horizontal Light.svg, viewBox 0 0 501.3 100.2).
+           The flat top-view truck is drawn around the icon's centre; each part morphs into its side-view piece
+           (data-to), then the wordmark reveals and the whole logo flies into the header logo. -->
+      <svg class="intro__svg" viewBox="0 0 501.3 100.2" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+        <defs>
+          <filter id="intro-blur" filterUnits="userSpaceOnUse" x="-400" y="-100" width="1400" height="300"><feGaussianBlur stdDeviation="0 0"/></filter>
+          <clipPath id="intro-clip"><rect x="0" y="-20" width="0" height="140"/></clipPath>
+          <linearGradient id="intro-sheen-grad" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+          </linearGradient>
+          <mask id="intro-sheen-mask" maskUnits="userSpaceOnUse" x="-50" y="-50" width="600" height="200">
+            <use href="#intro-word"/><use href="#intro-truck"/><use href="#intro-arrow"/>
+          </mask>
+        </defs>
+        <g id="intro-word" clip-path="url(#intro-clip)">
+          <path class="i-letter" fill="#fff" d="M49.5,52.3l-1-2-8.9,7.5,1,1.9,6.6,12.3h12.5l-10.2-19.7h0ZM57.4,35.5l-18.7,15.8-2.1,1.8-2.5,12.1,1.3-1.1,5.1-4.3.4-.3,7.6-6.2.9-.8,19.7-16.9h-11.8,0ZM32.1,35.5l-9.2,36.5h10.6l2-8,3.2-12.7,4-15.8h-10.6Z"/>
+          <path class="i-letter" fill="#fff" d="M108.5,35.5l-18.6,22-7.8-22h-8.9l-9.2,36.5h9.9l4.6-18.1,5.7,15.9h4.8l13.9-16.4-4.6,18.7h9.9l9.2-36.5s-8.9,0-8.9,0Z"/>
+          <path class="i-letter" fill="#fff" d="M121.7,35.5l-2.7,10.6h11.7l-6.5,25.9h10.8l6.5-25.9h11.6l2.7-10.6s-34.1,0-34.1,0Z"/>
+          <g class="i-letter"><text fill="#fff" font-family="BrandingSF-NarrowMedium, 'Branding SF', 'Segoe UI', Roboto, sans-serif" font-size="58.6" font-weight="500" transform="translate(161.6 72.3) skewX(-14.8)">L</text></g><g class="i-letter"><text fill="#fff" font-family="BrandingSF-NarrowMedium, 'Branding SF', 'Segoe UI', Roboto, sans-serif" font-size="58.6" font-weight="500" transform="translate(184.9 72.3) skewX(-14.8)">ogi</text></g><g class="i-letter"><text fill="#fff" font-family="BrandingSF-NarrowMedium, 'Branding SF', 'Segoe UI', Roboto, sans-serif" font-size="58.6" font-weight="500" transform="translate(252.3 72.3) skewX(-14.8)">s</text></g><g class="i-letter"><text fill="#fff" font-family="BrandingSF-NarrowMedium, 'Branding SF', 'Segoe UI', Roboto, sans-serif" font-size="58.6" font-weight="500" transform="translate(275.1 72.3) skewX(-14.8)">tics</text></g>
+        </g>
+        <g id="intro-truck" filter="url(#intro-blur)">
+          <path class="i-morph" d="M275 25.6H484V48.6H275Z" data-to="M383 27.6L380.3 38.3L423.8 38.3L425.9 27.6Z" fill="#fff"/>
+          <path class="i-morph" d="M275 48.6H484V71.6H275Z" data-to="M371.5 73.2L471.5 73.2L473.5 64.2L373.7 64.2Z" fill="#fff"/>
+          <path class="i-morph i-speed" d="M286 45.6H345V51.6H286Z" data-to="M402.5 46.8L400.2 55.7L375.9 55.7L378.1 46.8Z" fill="#3463FF"/>
+          <path class="i-morph i-wheel" d="M484 44.6H496V52.6H484Z" data-to="M459.2,71.3c-.3,5.5-5,10-10.5,10s-9.7-4.5-9.4-10,5-10,10.5-10,9.7,4.5,9.4,10Z" fill="#fff"/>
+          <path class="i-morph" d="M496 28.6L553 28.6L570 40.6L570 56.6L553 68.6L496 68.6Z" data-to="M427.6,27.7c-1,4.4-2.7,11.6-4.5,19.2-.7,2.9-1.4,5.9-2.1,8.8h-11.7l6.5-28h11.7Z" fill="#fff"/>
+          <path class="i-morph" d="M496 28.6L553 28.6L570 40.6L570 56.6L553 68.6L496 68.6Z" data-to="M444.5 27.7L442.8 35.4L435.8 65.5L434 73.2L426.1 73.2L427.9 65.5L429.7 57.9L431.5 50.2L433.3 42.6L434.9 35.4L435 34.9L436.7 27.7Z" fill="#fff"/>
+          <path class="i-morph" d="M496 28.6L553 28.6L570 40.6L570 56.6L553 68.6L496 68.6Z" data-to="M472.9 35.2L472.9 35.4L434.9 35.4L435 34.9L436.7 27.7L467.8 27.7L472.6 34.7Z" fill="#fff"/>
+          <path class="i-morph" d="M496 28.6L553 28.6L570 40.6L570 56.6L553 68.6L496 68.6Z" data-to="M478.4 43.3L476 53.8L470.1 45.2L463.5 35.4L458.2 27.7L467.8 27.7L472.6 34.7L472.9 35.2Z" fill="#fff"/>
+          <path class="i-morph" d="M496 28.6L553 28.6L570 40.6L570 56.6L553 68.6L496 68.6Z" data-to="M478.4 43.3L476 53.8L473.2 65.5L471.4 73.2L463.6 73.2L465.4 65.5L470.1 45.2L472.6 34.7L472.9 35.2Z" fill="#fff"/>
+          <path class="i-morph i-light" d="M549 31.6H555V65.6H549Z" data-to="M438.2 34.9L437.8 42.6L433.3 42.6L434.9 35.4L435 34.9Z" fill="#3463FF"/>
+          <path class="i-morph i-light" d="M549 31.6H555V65.6H549Z" data-to="M437.4 50.2L436.9 57.9L429.7 57.9L431.5 50.2Z" fill="#3463FF"/>
+          <path class="i-mirror" d="M547 22.1H553V26.6H547Z" fill="#fff"/>
+          <path class="i-mirror" d="M547 70.6H553V75.1H547Z" fill="#fff"/>
+        </g>
+        <path id="intro-arrow" class="i-arrow" d="M427.6 27.6L413.5 27.6L401.9 15.9L416 15.9L420.6 20.6Z" fill="#fff"/>
+        <g class="i-streaks">
+          <rect class="i-streak" x="350" y="48.6" width="20" height="2.4" rx="1.2" fill="#fff"/>
+          <rect class="i-streak" x="356" y="53.2" width="13" height="2.4" rx="1.2" fill="#fff"/>
+        </g>
+        <g mask="url(#intro-sheen-mask)"><rect class="i-sheen" x="-160" y="-10" width="110" height="120" fill="url(#intro-sheen-grad)"/></g>
+      </svg>
+    </div>
+  </div>
+</div>
 
 <header class="site-header site-header--overlay">
   <div class="site-header__inner">

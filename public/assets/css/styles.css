@@ -1094,3 +1094,41 @@ body.nav-open .site-header--overlay {
 @media (max-width: 767px) {
   .reveal--left, .reveal--right, .reveal--upright { transform: translate3d(0, 28px, 0); } /* sideways slides feel odd on narrow screens */
 }
+
+/* ===================== Logo intro (home page, once per session) =====================
+   Layout only — all motion is driven by assets/js/intro.js (GSAP timeline).
+   Hidden unless the <head> script decided to play it; a CSS failsafe hides it if the script never takes over. */
+.intro { display: none; }
+html.intro-on .intro {
+  position: fixed; inset: 0; z-index: 300; display: block; overflow: hidden; cursor: pointer;
+  animation: kmtIntroFailsafe 0.4s ease 6s forwards;
+}
+.intro__bg { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 50%, #15265A 0%, #0A1630 55%, #050C1C 100%); }
+.intro__lines { position: absolute; inset: 0; pointer-events: none; }
+.intro__line {
+  position: absolute; left: 0; height: 2px; border-radius: 2px; will-change: transform;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.75));
+}
+.intro__glow {
+  position: absolute; left: 50%; top: 50%; width: 360px; height: 360px; margin: -180px 0 0 -180px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(52,99,255,0.55) 0%, rgba(52,99,255,0.18) 38%, rgba(52,99,255,0) 68%);
+  opacity: 0; pointer-events: none;
+}
+/* the stage is exactly the logo box, centred without CSS transforms (GSAP owns transforms) */
+.intro__stage {
+  position: absolute; left: 50%; top: 50%; width: min(720px, 88vw);
+  margin-left: calc(min(720px, 88vw) / -2); margin-top: calc(min(720px, 88vw) * -0.09994);
+}
+.intro__cam { will-change: transform; }
+.intro__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.intro__svg .i-arrow, .intro__svg .i-streak { opacity: 0; }
+
+/* header logo stays hidden until the intro logo lands on it, then fades in underneath */
+.site-header .logo__img { transition: opacity 0.25s ease; }
+html.intro-logo-hidden .site-header .logo__img { opacity: 0; }
+
+@keyframes kmtIntroFailsafe { to { opacity: 0; visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) {
+  html:not(.intro-forced) .intro { display: none !important; }
+  html:not(.intro-forced).intro-logo-hidden .site-header .logo__img { opacity: 1; }
+}
