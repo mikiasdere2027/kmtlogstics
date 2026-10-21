@@ -366,4 +366,144 @@ function visitorText(d) {
   ].join("\n");
 }
 
-module.exports = { inquiryEmail, inquiryText, visitorEmail, visitorText };
+/* ---------- Cost-per-mile calculator ----------
+   Everything shown from the calculator is a number computed server-side (api/_cpm.js), never visitor text. */
+
+const money = (n, digits) => "$" + Number(n).toLocaleString("en-US", { minimumFractionDigits: digits == null ? 2 : digits, maximumFractionDigits: digits == null ? 2 : digits });
+const CPM_LABELS = [["fuel", "Fuel"], ["truck", "Truck payment + depreciation"], ["insurance", "Insurance"], ["maintenance", "Maintenance + tires"], ["hidden", "Tolls, permits, software &amp; other"], ["buffer", "Downtime buffer"]];
+
+// Big result tiles + a bar per cost category
+function cpmSummary(r) {
+  const tile = (label, value, sub, dark) => `
+                <td width="50%" valign="top" style="padding:0 6px;">
+                  <div style="background:${dark ? NAVY : "#F2F6FF"};border-radius:12px;padding:18px 20px;font-family:${FONT};">
+                    <div style="font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:${dark ? YELLOW : BLUE};">${label}</div>
+                    <div style="margin-top:6px;font-size:30px;font-weight:800;line-height:1.1;color:${dark ? "#FFFFFF" : NAVY};">${value}</div>
+                    <div style="margin-top:4px;font-size:13px;color:${dark ? "#C9D4EE" : INK};">${sub}</div>
+                  </div>
+                </td>`;
+  const bars = CPM_LABELS.map(([k, label]) => {
+    const v = r.parts[k], pct = r.total > 0 ? Math.round(v / r.total * 100) : 0;
+    return `
+              <tr>
+                <td style="padding:8px 0;font-family:${FONT};font-size:14px;color:${NAVY};">${label}</td>
+                <td width="90" align="right" style="padding:8px 0;font-family:${FONT};font-size:14px;font-weight:800;color:${NAVY};">${money(v)}/mi</td>
+                <td width="48" align="right" style="padding:8px 0;font-family:${FONT};font-size:13px;color:${INK};">${pct}%</td>
+              </tr>
+              <tr><td colspan="3" style="padding:0 0 4px;"><div style="height:6px;border-radius:3px;background:#E1EAFF;"><div style="width:${Math.max(2, pct)}%;height:6px;border-radius:3px;background:${BLUE};"></div></div></td></tr>`;
+  }).join("");
+  return `
+        <tr>
+          <td style="padding:28px 26px 0;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>${tile("True cost per mile", money(r.total), "every mile driven, incl. deadhead", true)}${tile("Minimum rate", money(r.minRate) + "/mi", "per loaded mile, incl. profit target", false)}</tr></table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:12px 26px 0;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>${tile("Monthly operating cost", money(r.monthlyCost, 0), "at your monthly miles", false)}${tile("Revenue needed / month", money(r.revenueNeeded, 0), money(r.monthlyProfit, 0) + " of it is your profit target", false)}</tr></table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:26px 32px 0;">
+            <div style="font-family:${FONT};font-size:18px;font-weight:800;color:${NAVY};margin-bottom:8px;">Cost breakdown</div>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${bars}
+            </table>
+          </td>
+        </tr>`;
+}
+
+function cpmInputsRows(i) {
+  const rows = [
+    ["Monthly miles", Number(i.miles).toLocaleString("en-US") + " mi"], ["Deadhead", i.deadhead + "%"],
+    ["Profit target", money(i.profit) + "/mi"], ["Downtime buffer", i.buffer + "%"],
+    ["Diesel / MPG", money(i.diesel) + "/gal · " + i.mpg + " mpg"],
+    ["Truck payment / depreciation", money(i.payment, 0) + " / " + money(i.depreciation, 0)],
+    ["Insurance", money(i.insurance, 0)], ["Maintenance / tires", money(i.maintenance, 0) + " / " + money(i.tires, 0)],
+    ["Tolls · permits · software · parking · other", [i.tolls, i.permits, i.software, i.parking, i.other].map(n => money(n, 0)).join(" · ")]
+  ];
+  return rows.map((r, k) => row(r[0], r[1], k === rows.length - 1)).join("");
+}
+
+function cpmEmail(d, siteUrl) {
+  const r = d.cpmResult, dash = `<span style="color:#97A0B5;">—</span>`;
+  const phoneDigits = String(d.phone || "").replace(/[^0-9+]/g, "");
+  const contact = [
+    ["Name", esc(d.name)],
+    ["Phone", `<a href="tel:${esc(phoneDigits)}" style="color:${NAVY};text-decoration:none;">${esc(d.phone)}</a>`],
+    ["Email", `<a href="mailto:${esc(d.email)}" style="color:${BLUE};text-decoration:none;">${esc(d.email)}</a>`],
+    ["State", d.state ? esc(d.state) : dash],
+    ["Own authority", d.ownAuthority ? esc(d.ownAuthority) : dash]
+  ].map((x, k, a) => row(x[0], x[1], k === a.length - 1)).join("");
+  return frame({
+    title: "New cost-per-mile lead", preheader: `${d.name} ran the cost-per-mile calculator: ${money(r.total)}/mi`,
+    headline: "Cost-per-mile calculator lead", highlight: money(r.total) + " per mile · min " + money(r.minRate) + "/mi", siteUrl,
+    body: `
+        <tr>
+          <td style="padding:32px 32px 0;">
+            <h1 style="margin:0 0 10px;font-family:${FONT};font-size:26px;line-height:1.15;font-weight:800;color:${NAVY};">An owner-operator ran the numbers</h1>
+            <p style="margin:0;font-family:${FONT};font-size:15px;line-height:1.6;color:${INK};">Here are their results and the figures they entered — a good opening for a dispatch or lease-to-own conversation.</p>
+          </td>
+        </tr>
+        <tr><td style="padding:22px 32px 0;">${detailsCard(esc((d.name || "?").trim().charAt(0).toUpperCase()), "Contact", contact)}
+        </td></tr>
+${cpmSummary(r)}
+        <tr><td style="padding:26px 32px 36px;">${detailsCard("$", "What they entered (monthly)", cpmInputsRows(d.cpmInputs))}
+        </td></tr>
+`
+  });
+}
+
+function cpmText(d) {
+  const r = d.cpmResult;
+  return ["Cost-per-mile calculator lead", "", "Name: " + d.name, "Phone: " + d.phone, "Email: " + d.email,
+    "State: " + (d.state || "—"), "Own authority: " + (d.ownAuthority || "—"), "",
+    "True cost per mile: " + money(r.total), "Minimum rate: " + money(r.minRate) + "/loaded mi",
+    "Monthly operating cost: " + money(r.monthlyCost, 0), "Revenue needed / month: " + money(r.revenueNeeded, 0), "",
+    ...CPM_LABELS.map(([k, l]) => l.replace("&amp;", "&") + ": " + money(r.parts[k]) + "/mi")].join("\n");
+}
+
+function cpmVisitorEmail(d, siteUrl) {
+  const r = d.cpmResult, name = firstName(d.name);
+  const big = Object.keys(r.parts).filter(k => k !== "buffer").sort((a, b) => r.parts[b] - r.parts[a])[0];
+  const bigLabel = (CPM_LABELS.find(x => x[0] === big) || ["", "Fuel"])[1];
+  return frame({
+    title: "Your truck cost per mile", preheader: `Your true cost per mile is ${money(r.total)} — minimum rate ${money(r.minRate)}/mi.`,
+    headline: "Your cost-per-mile results", highlight: money(r.total) + " per mile", siteUrl,
+    body: `
+        <tr>
+          <td style="padding:32px 32px 0;">
+            <h1 style="margin:0 0 10px;font-family:${FONT};font-size:26px;line-height:1.15;font-weight:800;color:${NAVY};">${name ? "Hi " + esc(name) + "," : "Hi there,"}</h1>
+            <p style="margin:0;font-family:${FONT};font-size:15px;line-height:1.6;color:${INK};">Here's your truck cost per mile from the KMT Logistics calculator. Your biggest cost is <strong style="color:${NAVY};">${bigLabel}</strong>. Don't take a load below your minimum rate.</p>
+          </td>
+        </tr>
+${cpmSummary(r)}
+        <tr>
+          <td style="padding:30px 32px 36px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${NAVY};border-radius:12px;">
+              <tr><td style="padding:22px 24px;font-family:${FONT};">
+                <div style="font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:${YELLOW};">Want loads above your rate?</div>
+                <div style="margin-top:8px;font-size:15px;line-height:1.6;color:#C9D4EE;">KMT dispatchers negotiate rates and plan your lanes so every load clears your cost per mile. Call ${esc(DISPATCH_PHONE)} or reply to this email.</div>
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:16px;"><tr><td style="background:${YELLOW};border-radius:9px;">
+                  <a href="${esc(siteUrl)}/dispatch" style="display:inline-block;padding:12px 22px;font-family:${FONT};font-size:14px;font-weight:800;color:${NAVY};text-decoration:none;">Get a dispatcher</a>
+                </td></tr></table>
+              </td></tr>
+            </table>
+            <p style="margin:18px 0 0;font-family:${FONT};font-size:12px;line-height:1.6;color:#97A0B5;">Estimates for planning only, based on the numbers you entered. Actual costs vary. This isn't financial, tax or insurance advice.</p>
+          </td>
+        </tr>
+`
+  });
+}
+
+function cpmVisitorText(d) {
+  const r = d.cpmResult;
+  return [(firstName(d.name) ? "Hi " + firstName(d.name) : "Hi there") + ",", "",
+    "Your truck cost per mile from the KMT Logistics calculator:", "",
+    "True cost per mile: " + money(r.total), "Minimum rate: " + money(r.minRate) + " per loaded mile",
+    "Monthly operating cost: " + money(r.monthlyCost, 0), "Revenue needed per month: " + money(r.revenueNeeded, 0), "",
+    "Want loads above your rate? KMT dispatch: " + DISPATCH_PHONE, "",
+    "Estimates for planning only. Not financial, tax or insurance advice."].join("\n");
+}
+
+module.exports = { inquiryEmail, inquiryText, visitorEmail, visitorText, cpmEmail, cpmText, cpmVisitorEmail, cpmVisitorText };
+

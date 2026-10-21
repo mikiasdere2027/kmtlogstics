@@ -10,7 +10,8 @@
 //   SITE_URL        public site address for email images, e.g. https://kmtlogisticsllc.com
 //                   (default: Vercel's production domain, then this request's host)
 
-const { inquiryEmail, inquiryText, visitorEmail, visitorText } = require("./_email");
+const { inquiryEmail, inquiryText, visitorEmail, visitorText, cpmEmail, cpmText, cpmVisitorEmail, cpmVisitorText } = require("./_email");
+const cpm = require("./_cpm");
 
 const INTERESTS = ["Ship freight", "Dispatch", "ELD", "Lease-to-own", "MC startup"];
 const LIMITS = { name: 120, company: 160, phone: 40, email: 200, notes: 4000, commodity: 120, setup: 80, authority: 80, equipmentType: 80 };
@@ -125,8 +126,22 @@ module.exports = async function handler(req, res) {
     if (qErr) return res.status(400).json({ ok: false, error: qErr });
   }
 
+  // Cost-per-mile calculator lead: contact details are required to unlock the results
+  const isCpm = body.kind === "cpm";
+  if (isCpm) {
+    d.kind = "cpm";
+    d.interest = "Cost per mile";
+    d.state = clean(body.state, 40);
+    d.ownAuthority = ["Yes", "No"].includes(body.ownAuthority) ? body.ownAuthority : "";
+    d.cpmInputs = cpm.readInputs(body.cpm);
+    d.cpmResult = cpm.compute(d.cpmInputs);
+    if (!d.name) return res.status(400).json({ ok: false, error: "Please add your first name." });
+    if (!d.email) return res.status(400).json({ ok: false, error: "Please add your email address." });
+    if (String(d.phone).replace(/\D/g, "").length < 7) return res.status(400).json({ ok: false, error: "Please add a phone number." });
+  }
+
   if (!d.name) return res.status(400).json({ ok: false, error: "Please add your name." });
-  if (!isQuote && d.interest !== "Ship freight" && (!d.setup || !d.authority)) return res.status(400).json({ ok: false, error: "Please complete your operation details." });
+  if (!isQuote && !isCpm && d.interest !== "Ship freight" && (!d.setup || !d.authority)) return res.status(400).json({ ok: false, error: "Please complete your operation details." });
   if (!d.phone && !d.email) {
     return res.status(400).json({ ok: false, error: "Add a phone number or email so we can reach you." });
   }
@@ -149,11 +164,13 @@ module.exports = async function handler(req, res) {
   const message = {
     from: process.env.CONTACT_FROM || DEFAULT_FROM,
     to: [process.env.CONTACT_TO || DEFAULT_TO],
-    subject: isQuote
-      ? "Freight quote — " + d.equipment + ", " + d.originZip + " → " + d.destZip
-      : "KMT website inquiry — " + d.interest,
-    html: inquiryEmail(d, siteUrl),
-    text: inquiryText(d)
+    subject: isCpm
+      ? "Cost-per-mile lead — " + d.name + ", $" + d.cpmResult.total.toFixed(2) + "/mi"
+      : isQuote
+        ? "Freight quote — " + d.equipment + ", " + d.originZip + " → " + d.destZip
+        : "KMT website inquiry — " + d.interest,
+    html: isCpm ? cpmEmail(d, siteUrl) : inquiryEmail(d, siteUrl),
+    text: isCpm ? cpmText(d) : inquiryText(d)
   };
   if (d.email) message.reply_to = d.email;
 
@@ -186,9 +203,10 @@ module.exports = async function handler(req, res) {
             from: message.from,
             to: [d.email],
             reply_to: message.to[0],
-            subject: isQuote ? "We received your quote request — KMT Logistics" : "We received your inquiry — KMT Logistics",
-            html: visitorEmail(d, siteUrl),
-            text: visitorText(d)
+            subject: isCpm ? "Your truck cost per mile — KMT Logistics"
+              : isQuote ? "We received your quote request — KMT Logistics" : "We received your inquiry — KMT Logistics",
+            html: isCpm ? cpmVisitorEmail(d, siteUrl) : visitorEmail(d, siteUrl),
+            text: isCpm ? cpmVisitorText(d) : visitorText(d)
           })
         });
         confirmationSent = c.ok;

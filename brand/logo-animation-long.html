@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KMT Logistics - logo animation (long)</title>
+<!-- Long brand version of the website logo intro. Open in a browser to play; add ?loop to loop it.
+     Used to render brand/kmt-logo-animation-long.gif. Reuses the site's GSAP files. -->
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #0A1630; }
+  .stage-root { position: fixed; inset: 0; overflow: hidden;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, #15265A 0%, #0A1630 55%, #050C1C 100%); }
+  /* flat road: asphalt band, white edge lines on the left and right of the lane, sky-blue dashed centre line */
+  .road { position: absolute; left: 0; right: 0; top: 50%; height: 168px; margin-top: -84px; background: #1E2433; transform-origin: 50% 50%; }
+  .road__edge { position: absolute; left: 0; right: 0; height: 4px; background: #fff; transform-origin: 0 50%; }
+  .road__edge--l { top: 14px; }
+  .road__edge--r { bottom: 14px; }
+  .road__dashes { position: absolute; left: 0; top: 50%; height: 6px; margin-top: -3px; }
+  .road__dash { position: absolute; top: 0; width: 64px; height: 6px; border-radius: 3px; background: #3463FF;
+    box-shadow: 0 0 10px rgba(52,99,255,.55); transform-origin: 50% 50%; }
+  .glow { position: absolute; left: 50%; top: 50%; width: 360px; height: 360px; margin: -180px 0 0 -180px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(52,99,255,.55) 0%, rgba(52,99,255,.18) 38%, rgba(52,99,255,0) 68%); opacity: 0; }
+  .intro__stage { position: absolute; left: 50%; top: 50%; width: min(720px, 88vw);
+    margin-left: calc(min(720px, 88vw) / -2); margin-top: calc(min(720px, 88vw) * -0.09994); }
+  .intro__svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .intro__svg .i-arrow, .intro__svg .i-streak { opacity: 0; }
+</style>
+</head>
+<body>
+<div class="stage-root" id="root">
+  <div class="road" id="road">
+    <span class="road__edge road__edge--l"></span>
+    <span class="road__dashes" id="dashes"></span>
+    <span class="road__edge road__edge--r"></span>
+  </div>
+  <div class="glow" id="glow"></div>
+  <div class="intro__stage">
+    <div class="intro__cam" id="cam">
+      <svg class="intro__svg" viewBox="0 0 501.3 100.2" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+        <defs>
+          <filter id="intro-blur" filterUnits="userSpaceOnUse" x="-400" y="-100" width="1400" height="300"><feGaussianBlur stdDeviation="0 0"/></filter>
+          <clipPath id="intro-clip"><rect x="0" y="-20" width="0" height="140"/></clipPath>
+          <linearGradient id="intro-sheen-grad" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+          </linearGradient>
+          <mask id="intro-sheen-mask" maskUnits="userSpaceOnUse" x="-50" y="-50" width="600" height="200">
+            <use href="#intro-word"/><use href="#intro-truck"/><use href="#intro-arrow"/>
+          </mask>
+        </defs>
+        <g id="intro-word" clip-path="url(#intro-clip)">
+          <path class="i-letter" fill="#fff" d="M49.5,52.3l-1-2-8.9,7.5,1,1.9,6.6,12.3h12.5l-10.2-19.7h0ZM57.4,35.5l-18.7,15.8-2.1,1.8-2.5,12.1,1.3-1.1,5.1-4.3.4-.3,7.6-6.2.9-.8,19.7-16.9h-11.8,0ZM32.1,35.5l-9.2,36.5h10.6l2-8,3.2-12.7,4-15.8h-10.6Z"/>
+          <path class="i-letter" fill="#fff" d="M108.5,35.5l-18.6,22-7.8-22h-8.9l-9.2,36.5h9.9l4.6-18.1,5.7,15.9h4.8l13.9-16.4-4.6,18.7h9.9l9.2-36.5s-8.9,0-8.9,0Z"/>
+          <path class="i-letter" fill="#fff" d="M121.7,35.5l-2.7,10.6h11.7l-6.5,25.9h10.8l6.5-25.9h11.6l2.7-10.6s-34.1,0-34.1,0Z"/>
+          <g class="i-letter"><text fill="#fff" font-family="BrandingSF-NarrowMedium, 'Branding SF', 'Segoe UI', Roboto, sans-serif" font-size="58.6" font-weight="500" transform="translate(161.6 72.3) skewX(-14.8)">L</text></g><g class="i-letter"><text fill="#fff" font-family="BrandingSF-NarrowMedium, 'Branding SF', 'Segoe UI', Roboto, sans-serif" font-size="58.6" font-weight="500" transform="translate(184.9 72.3) skewX(-14.8)">ogi</text></g><g class="i-letter"><text fill="#fff" font-family="BrandingSF-NarrowMedium, 'Branding SF', 'Segoe UI', Roboto, sans-serif" font-size="58.6" font-weight="500" transform="translate(252.3 72.3) skewX(-14.8)">s</text></g><g class="i-letter"><text fill="#fff" font-family="BrandingSF-NarrowMedium, 'Branding SF', 'Segoe UI', Roboto, sans-serif" font-size="58.6" font-weight="500" transform="translate(275.1 72.3) skewX(-14.8)">tics</text></g>
+        </g>
+        <g id="intro-truck" filter="url(#intro-blur)">
+          <path class="i-morph" d="M275 25.6H484V48.6H275Z" data-to="M383 27.6L380.3 38.3L423.8 38.3L425.9 27.6Z" fill="#fff"/>
+          <path class="i-morph" d="M275 48.6H484V71.6H275Z" data-to="M371.5 73.2L471.5 73.2L473.5 64.2L373.7 64.2Z" fill="#fff"/>
+          <path class="i-morph i-speed" d="M286 45.6H345V51.6H286Z" data-to="M402.5 46.8L400.2 55.7L375.9 55.7L378.1 46.8Z" fill="#3463FF"/>
+          <path class="i-morph i-wheel" d="M484 44.6H496V52.6H484Z" data-to="M459.2,71.3c-.3,5.5-5,10-10.5,10s-9.7-4.5-9.4-10,5-10,10.5-10,9.7,4.5,9.4,10Z" fill="#fff"/>
+          <path class="i-morph" d="M496 28.6L553 28.6L570 40.6L570 56.6L553 68.6L496 68.6Z" data-to="M427.6,27.7c-1,4.4-2.7,11.6-4.5,19.2-.7,2.9-1.4,5.9-2.1,8.8h-11.7l6.5-28h11.7Z" fill="#fff"/>
+          <path class="i-morph" d="M496 28.6L553 28.6L570 40.6L570 56.6L553 68.6L496 68.6Z" data-to="M444.5 27.7L442.8 35.4L435.8 65.5L434 73.2L426.1 73.2L427.9 65.5L429.7 57.9L431.5 50.2L433.3 42.6L434.9 35.4L435 34.9L436.7 27.7Z" fill="#fff"/>
+          <path class="i-morph" d="M496 28.6L553 28.6L570 40.6L570 56.6L553 68.6L496 68.6Z" data-to="M472.9 35.2L472.9 35.4L434.9 35.4L435 34.9L436.7 27.7L467.8 27.7L472.6 34.7Z" fill="#fff"/>
+          <path class="i-morph" d="M496 28.6L553 28.6L570 40.6L570 56.6L553 68.6L496 68.6Z" data-to="M478.4 43.3L476 53.8L470.1 45.2L463.5 35.4L458.2 27.7L467.8 27.7L472.6 34.7L472.9 35.2Z" fill="#fff"/>
+          <path class="i-morph" d="M496 28.6L553 28.6L570 40.6L570 56.6L553 68.6L496 68.6Z" data-to="M478.4 43.3L476 53.8L473.2 65.5L471.4 73.2L463.6 73.2L465.4 65.5L470.1 45.2L472.6 34.7L472.9 35.2Z" fill="#fff"/>
+          <path class="i-morph i-light" d="M549 31.6H555V65.6H549Z" data-to="M438.2 34.9L437.8 42.6L433.3 42.6L434.9 35.4L435 34.9Z" fill="#3463FF"/>
+          <path class="i-morph i-light" d="M549 31.6H555V65.6H549Z" data-to="M437.4 50.2L436.9 57.9L429.7 57.9L431.5 50.2Z" fill="#3463FF"/>
+          <path class="i-mirror" d="M547 22.1H553V26.6H547Z" fill="#fff"/>
+          <path class="i-mirror" d="M547 70.6H553V75.1H547Z" fill="#fff"/>
+        </g>
+        <path id="intro-arrow" class="i-arrow" d="M427.6 27.6L413.5 27.6L401.9 15.9L416 15.9L420.6 20.6Z" fill="#fff"/>
+        <g class="i-streaks">
+          <rect class="i-streak" x="350" y="48.6" width="20" height="2.4" rx="1.2" fill="#fff"/>
+          <rect class="i-streak" x="356" y="53.2" width="13" height="2.4" rx="1.2" fill="#fff"/>
+        </g>
+        <g mask="url(#intro-sheen-mask)"><rect class="i-sheen" x="-160" y="-10" width="110" height="120" fill="url(#intro-sheen-grad)"/></g>
+      </svg>
+    </div>
+  </div>
+</div>
+<script src="../public/assets/vendor/gsap.min.js"></script>
+<script src="../public/assets/vendor/MorphSVGPlugin.min.js"></script>
+<script>
+(function () {
+  gsap.registerPlugin(MorphSVGPlugin);
+  var root = document.getElementById("root"), cam = document.getElementById("cam"), road = document.getElementById("road");
+  var dashes = document.getElementById("dashes"), glow = document.getElementById("glow");
+  var svg = root.querySelector(".intro__svg"), blurEl = root.querySelector("#intro-blur feGaussianBlur");
+  var clipRect = root.querySelector("#intro-clip rect");
+  var vw = window.innerWidth, GAP = 120, N = 60;
+
+  // dashes laid out far past the right edge so the lane can scroll for the whole road section
+  for (var i = 0; i < N; i++) {
+    var d = document.createElement("span");
+    d.className = "road__dash";
+    d.style.left = (i * GAP + 28) + "px";
+    dashes.appendChild(d);
+  }
+  var all = dashes.children, visibleCount = Math.ceil(vw / GAP) + 1;
+
+  gsap.set(svg, { xPercent: -34.77 });
+  gsap.set(cam, { transformPerspective: 900, transformOrigin: "50% 50%", x: -1.4 * vw });
+  gsap.set(".intro__svg .i-arrow", { transformOrigin: "100% 100%" });
+  gsap.set(".intro__svg .i-streak", { transformOrigin: "100% 50%" });
+  gsap.set(".intro__svg .i-letter", { opacity: 0, y: 18 });
+
+  var tl = gsap.timeline({ defaults: { ease: "power3.inOut" }, paused: /[?&]render\b/.test(location.search) });
+  window.__tl = tl;
+
+  // 0) The road: asphalt opens, edge lines draw left to right, sky-blue dashes pop in, then the lane starts moving
+  tl.fromTo(road, { scaleY: 0 }, { scaleY: 1, duration: 0.7, ease: "power3.out" }, 0.15)
+    .fromTo(".road__edge--l", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.inOut" }, 0.45)
+    .fromTo(".road__edge--r", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.inOut" }, 0.55)
+    .fromTo([].slice.call(all, 0, visibleCount), { scaleX: 0, opacity: 0 },
+      { scaleX: 1, opacity: 1, duration: 0.35, ease: "back.out(2)", stagger: 0.045 }, 0.95)
+    .fromTo(dashes, { x: 0 }, { x: -GAP * 3, duration: 0.9, ease: "power2.in" }, 1.6)
+    .to(dashes, { x: -GAP * 30, duration: 2.4, ease: "none" }, 2.5);
+
+  // then the website intro, shifted to start once the road is moving
+  var D = 2.0;
+  tl.fromTo(cam, { x: -1.4 * vw }, { x: 0, duration: 1.2, ease: "power4.out" }, D)
+    .fromTo(blurEl, { attr: { stdDeviation: "26 0" } }, { attr: { stdDeviation: "0 0" }, duration: 0.95, ease: "power3.out" }, D)
+    .fromTo(cam, { scaleX: 1.04 }, { scaleX: 1, duration: 0.45, ease: "elastic.out(1, 0.6)" }, D + 0.82);
+  var T = D + 0.25;
+  tl.to(road, { scaleY: 0, opacity: 0, duration: 0.55, ease: "power3.in" }, T + 0.75);
+  tl.to(cam, { rotationX: 64, scale: 0.94, duration: 0.4, ease: "power2.in" }, T + 0.75)
+    .to(cam, { rotationX: 0, scale: 1, duration: 0.6, ease: "power3.out" }, T + 1.15)
+    .to(".intro__svg .i-mirror", { opacity: 0, duration: 0.25, ease: "power1.out" }, T + 0.8);
+  root.querySelectorAll(".i-morph").forEach(function (p, idx) {
+    tl.to(p, { morphSVG: { shape: p.getAttribute("data-to"), type: "linear" }, duration: 0.85, ease: "power3.inOut" }, T + 0.78 + (idx % 4) * 0.025);
+  });
+  tl.to(".intro__svg .i-speed, .intro__svg .i-light", { fill: "#ffffff", duration: 0.6, ease: "power1.inOut" }, T + 0.95);
+  tl.fromTo(glow, { opacity: 0, scale: 0.5 }, { opacity: 0.95, scale: 1.15, duration: 0.5, ease: "power2.out" }, T + 1.25)
+    .to(glow, { opacity: 0.35, scale: 1, duration: 0.7, ease: "power2.inOut" }, T + 1.75)
+    .fromTo(".intro__svg .i-arrow", { opacity: 0, scale: 0, rotation: -40 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.6, ease: "back.out(2.4)" }, T + 1.48)
+    .fromTo(".intro__svg .i-speed", { x: -16 }, { x: 0, duration: 0.5, ease: "back.out(3)" }, T + 1.56)
+    .fromTo(".intro__svg .i-streak", { opacity: 0, scaleX: 0.2 }, { opacity: 1, scaleX: 2.8, duration: 0.24, ease: "power2.out", stagger: 0.05 }, T + 1.54)
+    .to(".intro__svg .i-streak", { opacity: 0, scaleX: 0.4, duration: 0.35, ease: "power2.in" }, T + 1.8)
+    .fromTo(".intro__svg .i-wheel", { y: -6 }, { y: 0, duration: 0.55, ease: "bounce.out" }, T + 1.6);
+  tl.to(svg, { xPercent: 0, duration: 0.9, ease: "expo.inOut" }, T + 2.1)
+    .to(glow, { opacity: 0, duration: 0.5, ease: "power1.out" }, T + 2.15)
+    .fromTo(clipRect, { attr: { width: 0 } }, { attr: { width: 380 }, duration: 0.85, ease: "power3.out" }, T + 2.25)
+    .to(".intro__svg .i-letter", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", stagger: 0.045 }, T + 2.25)
+    .fromTo(".intro__svg .i-sheen", { attr: { x: -160 } }, { attr: { x: 540 }, duration: 0.8, ease: "power2.inOut" }, T + 2.75);
+
+  if (/[?&]loop\b/.test(location.search)) tl.repeat(-1).repeatDelay(2.2);
+})();
+</script>
+</body>
+</html>

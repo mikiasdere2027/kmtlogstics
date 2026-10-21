@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Truck Cost Per Mile Calculator — KMT Logistics</title>
+  <meta name="description" content="Free truck cost-per-mile calculator for owner-operators. Add fuel, truck payment, insurance, maintenance and hidden costs to find your true cost per mile and the minimum rate to accept.">
+  <meta name="theme-color" content="#0A1630">
+  <link rel="canonical" href="https://www.kmtlogisticsllc.com/cost-per-mile">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Truck Cost Per Mile Calculator — KMT Logistics">
+  <meta property="og:description" content="Free truck cost-per-mile calculator for owner-operators. Add fuel, truck payment, insurance, maintenance and hidden costs to find your true cost per mile and the minimum rate to accept.">
+  <meta property="og:image" content="https://www.kmtlogisticsllc.com/assets/img/lease-tractor.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="./assets/css/styles.css?v=20261010">
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/cpm.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="index.html" class="logo" aria-label="KMT Logistics home">
+      <img class="logo__img" src="assets/img/KMT Horizontal Light.svg" alt="" width="150" height="30">
+    </a>
+    <div class="site-header__right">
+      <nav class="site-nav" aria-label="Main">
+        <div class="site-nav__menu">
+          <button class="site-nav__menu-toggle" type="button" aria-expanded="false" aria-controls="shipper-menu">
+            <span>For shippers</span>
+            <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="shipper-menu" id="shipper-menu" hidden>
+            <div class="shipper-menu__cols">
+              <!-- Column 1: Freight Services -->
+              <section class="shipper-menu__col">
+                <div class="shipper-menu__col-header">
+                  <h3 class="shipper-menu__col-title">Freight Services</h3>
+                  <p class="shipper-menu__col-sub">Reliable transportation for your business.</p>
+                </div>
+                <div class="shipper-menu__entries">
+                  <a class="shipper-menu__entry" href="freight.html">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>Freight Transportation</strong>
+                      <span>Nationwide coverage and equipment options.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                  <a class="shipper-menu__entry" href="freight.html#equipment">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>Equipment &amp; Capacity</strong>
+                      <span>Dry van, reefer, flatbed and specialized freight.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                  <a class="shipper-menu__entry" href="freight.html">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>Service Areas</strong>
+                      <span>Coverage across the United States.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                </div>
+              </section>
+
+              <!-- Column 2: Work With Our Drivers -->
+              <section class="shipper-menu__col">
+                <div class="shipper-menu__col-header">
+                  <h3 class="shipper-menu__col-title">Work With Our Drivers</h3>
+                  <p class="shipper-menu__col-sub">A dependable partner for your freight needs.</p>
+                </div>
+                <div class="shipper-menu__entries">
+                  <a class="shipper-menu__entry" href="freight.html">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>Dedicated Capacity</strong>
+                      <span>Long-term and dedicated lane options.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                  <a class="shipper-menu__entry" href="freight.html">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>On-Time Performance</strong>
+                      <span>Reliable and professional service.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                  <a class="shipper-menu__entry" href="freight.html">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>Safety &amp; Compliance</strong>
+                      <span>FMCSA compliant operations and monitoring.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                </div>
+              </section>
+
+              <!-- Column 3: Helpful Information -->
+              <section class="shipper-menu__col">
+                <div class="shipper-menu__col-header">
+                  <h3 class="shipper-menu__col-title">Helpful Information</h3>
+                  <p class="shipper-menu__col-sub">Everything you need in one place.</p>
+                </div>
+                <div class="shipper-menu__entries">
+                  <a class="shipper-menu__entry" href="freight.html#quote">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>Request a Freight Quote</strong>
+                      <span>Get a competitive rate for your shipment.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                  <a class="shipper-menu__entry" href="freight.html#process">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>Ship With KMT</strong>
+                      <span>Process, requirements and documentation.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                  <a class="shipper-menu__entry" href="index.html#contact">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>Contact Our Team</strong>
+                      <span>Talk to a logistics specialist.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                </div>
+              </section>
+            </div>
+
+            <!-- Right Promo Card -->
+            <aside class="shipper-menu__promo">
+              <div class="shipper-menu__promo-media">
+                <img src="assets/img/promo-freight.png" alt="Semi truck hauling freight across an open highway" loading="lazy">
+                <div class="shipper-menu__promo-overlay"></div>
+              </div>
+              <div class="shipper-menu__promo-body">
+                <div class="shipper-menu__promo-top">
+                  <img class="shipper-menu__promo-badge" src="assets/img/KMT Icon Light.svg" alt="" aria-hidden="true" width="64" height="44">
+                  <h3 class="shipper-menu__promo-title">Need a Rate?</h3>
+                  <p class="shipper-menu__promo-desc">Get a competitive quote for your freight shipment in minutes.</p>
+                </div>
+                <a class="shipper-menu__promo-btn" href="freight.html#quote">
+                  <span>Request a freight quote</span>
+                  <span class="shipper-menu__promo-btn-arrow" aria-hidden="true">→</span>
+                </a>
+                <ul class="shipper-menu__promo-checks">
+                  <li>
+                    <svg class="shipper-menu__check-icon" width="18" height="18" viewBox="0 0 24 24" fill="#F5B014"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4" fill="none" stroke="#0A1630" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>Competitive rates</span>
+                  </li>
+                  <li>
+                    <svg class="shipper-menu__check-icon" width="18" height="18" viewBox="0 0 24 24" fill="#F5B014"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4" fill="none" stroke="#0A1630" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>Nationwide coverage</span>
+                  </li>
+                  <li>
+                    <svg class="shipper-menu__check-icon" width="18" height="18" viewBox="0 0 24 24" fill="#F5B014"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4" fill="none" stroke="#0A1630" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>Dedicated support team</span>
+                  </li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+        <div class="site-nav__menu">
+          <button class="site-nav__menu-toggle is-current" type="button" aria-expanded="false" aria-controls="carrier-menu">
+            <span>For carriers</span>
+            <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="shipper-menu carrier-menu" id="carrier-menu" hidden>
+            <div class="shipper-menu__cols">
+              <section class="shipper-menu__col">
+                <div class="shipper-menu__col-header">
+                  <h3 class="shipper-menu__col-title">Owner-Operator Services</h3>
+                  <p class="shipper-menu__col-sub">Keep loads moving and your logs clean.</p>
+                </div>
+                <div class="shipper-menu__entries">
+                  <a class="shipper-menu__entry" href="dispatch.html">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>Dispatch Service</strong>
+                      <span>We find loads, negotiate rates and handle paperwork.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                  <a class="shipper-menu__entry" href="eld.html">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>ELD &amp; Compliance</strong>
+                      <span>FMCSA-registered ELD, HOS, IFTA and audit prep.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                  <a class="shipper-menu__entry" href="cost-per-mile.html" aria-current="page">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>Cost Per Mile Calculator</strong>
+                      <span>Find your true cost and the lowest rate to accept.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                </div>
+              </section>
+              <section class="shipper-menu__col">
+                <div class="shipper-menu__col-header">
+                  <h3 class="shipper-menu__col-title">Own Your Business</h3>
+                  <p class="shipper-menu__col-sub">From new authority to your own truck.</p>
+                </div>
+                <div class="shipper-menu__entries">
+                  <a class="shipper-menu__entry" href="lease-to-own.html">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"/><path d="m21 2-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>Lease-to-Own Trucks</strong>
+                      <span>Drive a late-model tractor today, own it at the end.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                  <a class="shipper-menu__entry" href="mc-startup.html">
+                    <span class="shipper-menu__entry-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+                    </span>
+                    <div class="shipper-menu__entry-copy">
+                      <strong>MC Startup</strong>
+                      <span>LLC, USDOT, MC, BOC-3 and insurance — filed right.</span>
+                    </div>
+                    <i class="shipper-menu__arrow" aria-hidden="true">→</i>
+                  </a>
+                </div>
+              </section>
+            </div>
+
+            <aside class="shipper-menu__promo">
+              <div class="shipper-menu__promo-media">
+                <img src="assets/img/lease-tractor.jpg" alt="Late-model semi tractor ready for a lease-to-own driver" loading="lazy">
+                <div class="shipper-menu__promo-overlay"></div>
+              </div>
+              <div class="shipper-menu__promo-body">
+                <div class="shipper-menu__promo-top">
+                  <img class="shipper-menu__promo-badge" src="assets/img/KMT Icon Light.svg" alt="" aria-hidden="true" width="64" height="44">
+                  <h3 class="shipper-menu__promo-title">Drive with KMT</h3>
+                  <p class="shipper-menu__promo-desc">Dispatch, ELD and your own truck.</p>
+                </div>
+                <a class="shipper-menu__promo-btn" href="index.html?interest=Lease-to-own#contact">
+                  <span>Talk to our team</span>
+                  <span class="shipper-menu__promo-btn-arrow" aria-hidden="true">→</span>
+                </a>
+                <ul class="shipper-menu__promo-checks">
+                  <li>
+                    <svg class="shipper-menu__check-icon" width="18" height="18" viewBox="0 0 24 24" fill="#F5B014"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4" fill="none" stroke="#0A1630" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>24/7 dispatch support</span>
+                  </li>
+                  <li>
+                    <svg class="shipper-menu__check-icon" width="18" height="18" viewBox="0 0 24 24" fill="#F5B014"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4" fill="none" stroke="#0A1630" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>ELD installed for you</span>
+                  </li>
+                  <li>
+                    <svg class="shipper-menu__check-icon" width="18" height="18" viewBox="0 0 24 24" fill="#F5B014"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4" fill="none" stroke="#0A1630" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>Weekly settlements</span>
+                  </li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+        <a href="index.html#path">How it works</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div class="site-header__actions">
+        <a class="header-phone" href="tel:5550142200"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(555) 014-2200</a>
+        <a class="header-cta" href="index.html#contact">Get started</a>
+        <button class="nav-burger" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav" hidden>
+    <nav class="mobile-nav__inner" aria-label="Mobile">
+      <div class="mobile-nav__group">
+        <span class="mobile-nav__label">For shippers</span>
+        <a href="freight.html">Freight transportation</a>
+        <a href="freight.html#quote">Request a freight quote</a>
+      </div>
+      <div class="mobile-nav__group">
+        <span class="mobile-nav__label">For carriers</span>
+        <a href="dispatch.html">Dispatch service</a>
+        <a href="eld.html">ELD &amp; compliance</a>
+        <a href="cost-per-mile.html" aria-current="page">Cost per mile calculator</a>
+        <a href="lease-to-own.html">Lease-to-own trucks</a>
+        <a href="mc-startup.html">MC startup</a>
+      </div>
+      <div class="mobile-nav__group mobile-nav__group--plain">
+        <a href="index.html#path">How it works</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <a class="btn btn--accent mobile-nav__call" href="tel:5550142200">Call dispatch 24/7 · (555) 014-2200</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="cover cover--compact">
+    <div class="cover__mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg>
+    </div>
+    <div class="cover__inner">
+      <span class="eyebrow cover__eyebrow">Free tool for owner-operators</span>
+      <h1 class="cover__title">What does one mile really cost you?</h1>
+      <p class="cover__lede">Enter your real monthly costs to see your true cost per mile, which expense hits hardest, and the lowest rate you should accept before you book a load. It takes about three minutes.</p>
+    </div>
+  </section>
+
+  <section class="cpm" id="calculator">
+    <div class="wrap cpm__inner">
+      <div class="cpm-main">
+      <form class="cpm-card" id="cpm-form" novalidate>
+        <div class="cpm-progress" aria-hidden="true"><span id="cpm-bar"></span></div>
+        <fieldset class="cpm-step" data-step="1" >
+          <legend class="cpm-step__title"><span class="cpm-step__count">Step 1 of 7</span>Your operation</legend>
+          <p class="cpm-step__lede">How you run sets how every cost is spread across your miles.</p>
+          <div class="cpm-grid">
+            <label class="cpm-field">
+              <span class="cpm-field__label">Total miles per month</span>
+              <span class="cpm-field__control"><input type="number" inputmode="decimal" name="miles" step="100" min="500"><span class="cpm-field__unit cpm-field__unit--post">mi</span></span>
+              <small class="cpm-field__hint">Loaded and empty miles together</small>
+            </label>
+            <label class="cpm-field">
+              <span class="cpm-field__label">Deadhead</span>
+              <span class="cpm-field__control"><input type="number" inputmode="decimal" name="deadhead" step="1" min="0"><span class="cpm-field__unit cpm-field__unit--post">%</span></span>
+              <small class="cpm-field__hint">Share of miles you drive empty</small>
+            </label>
+            <label class="cpm-field">
+              <span class="cpm-field__label">Profit target per mile</span>
+              <span class="cpm-field__control"><span class="cpm-field__unit">$</span><input type="number" inputmode="decimal" name="profit" step="0.01" min="0" class="has-pre"></span>
+              <small class="cpm-field__hint">What you want to keep on every loaded mile</small>
+            </label>
+            <label class="cpm-field">
+              <span class="cpm-field__label">Downtime buffer</span>
+              <span class="cpm-field__control"><input type="number" inputmode="decimal" name="buffer" step="1" min="0"><span class="cpm-field__unit cpm-field__unit--post">%</span></span>
+              <small class="cpm-field__hint">Cushion for breakdowns and slow weeks</small>
+            </label>
+          </div>
+        </fieldset>
+        <fieldset class="cpm-step" data-step="2" hidden>
+          <legend class="cpm-step__title"><span class="cpm-step__count">Step 2 of 7</span>Fuel</legend>
+          <p class="cpm-step__lede">Usually your single biggest cost per mile.</p>
+          <div class="cpm-grid">
+            <label class="cpm-field">
+              <span class="cpm-field__label">Average diesel price</span>
+              <span class="cpm-field__control"><span class="cpm-field__unit">$</span><input type="number" inputmode="decimal" name="diesel" step="0.01" min="1" class="has-pre"><span class="cpm-field__unit cpm-field__unit--post">/gal</span></span>
+              
+            </label>
+            <label class="cpm-field">
+              <span class="cpm-field__label">Average MPG</span>
+              <span class="cpm-field__control"><input type="number" inputmode="decimal" name="mpg" step="0.1" min="2"><span class="cpm-field__unit cpm-field__unit--post">mpg</span></span>
+              
+            </label>
+          </div>
+          <div class="cpm-live"><span>Fuel cost</span><strong data-live="fuel">$0.00</strong><em>per mile</em></div>
+        </fieldset>
+        <fieldset class="cpm-step" data-step="3" hidden>
+          <legend class="cpm-step__title"><span class="cpm-step__count">Step 3 of 7</span>Truck payment</legend>
+          <p class="cpm-step__lede">What the truck itself costs you each month.</p>
+          <div class="cpm-grid">
+            <label class="cpm-field">
+              <span class="cpm-field__label">Monthly truck payment</span>
+              <span class="cpm-field__control"><span class="cpm-field__unit">$</span><input type="number" inputmode="decimal" name="payment" step="10" min="0" class="has-pre"></span>
+              <small class="cpm-field__hint">Loan or lease payment (0 if owned outright)</small>
+            </label>
+            <label class="cpm-field">
+              <span class="cpm-field__label">Monthly depreciation</span>
+              <span class="cpm-field__control"><span class="cpm-field__unit">$</span><input type="number" inputmode="decimal" name="depreciation" step="10" min="0" class="has-pre"></span>
+              <small class="cpm-field__hint">Value the truck loses each month</small>
+            </label>
+          </div>
+          <div class="cpm-live"><span>Truck cost</span><strong data-live="truck">$0.00</strong><em>per mile</em></div>
+        </fieldset>
+        <fieldset class="cpm-step" data-step="4" hidden>
+          <legend class="cpm-step__title"><span class="cpm-step__count">Step 4 of 7</span>Insurance</legend>
+          <p class="cpm-step__lede">Liability, cargo and physical damage.</p>
+          <div class="cpm-grid">
+            <label class="cpm-field">
+              <span class="cpm-field__label">Monthly insurance premium</span>
+              <span class="cpm-field__control"><span class="cpm-field__unit">$</span><input type="number" inputmode="decimal" name="insurance" step="10" min="0" class="has-pre"></span>
+              
+            </label>
+          </div>
+          <div class="cpm-checks">
+            <span class="cpm-checks__title">Does your premium include:</span>
+            <label><input type="checkbox" name="cov_cargo" checked> Cargo coverage</label>
+            <label><input type="checkbox" name="cov_physical" checked> Physical damage</label>
+            <label><input type="checkbox" name="cov_liability" checked> General liability</label>
+            <p class="cpm-checks__warn" data-cov-warn hidden>Add the cost of any coverage you pay for separately, or your cost per mile will come out too low.</p>
+          </div>
+          <div class="cpm-live"><span>Insurance cost</span><strong data-live="insurance">$0.00</strong><em>per mile</em></div>
+        </fieldset>
+        <fieldset class="cpm-step" data-step="5" hidden>
+          <legend class="cpm-step__title"><span class="cpm-step__count">Step 5 of 7</span>Maintenance & tires</legend>
+          <p class="cpm-step__lede">Set money aside every month, even when nothing breaks.</p>
+          <div class="cpm-grid">
+            <label class="cpm-field">
+              <span class="cpm-field__label">Monthly repairs & maintenance</span>
+              <span class="cpm-field__control"><span class="cpm-field__unit">$</span><input type="number" inputmode="decimal" name="maintenance" step="10" min="0" class="has-pre"></span>
+              
+            </label>
+            <label class="cpm-field">
+              <span class="cpm-field__label">Monthly tire reserve</span>
+              <span class="cpm-field__control"><span class="cpm-field__unit">$</span><input type="number" inputmode="decimal" name="tires" step="10" min="0" class="has-pre"></span>
+              
+            </label>
+          </div>
+          <div class="cpm-live"><span>Maintenance cost</span><strong data-live="maintenance">$0.00</strong><em>per mile</em></div>
+        </fieldset>
+        <fieldset class="cpm-step" data-step="6" hidden>
+          <legend class="cpm-step__title"><span class="cpm-step__count">Step 6 of 7</span>The costs that add up</legend>
+          <p class="cpm-step__lede">Small monthly bills that quietly eat your profit.</p>
+          <div class="cpm-grid">
+            <label class="cpm-field">
+              <span class="cpm-field__label">Tolls</span>
+              <span class="cpm-field__control"><span class="cpm-field__unit">$</span><input type="number" inputmode="decimal" name="tolls" step="10" min="0" class="has-pre"></span>
+              
+            </label>
+            <label class="cpm-field">
+              <span class="cpm-field__label">Permits, IFTA, UCR & licensing</span>
+              <span class="cpm-field__control"><span class="cpm-field__unit">$</span><input type="number" inputmode="decimal" name="permits" step="10" min="0" class="has-pre"></span>
+              
+            </label>
+            <label class="cpm-field">
+              <span class="cpm-field__label">ELD, load boards & software</span>
+              <span class="cpm-field__control"><span class="cpm-field__unit">$</span><input type="number" inputmode="decimal" name="software" step="10" min="0" class="has-pre"></span>
+              
+            </label>
+            <label class="cpm-field">
+              <span class="cpm-field__label">Parking, scales & washes</span>
+              <span class="cpm-field__control"><span class="cpm-field__unit">$</span><input type="number" inputmode="decimal" name="parking" step="10" min="0" class="has-pre"></span>
+              
+            </label>
+            <label class="cpm-field">
+              <span class="cpm-field__label">Anything else</span>
+              <span class="cpm-field__control"><span class="cpm-field__unit">$</span><input type="number" inputmode="decimal" name="other" step="10" min="0" class="has-pre"></span>
+              
+            </label>
+          </div>
+          <div class="cpm-live"><span>Hidden costs</span><strong data-live="hidden">$0.00</strong><em>per mile</em></div>
+        </fieldset>
+        <fieldset class="cpm-step" data-step="7" hidden>
+          <legend class="cpm-step__title"><span class="cpm-step__count">Step 7 of 7</span>Unlock your results</legend>
+          <p class="cpm-step__lede">Tell us where to send your breakdown. We'll show your results right here and email you a copy.</p>
+          <div class="cpm-grid">
+            <label class="cpm-field"><span class="cpm-field__label">First name</span><span class="cpm-field__control"><input name="name" autocomplete="given-name" required></span></label>
+            <label class="cpm-field"><span class="cpm-field__label">Email</span><span class="cpm-field__control"><input name="email" type="email" autocomplete="email" required></span></label>
+            <label class="cpm-field"><span class="cpm-field__label">Phone</span><span class="cpm-field__control"><input name="phone" type="tel" autocomplete="tel" required></span></label>
+            <label class="cpm-field"><span class="cpm-field__label">State <em>optional</em></span><span class="cpm-field__control"><input name="state" autocomplete="address-level1" maxlength="40"></span></label>
+            <label class="cpm-field cpm-field--full"><span class="cpm-field__label">Do you run under your own authority? <em>optional</em></span>
+              <span class="cpm-field__control"><select name="ownAuthority"><option value="">Select…</option><option>Yes</option><option>No</option></select></span></label>
+          </div>
+          <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p class="cpm-consent">By unlocking, you agree that KMT Logistics may contact you about dispatch and owner-operator services. No spam.</p>
+        </fieldset>
+        <div class="cpm-nav">
+          <button type="button" class="cpm-link" id="cpm-back" hidden>← Back</button>
+          <span class="cpm-nav__status" id="cpm-status" role="status" aria-live="polite"></span>
+          <button type="button" class="btn btn--blue" id="cpm-next">Continue →</button>
+          <button type="submit" class="btn btn--accent" id="cpm-submit" hidden>Unlock my results →</button>
+        </div>
+      </form>
+      <div class="cpm-results" id="cpm-results" tabindex="-1" hidden>
+        <div class="cpm-results__top">
+          <div class="cpm-tile cpm-tile--dark"><span>True cost per mile</span><strong data-out="total">$0.00</strong><em>every mile driven, deadhead included</em></div>
+          <div class="cpm-tile cpm-tile--accent"><span>Minimum rate</span><strong data-out="minRate">$0.00</strong><em>per loaded mile, profit included</em></div>
+        </div>
+        <div class="cpm-results__row">
+          <div class="cpm-tile"><span>Monthly operating cost</span><strong data-out="monthlyCost">$0</strong></div>
+          <div class="cpm-tile"><span>Revenue needed per month</span><strong data-out="revenueNeeded">$0</strong></div>
+          <div class="cpm-tile"><span>Your profit target per month</span><strong data-out="monthlyProfit">$0</strong></div>
+        </div>
+        <h3 class="cpm-results__h">Where your money goes</h3>
+        <ul class="cpm-bars" id="cpm-bars"></ul>
+        <p class="cpm-results__tip" id="cpm-tip"></p>
+        <div class="cpm-results__cta">
+          <a class="btn btn--blue btn--lift" href="dispatch.html"><span>Get loads above your rate</span></a>
+          <button type="button" class="cpm-link" id="cpm-edit">Change my numbers</button>
+        </div>
+        <p class="cpm-results__sent" id="cpm-sent"></p>
+      </div>
+      </div>
+      <aside class="cpm-aside">
+        <div class="cpm-aside__card">
+          <span class="eyebrow">Industry context</span>
+          <h3>Typical cost per mile</h3>
+          <ul class="cpm-bench">
+            <li><span>Fuel</span><strong>$0.48 – $0.55</strong></li>
+            <li><span>Truck payment + depreciation</span><strong>≈ $0.49</strong></li>
+            <li><span>Insurance</span><strong>$0.10 – $0.15</strong></li>
+            <li><span>Repairs &amp; maintenance</span><strong>$0.15 – $0.20</strong></li>
+            <li><span>Tolls, permits &amp; other</span><strong>$0.08 – $0.15</strong></li>
+          </ul>
+          <p class="cpm-aside__note">Planning ranges based on ATRI's annual <em>Operational Costs of Trucking</em> research. Your own numbers are what matter.</p>
+        </div>
+        <div class="cpm-aside__card cpm-aside__card--navy">
+          <h3>Rates not covering it?</h3>
+          <p>A KMT dispatcher can plan your lanes and negotiate loads that clear your cost per mile.</p>
+          <a class="btn btn--accent" href="dispatch.html">See dispatch service</a>
+        </div>
+      </aside>
+    </div>
+    <div class="wrap cpm-note-wrap">
+      <div class="cpm-note">
+        <span class="cpm-note__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        </span>
+        <div class="cpm-note__copy">
+          <strong>These are estimates, not a quote</strong>
+          <p>Your real cost per mile moves with fuel prices, routes, freight, equipment condition, insurance history and financing. Use the results to plan and to price loads — not as financial, legal, tax or insurance advice.</p>
+        </div>
+        <a class="cpm-note__link" href="index.html?interest=Dispatch#contact">Talk it through with a dispatcher →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap site-footer__grid">
+    <div class="site-footer__col site-footer__brand">
+      <div class="logo">
+        <img class="logo__img" src="assets/img/KMT Horizontal Light.svg" alt="KMT Logistics" width="140" height="28">
+      </div>
+      <p>Nationwide freight carrier with dispatch, ELD, lease-to-own and MC startup services for owner-operators.</p>
+      <span class="site-footer__ids">USDOT 9352031 · MC 62320826 · <a href="https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&amp;query_type=queryCarrierSnapshot&amp;query_param=USDOT&amp;query_string=9352031" target="_blank" rel="noopener">Verify on FMCSA ↗</a></span>
+    </div>
+    <div class="site-footer__col">
+      <span class="site-footer__heading">Services</span>
+      <a href="freight.html">Nationwide freight</a>
+      <a href="dispatch.html">Dispatch service</a>
+      <a href="eld.html">ELD &amp; compliance</a>
+      <a href="lease-to-own.html">Lease-to-own trucks</a>
+      <a href="mc-startup.html">MC startup</a>
+      <a href="cost-per-mile.html">Cost per mile calculator</a>
+    </div>
+    <div class="site-footer__col">
+      <span class="site-footer__heading">Work with us</span>
+      <a href="index.html?interest=Ship%20freight#contact">Ship with KMT</a>
+      <a href="index.html?interest=Lease-to-own#contact">Drive for KMT</a>
+      <a href="mailto:dispatch@kmtlogisticsllc.com?subject=Carrier%20packet%20request">Carrier packet</a>
+    </div>
+    <div class="site-footer__col">
+      <span class="site-footer__heading">Contact</span>
+      <a href="tel:5550142200">(555) 014-2200</a>
+      <a href="mailto:dispatch@kmtlogisticsllc.com">dispatch@kmtlogisticsllc.com</a>
+      <span>Dispatch open 24/7</span>
+    </div>
+  </div>
+  <div class="wrap site-footer__legal">
+    © <span data-year>2026</span> KMT Logistics LLC. All rights reserved.
+  </div>
+</footer>
+<nav class="mobile-cta" aria-label="Quick contact">
+  <a class="btn btn--accent" href="tel:5550142200">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    <span>Call dispatch</span>
+  </a>
+  <a class="btn btn--blue" href="freight.html#quote"><span>Get a quote</span></a>
+</nav>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
